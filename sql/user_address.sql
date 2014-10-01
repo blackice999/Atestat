@@ -6,4 +6,4 @@ CREATE TABLE IF NOT EXISTS `user_address`
     `zip` INT(9) NOT NULL,
     `country` VARCHAR(50) NOT NULL,
     PRIMARY KEY (`ID`)
-)
+) ENGINE=INNODB;
