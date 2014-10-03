@@ -5,7 +5,8 @@ CREATE TABLE IF NOT EXISTS `user`
     `statusID` INT(4) NOT NULL,
     `password` VARCHAR(255) NOT NULL,
     `password_hash` VARCHAR(255) NOT NULL,
-    PRIMARY KEY (`ID`)
+    `date_registered` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`ID`),
 
     FOREIGN KEY(`statusID`)
         REFERENCES user_status(`ID`)
