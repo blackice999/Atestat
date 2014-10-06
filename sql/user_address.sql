@@ -12,6 +12,6 @@ CREATE TABLE IF NOT EXISTS `user_address`
     `country` VARCHAR(50) NOT NULL,
     PRIMARY KEY (`ID`),
 
-    FOREIGN KEY (`user_ID`)
+    FOREIGN KEY (`userID`)
         REFERENCES `user`(`ID`)
 ) ENGINE=INNODB;
