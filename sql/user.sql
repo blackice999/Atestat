@@ -1,4 +1,5 @@
 CREATE DATABASE IF NOT EXISTS `loan-crm`;
+USE 'loan-crm';
 
 CREATE TABLE IF NOT EXISTS `user`
 (
