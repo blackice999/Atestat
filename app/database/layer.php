@@ -56,21 +56,22 @@
         */
         public function __construct()
         {
-            try
-            {
-                $this->database = new PDO(
-                    'mysql:host='. $this->databaseHost . ';
-                    dbname=' . $this->databaseName,
-                    $this->databaseUser,
-                    $this->databasePassword
-                );
-            }
+            $this->database = new mysqli(
+                $this->databaseHost
+                $this->databaseUser,
+                $this->databasePassword
+                $this->databaseName,
+             );
 
-            catch(PDOException $e)
+            if ($this->database->connect_errno)
             {
-                $this->monolog = new Logger('pdo');
-                $this->monolog->pushHandler(new StreamHandler(__DIR__.'/../logs/pdoError.log', Logger::ERROR));
-                $this->monolog->addError($e->getMessage());
+
+                $this->monolog = new Logger('mysql');
+                $this->monolog->pushHandler(new StreamHandler(__DIR__.'/../logs/mysqlError.log', Logger::ERROR));
+                $this->monolog->addError(
+                    'Failed to connect to mysql: (' .
+                    $this->database->connect_errno . ')' .
+                    $this->database->connect_error);
                 die();
             }
         }
@@ -81,6 +82,24 @@
         public function __destruct()
         {
             $this->database = NULL;
+        }
+
+        public function getData(...$parameters)
+        {
+            $this->database->query('SELECT ' . $parameters);
+            return $this;
+        }
+
+        public function fromData($from)
+        {
+            $this->database->query('FROM' . $from);
+            return $this;
+        }
+
+        public function whereData($where = null)
+        {
+            $this->database->query('WHERE' . $where);
+            return $this;
         }
     }
  ?>
