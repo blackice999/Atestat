@@ -1,6 +1,6 @@
 {
 	"require": {
 		"phpunit/phpunit": "4.2.*",
-		"monolog/monolog" : "~1.*"
+		"monolog/monolog" : "~1"
 	}
 }
