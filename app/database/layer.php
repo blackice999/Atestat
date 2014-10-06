@@ -57,10 +57,10 @@
         public function __construct()
         {
             $this->database = new mysqli(
-                $this->databaseHost
+                $this->databaseHost,
                 $this->databaseUser,
-                $this->databasePassword
-                $this->databaseName,
+                $this->databasePassword,
+                $this->databaseName
              );
 
             if ($this->database->connect_errno)
