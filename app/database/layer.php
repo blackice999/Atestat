@@ -43,7 +43,7 @@
          * Which one to use?
          * @var string
          */
-        private $databasePassword = '';
+        private $databasePassword = 'sampwoS1';
 
         /**
          * Creates a new Monolog Logger instance
@@ -84,22 +84,6 @@
             $this->database = NULL;
         }
 
-        public function getData(...$parameters)
-        {
-            $this->database->query('SELECT ' . $parameters);
-            return $this;
-        }
-
-        public function fromData($from)
-        {
-            $this->database->query('FROM' . $from);
-            return $this;
-        }
-
-        public function whereData($where = null)
-        {
-            $this->database->query('WHERE' . $where);
-            return $this;
-        }
+        
     }
  ?>
