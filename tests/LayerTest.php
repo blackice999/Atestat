@@ -9,17 +9,7 @@
 
         public function setUp( )
         {
-            $this->layer = new Layer('localhost','root','sampwoS1','loan-crm');
-        }
-
-        public function testItCanConnect()
-        {
-            $this->connect = new mysqli('localhost','root','sampwoS1','loan-crm');
-        }
-
-        public function testItReturnsNull()
-        {
-            getData('ID')->fromData('user');
+            $this->layer = new Layer();
         }
     }
 ?>
