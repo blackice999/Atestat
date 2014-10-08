@@ -100,8 +100,6 @@
 
             try
             {
-                $stmt->execute();
-
                 if ($stmt->execute())
                 {
                     while ($row = $stmt->fetch_row)
@@ -135,8 +133,6 @@
 
             try
             {
-                $stmt->execute();
-
                 if ($stmt->execute())
                 {
                     while ($row = $stmt->fetch_row)
@@ -173,8 +169,6 @@
 
             try
             {
-                $stmt->execute();
-
                 if ($stmt->execute())
                 {
                     while ($obj = $stmt->fetch_object)
@@ -207,8 +201,6 @@
 
             try
             {
-                $stmt->execute();
-
                 if ($stmt->execute())
                 {
                     while ($row = $stmt->fetch_row)
