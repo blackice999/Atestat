@@ -195,6 +195,4 @@
             }
         }
     }
-
-$layer = new Layer();
 ?>
