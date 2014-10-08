@@ -58,23 +58,27 @@
         public function __construct()
         {
             mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-                $this->database = new mysqli(
-                    $this->databaseHost,
-                    $this->databaseUser,
-                    $this->databasePassword,
-                    $this->databaseName
-                 );
+            try
+            {
+                    $this->database = new mysqli(
+                        $this->databaseHost,
+                        $this->databaseUser,
+                        $this->databasePassword,
+                        $this->databaseName
+                     );
+            }
+            catch (Exception $e)
+            {
 
-                if ($this->database->connect_errno)
-                {
-                    $this->monolog = new Logger('mysql');
-                    $this->monolog->pushHandler(new StreamHandler(__DIR__.'/../logs/mysqlError.log', Logger::ERROR));
-                    $this->monolog->addError(
-                        'Failed to connect to mysql: (' .
-                        $this->database->connect_errno . ')' .
-                        $this->database->connect_error);
-                    die();
-                }
+                $this->monolog = new Logger('mysql');
+                $this->monolog->pushHandler(new StreamHandler(__DIR__.'/../logs/mysqlError.log', Logger::ERROR));
+                $this->monolog->addError(
+                    'Failed to connect to mysql: (' .
+                    $e->getCode() . ')' .
+                    $e->getMessage());
+                die();
+                    
+            }
         }
 
         /**
