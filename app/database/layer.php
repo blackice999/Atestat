@@ -53,7 +53,7 @@
         private $monolog;
 
         /**
-        * Connects to MySQL database using PDO
+        * Connects to MySQL database using mysqli
         */
         public function __construct()
         {
