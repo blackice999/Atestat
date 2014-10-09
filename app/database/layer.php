@@ -58,6 +58,9 @@
         public function __construct()
         {
             mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
+            $this->monolog = new Logger('mysql');
+
             try
             {
                 $this->database = new mysqli(
@@ -69,8 +72,6 @@
             }
             catch (Exception $e)
             {
-
-                $this->monolog = new Logger('mysql');
                 $this->monolog->pushHandler(new StreamHandler(__DIR__.'/../logs/mysqlError.log', Logger::ERROR));
                 $this->monolog->addError(
                     'Failed to connect to mysql: (' .
@@ -89,7 +90,19 @@
             $this->database = NULL;
         }
 
-        
+        /**
+         * Check if the server is alive
+         * Send error to log if connection is down
+         * @return string Returns friendly notice to try again later
+         */
+        public function checkConnectionStatus()
+        {
+           if(!$this->database->ping())
+           {
+                echo "Please try again later";
+                $this->monolog->addError("Error:" . $this->database->error);
+           }
+        }
 
         /**
          * Fetches the ID, email and date_registered rows from user table
@@ -105,13 +118,13 @@
             {
                 $query = 'SELECT `ID`,`email`, `date_registered` FROM `user` WHERE `ID`= ?';
                 $stmt = $this->database->prepare($query);
-                $stmt = $this->database->bind_param('i', $ID);
+                $stmt->bind_param('i', $ID);
 
                 if ($stmt->execute())
                 {
                     if ($type == 'row')
                     {
-                        while ($row = $stmt->fetch_row)
+                        while ($row = $stmt->fetch_row())
                         {
                             printf ("%s (%s)\n",
                              $row[0],
@@ -123,7 +136,7 @@
 
                     elseif ($type == 'object')
                     {
-                        while ($obj = $stmt->fetch_object)
+                        while ($obj = $stmt->fetch_object())
                         {
                             printf ("%s (%s)\n",
                              $obj->ID,
@@ -155,13 +168,13 @@
             {
                 $query = 'SELECT `ID`,`userID`, `city`, `street`, `zip`,`country` FROM `user_address` WHERE `ID`= ?';
                 $stmt = $this->database->prepare($query);
-                $stmt = $this->database->bind_param('i', $ID);
+                $stmt->bind_param('i', $ID);
 
                 if ($stmt->execute())
                 {
                     if ($type == 'row')
                     {
-                        while ($row = $stmt->fetch_row)
+                        while ($row = $stmt->fetch_row())
                         {
                             printf ("%s (%s)\n",
                              $row[0],
@@ -176,7 +189,7 @@
 
                     elseif ($type == 'object')
                     {
-                        while ($row = $stmt->fetch_row)
+                        while ($row = $stmt->fetch_row())
                         {
                             printf ("%s (%s)\n",
                              $obj->ID,
