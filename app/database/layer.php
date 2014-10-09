@@ -60,12 +60,12 @@
             mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
             try
             {
-                    $this->database = new mysqli(
-                        $this->databaseHost,
-                        $this->databaseUser,
-                        $this->databasePassword,
-                        $this->databaseName
-                     );
+                $this->database = new mysqli(
+                    $this->databaseHost,
+                    $this->databaseUser,
+                    $this->databasePassword,
+                    $this->databaseName
+                 );
             }
             catch (Exception $e)
             {
@@ -89,6 +89,8 @@
             $this->database = NULL;
         }
 
+        
+
         /**
          * Fetches the ID, email and date_registered rows from user table
          * as an enumerated array if $type is 'row'
@@ -99,12 +101,12 @@
          */
         public function fetchUser($ID, $type = 'row')
         {
-            $query = 'SELECT `ID`,`email`, `date_registered` FROM `user` WHERE = ?';
-            $stmt = $this->database->prepare($query);
-            $stmt = $this->database->bind_param('i', $ID);
-
             try
             {
+                $query = 'SELECT `ID`,`email`, `date_registered` FROM `user` WHERE `ID`= ?';
+                $stmt = $this->database->prepare($query);
+                $stmt = $this->database->bind_param('i', $ID);
+
                 if ($stmt->execute())
                 {
                     if ($type == 'row')
@@ -149,12 +151,12 @@
          */
         public function fetchUser_address($ID, $type = 'row')
         {
-            $query = 'SELECT `ID`,`userID`, `city`, `street`, `zip`,`country` FROM `user_address` WHERE = ?';
-            $stmt = $this->database->prepare($query);
-            $stmt = $this->database->bind_param('i', $ID);
-
             try
             {
+                $query = 'SELECT `ID`,`userID`, `city`, `street`, `zip`,`country` FROM `user_address` WHERE `ID`= ?';
+                $stmt = $this->database->prepare($query);
+                $stmt = $this->database->bind_param('i', $ID);
+
                 if ($stmt->execute())
                 {
                     if ($type == 'row')
