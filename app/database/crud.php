@@ -17,6 +17,15 @@
             parent::__construct();
         }
 
+        /**
+         * Inserts data into 'user' table
+         * @param  string $email
+         * @param  string $statusID
+         * @param  string $password
+         * @param  string $password_hash
+         * @param  string $date_registered
+         * @return string
+         */
         public function insert($email, $statusID, $password, $password_hash, $date_registered)   
         {
             try
@@ -56,7 +65,11 @@
                 $this->generateLog();
             }
         }
-
+        /**
+         * Deletes data from 'user' table
+         * @param  int $ID The row ID
+         * @return string
+         */
         public function delete($ID) 
         {
             try
@@ -89,10 +102,14 @@
             }
         }
 
-        private function generateLog()
+        /**
+         * Creates the log for CRUD operations that will be saved to logs/crud.log
+         * @return string
+         */
+        private function generateLogCrud()
         {
             $this->monolog->pushHandler(new StreamHandler(__DIR__.'/../logs/crud.log', Logger::ERROR));
-                $this->monolog->addError('Failed to add data: (' . $stmt->errno . ') ' .$stmt->error);
+            $this->monolog->addError('Failed to add data: (' . $stmt->errno . ') ' .$stmt->error);
         }
     }
 ?>
