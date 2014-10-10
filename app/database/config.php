@@ -1,15 +1,10 @@
 <?php 
 	ini_set('display_errors',1);
 	error_reporting(E_ALL);
+    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
     class Config
     {
-        /**
-         * Holds the database connection link
-         * @var resource
-         */
-        public $database;
-
         /**
          * Holds the database host name
          * @var string
@@ -36,11 +31,5 @@
          * @var string
          */
         public $databasePassword = 'sampwoS1';
-
-        /**
-         * Creates a new Monolog Logger instance
-         * @var resource
-         */
-        public $monolog;
     }
 ?>
