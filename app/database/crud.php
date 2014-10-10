@@ -53,9 +53,46 @@
 
             catch (Exception $e)
             {
-                $this->monolog->pushHandler(new StreamHandler(__DIR__.'/../logs/crud.log', Logger::ERROR));
-                $this->monolog->addError('Failed to add data: (' . $stmt->errno . ') ' .$stmt->error);
+                $this->generateLog();
             }
+        }
+
+        public function delete($ID) 
+        {
+            try
+            {
+                $query = "DELETE FROM `user` WHERE `ID` = ?";
+
+                $stmt = $this->database->stmt_init();
+
+                if ($stmt->prepare($query))
+                {
+                    $stmt->bind_param('i', $ID);
+
+                    $stmt->execute();
+
+                    if ($stmt->execute())
+                    {
+                        echo "Deleted successfully data with ID: " . $ID;
+                    }
+
+                    else
+                    {
+                        echo "Error deleting data, try again later";
+                    }
+                }
+            }
+
+            catch (Exception $e)
+            {
+                $this->generateLog();
+            }
+        }
+
+        private function generateLog()
+        {
+            $this->monolog->pushHandler(new StreamHandler(__DIR__.'/../logs/crud.log', Logger::ERROR));
+                $this->monolog->addError('Failed to add data: (' . $stmt->errno . ') ' .$stmt->error);
         }
     }
 ?>
