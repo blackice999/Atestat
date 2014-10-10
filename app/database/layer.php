@@ -75,7 +75,7 @@
                 $this->monolog->pushHandler(new StreamHandler(__DIR__.'/../logs/mysqlError.log', Logger::ERROR));
                 $this->monolog->addError(
                     'Failed to connect to mysql: (' .
-                    $e->getCode() . ')' .
+                    $e->getCode() . ') ' .
                     $e->getMessage());
                 die();
                     
@@ -116,17 +116,23 @@
         {
             try
             {
-                $query = 'SELECT `ID`,`email`, `date_registered` FROM `user` WHERE `ID`= ?';
-                $stmt = $this->database->prepare($query);
-                $stmt->bind_param('i', $ID);
+                $query = "SELECT `ID`,`email`, `date_registered` FROM `user` WHERE `ID`= ?";
 
-                if ($stmt->execute())
+                $stmt = $this->database->stmt_init();
+
+                if($stmt->prepare($query))
                 {
+                    $stmt->bind_param('i', $ID);
+
+                    $stmt->execute();
+
+                    $result = $stmt->get_result();
+
                     if ($type == 'row')
                     {
-                        while ($row = $stmt->fetch_row())
+                        while ($row = $result->fetch_array(MYSQLI_NUM))
                         {
-                            printf ("%s (%s)\n",
+                            printf ("%s (%s) %s\n",
                              $row[0],
                              $row[1],
                              $row[2]
@@ -136,12 +142,12 @@
 
                     elseif ($type == 'object')
                     {
-                        while ($obj = $stmt->fetch_object())
+                        while ($obj = $result->fetch_array(MYSQLI_ASSOC))
                         {
-                            printf ("%s (%s)\n",
-                             $obj->ID,
-                             $obj->email,
-                             $obj->date_registered
+                            printf ("%s (%s) %s\n",
+                             $obj['ID'],
+                             $obj['email'],
+                             $obj['date_registered']
                             );
                         }
                     }
@@ -150,7 +156,8 @@
 
             catch(Exception $e)
             {
-                return $this->monolog->addError('Error:' . $this->database->error);
+                $this->monolog->pushHandler(new StreamHandler(__DIR__.'/../logs/mysqlError.log', Logger::ERROR));
+                $this->monolog->addError('Error:  (' .$stmt->errno . ') ' . $stmt->error);
             }
         }
 
@@ -167,16 +174,22 @@
             try
             {
                 $query = 'SELECT `ID`,`userID`, `city`, `street`, `zip`,`country` FROM `user_address` WHERE `ID`= ?';
-                $stmt = $this->database->prepare($query);
-                $stmt->bind_param('i', $ID);
 
-                if ($stmt->execute())
+                $stmt = $this->database->stmt_init();
+
+                if($stmt->prepare($query))
                 {
+                    $stmt->bind_param('i', $ID);
+
+                    $stmt->execute();
+
+                    $result = $stmt->get_result();
+
                     if ($type == 'row')
                     {
-                        while ($row = $stmt->fetch_row())
+                        while ($row = $result->fetch_array(MYSQLI_NUM))
                         {
-                            printf ("%s (%s)\n",
+                            printf ("%s (%s) %s %s %s\n",
                              $row[0],
                              $row[1],
                              $row[2],
@@ -189,15 +202,15 @@
 
                     elseif ($type == 'object')
                     {
-                        while ($row = $stmt->fetch_row())
+                        while ($row = $result->fetch_array(MYSQLI_ASSOC))
                         {
-                            printf ("%s (%s)\n",
-                             $obj->ID,
-                             $obj->userID,
-                             $obj->city,
-                             $obj->street,
-                             $obj->zip,
-                             $obj->country
+                            printf ("%s (%s) %s %s %s\n",
+                             $row['ID'],
+                             $row['userID'],
+                             $row['city'],
+                             $row['street'],
+                             $row['zip'],
+                             $row['country']
                             );
                         }
                     }
@@ -206,8 +219,12 @@
 
             catch(Exception $e)
             {
-                return $this->monolog->addError('Error:' . $this->database->error);
+                $this->monolog->pushHandler(new StreamHandler(__DIR__.'/../logs/mysqlError.log', Logger::ERROR));
+                $this->monolog->addError('Error:  (' .$stmt->errno . ') ' . $stmt->error);
             }
         }
     }
+    
+$layer = new Layer();
+$layer->fetchUser_address(1);
 ?>
