@@ -28,10 +28,15 @@
         /**
         * Connects to MySQL database using mysqli
         */
+       
+        /**
+         * Creates a new config class where database info is stored
+         * @var resource
+         */
+        private $config;
+
         public function __construct()
         {
-            mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-
             $config = new Config();
 
             $this->monolog = new Logger('mysql');
