@@ -13,6 +13,7 @@
      */
     class Layer
     {
+
         /**
          * Holds the database connection link
          * @var resource
@@ -20,44 +21,18 @@
         private $database;
 
         /**
-         * Holds the database host name
-         * @var string
-         */
-        private $databaseHost = 'localhost';
-
-        /**
-         * Holds the database name
-         * @var string
-         */
-        private $databaseName = 'loan-crm';
-
-        /**
-         * Holds the database users name
-         * @var string
-         */
-        private $databaseUser = 'root';
-
-        /**
-         * Holds the database password
-         * In Windows, there's no password,
-         * In Ubuntu there is
-         * Which one to use?
-         * @var string
-         */
-        private $databasePassword = 'sampwoS1';
-
-        /**
          * Creates a new Monolog Logger instance
          * @var resource
          */
         private $monolog;
-
         /**
         * Connects to MySQL database using mysqli
         */
         public function __construct()
         {
             mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
+            $config = new Config();
 
             $this->monolog = new Logger('mysql');
 
@@ -224,7 +199,4 @@
             }
         }
     }
-    
-$layer = new Layer();
-$layer->fetchUser_address(1);
 ?>
