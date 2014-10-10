@@ -203,5 +203,15 @@
                 $this->monolog->addError('Error:  (' .$stmt->errno . ') ' . $stmt->error);
             }
         }
+
+        /**
+         * Generates MySQL log that will be saved to logs/mysqlError.log
+         * @return string
+         */
+        private function generateLogMysql()
+        {
+            $this->monolog->pushHandler(new StreamHandler(__DIR__.'/../logs/mysqlError.log', Logger::ERROR));
+            $this->monolog->addError('Error:  (' .$stmt->errno . ') ' . $stmt->error);
+        }
     }
 ?>
