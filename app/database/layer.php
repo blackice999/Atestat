@@ -102,7 +102,7 @@
         {
             try
             {
-                $query = "SELECT `ID`,`email`, `date_registered` FROM `user` WHERE `ID`= ?";
+                $query = "SELECT `ID`,`email`, `statusID`, `date_registered` FROM `user` WHERE `ID`= ?";
 
                 $stmt = $this->database->stmt_init();
 
