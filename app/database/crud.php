@@ -62,7 +62,7 @@
 
             catch (Exception $e)
             {
-                $this->generateLog();
+                $this->generateLogCrud();
             }
         }
         /**
@@ -98,7 +98,7 @@
 
             catch (Exception $e)
             {
-                $this->generateLog();
+                $this->generateLogCrud();
             }
         }
 
