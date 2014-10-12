@@ -138,6 +138,12 @@
             }
         }
 
+        /**
+         * Updates password with $password parameter
+         * @param  int $ID       The row ID
+         * @param  string $password The new password
+         * @return string
+         */
         public function updateUserPassword($ID, $password)
         {
             try
