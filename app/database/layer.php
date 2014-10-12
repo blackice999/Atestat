@@ -25,9 +25,6 @@
          * @var resource
          */
         private $monolog;
-        /**
-        * Connects to MySQL database using mysqli
-        */
        
         /**
          * Creates a new config class where database info is stored
@@ -35,9 +32,18 @@
          */
         private $config;
 
+        /**
+         * Connects to Memcached
+         * @var resource
+         */
+        private $memcached;
+
         public function __construct()
         {
             $this->$config = new Config();
+
+            $this->memcached = new Memcached();
+            $this->memcached->addServer('127.0.0.1', '11211');
 
             $this->monolog = new Logger('mysql');
 
