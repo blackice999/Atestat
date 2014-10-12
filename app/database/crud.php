@@ -177,6 +177,44 @@
         }
 
         /**
+         * Updates the users statusID with $statusID parameter
+         * @param  int $ID       The row ID
+         * @param  int $statusID the statusID from 'user_status' table
+         * @return string
+         */
+        public function updateUserStatusID($ID, $statusID)
+        {
+            try
+            {
+                $query = "UPDATE `user` SET `statusID` = ? WHERE `ID` = ?";
+
+                $stmt = $this->database->stmt_init();
+
+                if ($stmt->prepare($query))
+                {
+                    $stmt->bind_param('ii', $statusID, $ID);
+
+                    $stmt->execute();
+
+                    if ($stmt->execute())
+                    {
+                        echo "Updated user statusID with: " . $statusID; 
+                    }
+
+                    else
+                    {
+                        echo "Error updating data, try again later";
+                    }
+                }
+            }
+
+            catch (Exception $e)
+            {
+                $this->generateLogCrud();
+            }
+        }
+
+        /**
          * Deletes data from 'user' table
          * @param  int $ID The row ID
          * @return string
