@@ -47,9 +47,23 @@
 
                     $stmt->execute();
 
+                    //If the execution is successful,
+                    //display that it succeeded
+                    //also insert data into Memcached
                     if ($stmt->execute())
                     {
                         echo "Data added successfully";
+                        static $i;
+
+                        $key = 'user_' . $i;
+                        $user = array(
+                            'id' => $i,
+                            'email' => $email,
+                            'statusID' => $statusID,
+                            'date_registered'
+                            );
+
+                        $this->memcached->set($key, $user);
                     }
 
                     else
