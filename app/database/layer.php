@@ -102,39 +102,52 @@
         {
             try
             {
-                $query = "SELECT `ID`,`email`, `statusID`, `date_registered` FROM `user` WHERE `ID`= ?";
+                $user = NULL;
 
-                $stmt = $this->database->stmt_init();
-
-                if($stmt->prepare($query))
+                //Get user with id number $ID
+                if ($this->memcached)
                 {
-                    $stmt->bind_param('i', $ID);
+                    $key = 'user_' . $ID;
+                    $user = $this->memcached->get($key);
+                }
 
-                    $stmt->execute();
+                //If the cache can't be accessed, get the data from mysql
+                if (!$user)
+                {
+                    $query = "SELECT `ID`,`email`, `statusID`, `date_registered` FROM `user` WHERE `ID`= ?";
 
-                    $result = $stmt->get_result();
+                    $stmt = $this->database->stmt_init();
 
-                    if ($type == 'row')
+                    if($stmt->prepare($query))
                     {
-                        while ($row = $result->fetch_array(MYSQLI_NUM))
+                        $stmt->bind_param('i', $ID);
+
+                        $stmt->execute();
+
+                        $result = $stmt->get_result();
+
+                        if ($type == 'row')
                         {
-                            printf ("%s (%s) %s\n",
-                             $row[0],
-                             $row[1],
-                             $row[2]
-                            );
+                            while ($row = $result->fetch_array(MYSQLI_NUM))
+                            {
+                                printf ("%s (%s) %s\n",
+                                 $row[0],
+                                 $row[1],
+                                 $row[2]
+                                );
+                            }
                         }
-                    }
 
-                    elseif ($type == 'object')
-                    {
-                        while ($obj = $result->fetch_array(MYSQLI_ASSOC))
+                        elseif ($type == 'object')
                         {
-                            printf ("%s (%s) %s\n",
-                             $obj['ID'],
-                             $obj['email'],
-                             $obj['date_registered']
-                            );
+                            while ($obj = $result->fetch_array(MYSQLI_ASSOC))
+                            {
+                                printf ("%s (%s) %s\n",
+                                 $obj['ID'],
+                                 $obj['email'],
+                                 $obj['date_registered']
+                                );
+                            }
                         }
                     }
                 }
