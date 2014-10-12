@@ -37,7 +37,7 @@
 
         public function __construct()
         {
-            $config = new Config();
+            $this->$config = new Config();
 
             $this->monolog = new Logger('mysql');
 
