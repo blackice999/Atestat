@@ -182,7 +182,7 @@
         private function generateLogCrud()
         {
             $this->monolog->pushHandler(new StreamHandler(__DIR__.'/../logs/crud.log', Logger::ERROR));
-            $this->monolog->addError('Failed to add data: (' . $stmt->errno . ') ' .$stmt->error);
+            $this->monolog->addError('Failed query: (' . $stmt->errno . ') ' .$stmt->error);
         }
     }
 ?>
