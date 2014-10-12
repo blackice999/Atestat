@@ -93,6 +93,11 @@
                     echo "</table>";
                 }
             }
+
+            catch (Exception $e)
+            {
+                $this->generateLogCrud();
+            }
         }
 
         /**
