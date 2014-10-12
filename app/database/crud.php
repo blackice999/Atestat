@@ -64,40 +64,34 @@
                 $this->generateLogCrud();
             }
         }
+
         /**
-         * Deletes data from 'user' table
-         * @param  int $ID The row ID
+         * Gets data from 'user' table up to a given $limit
+         * @param  int $limit    The number of rows to get
          * @return string
          */
-        public function delete($ID) 
+        public function getUserData($limit = PHP_INT_MAX)
         {
             try
             {
-                $query = "DELETE FROM `user` WHERE `ID` = ?";
+                $limit = intval($limit);
 
-                $stmt = $this->database->stmt_init();
+                $query = "SELECT `ID`,`email`,`statusID`, `date_registered`
+                 FROM `user`
+                 LIMIT $limit";
 
-                if ($stmt->prepare($query))
+                if($result = $this->database->query($query))
                 {
-                    $stmt->bind_param('i', $ID);
-
-                    $stmt->execute();
-
-                    if ($stmt->execute())
-                    {
-                        echo "Deleted successfully data with ID: " . $ID;
-                    }
-
-                    else
-                    {
-                        echo "Error deleting data, try again later";
-                    }
+                    while($data = $result->fetch_object())
+                    echo "<table border='1'>";
+                        echo "<tr>";
+                            echo "<td> " .$data->ID . "</td>";
+                            echo "<td> " .$data->email . "</td>";
+                            echo "<td> " .$data->statusID  . "</td>";
+                            echo "<td> " .$data->date_registered . "</td>";
+                        echo "</tr>";
+                    echo "</table>";
                 }
-            }
-
-            catch (Exception $e)
-            {
-                $this->generateLogCrud();
             }
         }
 
@@ -129,6 +123,43 @@
                     else
                     {
                         echo "Error updating data, try again later";
+                    }
+                }
+            }
+
+            catch (Exception $e)
+            {
+                $this->generateLogCrud();
+            }
+        }
+
+        /**
+         * Deletes data from 'user' table
+         * @param  int $ID The row ID
+         * @return string
+         */
+        public function delete($ID) 
+        {
+            try
+            {
+                $query = "DELETE FROM `user` WHERE `ID` = ?";
+
+                $stmt = $this->database->stmt_init();
+
+                if ($stmt->prepare($query))
+                {
+                    $stmt->bind_param('i', $ID);
+
+                    $stmt->execute();
+
+                    if ($stmt->execute())
+                    {
+                        echo "Deleted successfully data with ID: " . $ID;
+                    }
+
+                    else
+                    {
+                        echo "Error deleting data, try again later";
                     }
                 }
             }
