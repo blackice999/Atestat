@@ -18,25 +18,25 @@
          * Holds the database connection link
          * @var resource
          */
-        private $database;
+        protected $database;
 
         /**
          * Creates a new Monolog Logger instance
          * @var resource
          */
-        private $monolog;
+        protected $monolog;
        
         /**
          * Creates a new config class where database info is stored
          * @var resource
          */
-        private $config;
+        protected $config;
 
         /**
          * Connects to Memcached
          * @var resource
          */
-        private $memcached;
+        protected $memcached;
 
         public function __construct()
         {
