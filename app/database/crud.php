@@ -32,8 +32,7 @@
             {
                 $query = "INSERT INTO `user` 
                 (`email`,`statusID`,`password`,`password_hash`,`date_registered`)
-                VALUES (?, ?, ?, ?, ?)
-                WHERE `ID` = ?";
+                VALUES (?, ?, ?, ?, ?)";
 
                 $stmt = $this->database->stmt_init();
                 if ($stmt->prepare($query))
@@ -92,6 +91,38 @@
                     else
                     {
                         echo "Error deleting data, try again later";
+                    }
+                }
+            }
+
+            catch (Exception $e)
+            {
+                $this->generateLogCrud();
+            }
+        }
+
+        public function update($ID)
+        {
+            try
+            {
+                $query = "UPDATE `user` SET `email` = ? WHERE `ID` = ?"
+
+                $stmt = $this->datebase->stmt_init();
+
+                if ($stmt->prepare$query)
+                {
+                    $stmt->bindParam('si',$email, $ID);
+
+                    $stmt->execute();
+
+                    if ($stmt->execute())
+                    {
+                        echo "Updated user email with:" . $email;
+                    }
+
+                    else
+                    {
+                        echo "Error updating data, try again later";
                     }
                 }
             }
