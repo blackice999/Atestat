@@ -116,13 +116,45 @@
 
                 if ($stmt->prepare($query))
                 {
-                    $stmt->bindParam('si',$email, $ID);
+                    $stmt->bind_param('si',$email, $ID);
 
                     $stmt->execute();
 
                     if ($stmt->execute())
                     {
                         echo "Updated user email with:" . $email;
+                    }
+
+                    else
+                    {
+                        echo "Error updating data, try again later";
+                    }
+                }
+            }
+
+            catch (Exception $e)
+            {
+                $this->generateLogCrud();
+            }
+        }
+
+        public function updateUserPassword($ID, $password)
+        {
+            try
+            {
+                $query = "UPDATE `user` SET `password` = ? WHERE `ID` = ?";
+
+                $stmt = $this->database->stmt_init();
+
+                if ($stmt->prepare($query))
+                {
+                    $stmt->bind_param('si', $password, $ID);
+
+                    $stmt->execute();
+
+                    if ($stmt->execute())
+                    {
+                        echo "Updated user password with" . $password;
                     }
 
                     else
