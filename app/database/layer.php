@@ -44,10 +44,10 @@
             try
             {
                 $this->database = new mysqli(
-                    $this->databaseHost,
-                    $this->databaseUser,
-                    $this->databasePassword,
-                    $this->databaseName
+                    $config->databaseHost,
+                    $config->databaseUser,
+                    $config->databasePassword,
+                    $config->databaseName
                  );
             }
             catch (Exception $e)
