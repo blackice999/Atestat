@@ -136,8 +136,7 @@
 
             catch(Exception $e)
             {
-                $this->monolog->pushHandler(new StreamHandler(__DIR__.'/../logs/mysqlError.log', Logger::ERROR));
-                $this->monolog->addError('Error:  (' .$stmt->errno . ') ' . $stmt->error);
+                $this->generateLogMysql();
             }
         }
 
@@ -199,8 +198,7 @@
 
             catch(Exception $e)
             {
-                $this->monolog->pushHandler(new StreamHandler(__DIR__.'/../logs/mysqlError.log', Logger::ERROR));
-                $this->monolog->addError('Error:  (' .$stmt->errno . ') ' . $stmt->error);
+                $this->generateLogMysql();
             }
         }
 
