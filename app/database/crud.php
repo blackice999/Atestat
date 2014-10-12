@@ -101,15 +101,21 @@
             }
         }
 
-        public function update($ID)
+        /**
+         * Updates email with $email parameter
+         * @param  int $ID    The row ID
+         * @param  string $email The new email
+         * @return string
+         */
+        public function updateUserEmail($ID, $email)
         {
             try
             {
-                $query = "UPDATE `user` SET `email` = ? WHERE `ID` = ?"
+                $query = "UPDATE `user` SET `email` = ? WHERE `ID` = ?";
 
                 $stmt = $this->datebase->stmt_init();
 
-                if ($stmt->prepare$query)
+                if ($stmt->prepare($query))
                 {
                     $stmt->bindParam('si',$email, $ID);
 
