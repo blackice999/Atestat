@@ -171,45 +171,59 @@
         {
             try
             {
-                $query = 'SELECT `ID`,`userID`, `city`, `street`, `zip`,`country` FROM `user_address` WHERE `ID`= ?';
+                $user = NULL;
 
-                $stmt = $this->database->stmt_init();
-
-                if($stmt->prepare($query))
+                //Get user address with id $ID
+                if ($this->memcached)
                 {
-                    $stmt->bind_param('i', $ID);
+                    $key = 'user_' . $ID;
+                    $user = $this->memcached->get($key);
+                }
 
-                    $stmt->execute();
+                //If the cache can't be accessed, get the data from mysql
+                if (!$user)
+                {
 
-                    $result = $stmt->get_result();
+                    $query = 'SELECT `ID`,`userID`, `city`, `street`, `zip`,`country` FROM `user_address` WHERE `ID`= ?';
 
-                    if ($type == 'row')
+                    $stmt = $this->database->stmt_init();
+
+                    if($stmt->prepare($query))
                     {
-                        while ($row = $result->fetch_array(MYSQLI_NUM))
+                        $stmt->bind_param('i', $ID);
+
+                        $stmt->execute();
+
+                        $result = $stmt->get_result();
+
+                        if ($type == 'row')
                         {
-                            printf ("%s (%s) %s %s %s\n",
-                             $row[0],
-                             $row[1],
-                             $row[2],
-                             $row[3],
-                             $row[4],
-                             $row[5]
-                            );
+                            while ($row = $result->fetch_array(MYSQLI_NUM))
+                            {
+                                printf ("%s (%s) %s %s %s\n",
+                                 $row[0],
+                                 $row[1],
+                                 $row[2],
+                                 $row[3],
+                                 $row[4],
+                                 $row[5]
+                                );
+                            }
                         }
-                    }
 
-                    elseif ($type == 'object')
-                    {
-                        while ($row = $result->fetch_array(MYSQLI_ASSOC))
+                        elseif ($type == 'object')
                         {
-                            printf ("%s (%s) %s %s %s\n",
-                             $row['ID'],
-                             $row['userID'],
-                             $row['city'],
-                             $row['street'],
-                             $row['zip'],
-                             $row['country']
-                            );
+                            while ($row = $result->fetch_array(MYSQLI_ASSOC))
+                            {
+                                printf ("%s (%s) %s %s %s\n",
+                                 $row['ID'],
+                                 $row['userID'],
+                                 $row['city'],
+                                 $row['street'],
+                                 $row['zip'],
+                                 $row['country']
+                                );
+                            }
                         }
                     }
                 }
@@ -220,7 +234,7 @@
                 $this->generateLogMysql();
             }
         }
-
+        
         /**
          * Generates MySQL log that will be saved to logs/mysqlError.log
          * @return string
