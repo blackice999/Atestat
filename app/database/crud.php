@@ -247,7 +247,7 @@
          * @param  int $ID The row ID
          * @return string
          */
-        public function delete($ID) 
+        public function deleteUser($ID) 
         {
             try
             {
@@ -263,7 +263,10 @@
 
                     if ($stmt->execute())
                     {
+                        //Delete data from memcached
+                        $this->memcached->delete('user_' . $ID);
                         echo "Deleted successfully data with ID: " . $ID;
+
                     }
 
                     else
