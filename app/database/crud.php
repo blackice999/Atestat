@@ -90,21 +90,34 @@
             {
                 $limit = intval($limit);
 
-                $query = "SELECT `ID`,`email`,`statusID`, `date_registered`
-                 FROM `user`
-                 LIMIT $limit";
-
-                if($result = $this->database->query($query))
+                //If the cache is available, fetch data from it
+                if ($this->memcached())
+                for ($i = 0; $i <= $limit, $i++)
                 {
-                    while($data = $result->fetch_object())
-                    echo "<table border='1'>";
-                        echo "<tr>";
-                            echo "<td> " .$data->ID . "</td>";
-                            echo "<td> " .$data->email . "</td>";
-                            echo "<td> " .$data->statusID  . "</td>";
-                            echo "<td> " .$data->date_registered . "</td>";
-                        echo "</tr>";
-                    echo "</table>";
+                    $key = 'user_' . $i;
+                    $this->memcached->get($key);
+                }
+
+                //If the cache isn't availabe, fetch from MySQL
+                else
+                {
+
+                    $query = "SELECT `ID`,`email`,`statusID`, `date_registered`
+                     FROM `user`
+                     LIMIT $limit";
+
+                    if($result = $this->database->query($query))
+                    {
+                        while($data = $result->fetch_object())
+                        echo "<table border='1'>";
+                            echo "<tr>";
+                                echo "<td> " .$data->ID . "</td>";
+                                echo "<td> " .$data->email . "</td>";
+                                echo "<td> " .$data->statusID  . "</td>";
+                                echo "<td> " .$data->date_registered . "</td>";
+                            echo "</tr>";
+                        echo "</table>";
+                    }
                 }
             }
 
@@ -112,6 +125,7 @@
             {
                 $this->generateLogCrud();
             }
+
         }
 
         /**
