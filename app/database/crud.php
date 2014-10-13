@@ -26,7 +26,7 @@
          * @param  string $date_registered
          * @return string
          */
-        public function insert($email, $statusID, $password, $password_hash, $date_registered)   
+        public function insertUser($email, $statusID, $password, $password_hash, $date_registered)   
         {
             try
             {
