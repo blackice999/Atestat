@@ -40,7 +40,7 @@
 
         public function __construct()
         {
-            $this->$config = new Config();
+            $this->config = new Config();
 
             $this->memcached = new Memcached();
             $this->memcached->addServer('127.0.0.1', '11211');
@@ -234,7 +234,7 @@
                 $this->generateLogMysql();
             }
         }
-        
+
         /**
          * Generates MySQL log that will be saved to logs/mysqlError.log
          * @return string
