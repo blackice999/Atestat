@@ -235,28 +235,6 @@
             }
         }
 
-        public function customQuery($customQuery)
-        {
-            try
-            {
-                if($this->database->query($customQuery))
-                {
-                    echo "Query executed succesfully";
-                }
-
-                else
-                {
-                    echo "Error occured";
-                }
-            }
-
-            catch (Exception $e)
-            {
-                $this->monolog->pushHandler(new StreamHandler(__DIR__.'/../logs/mysqlError.log', Logger::ERROR));
-                $this->monolog->addError('Query failed: (' . $e->getCode() . ')' . $e->getMessage());
-            }
-        }
-
         /**
          * Generates MySQL log that will be saved to logs/mysqlError.log
          * @return string

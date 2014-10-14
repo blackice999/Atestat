@@ -282,6 +282,15 @@
             }
         }
 
+        /**
+         * Inserts data into 'user_address' table
+         * @param  int $userID  The foreign key to user('ID')
+         * @param  string $city    The city of the user
+         * @param  string $street  The street of the user
+         * @param  int $zip     The Zip code of the user
+         * @param  string $country The country of the user
+         * @return string
+         */
         public function insertUser_address($userID, $city, $street, $zip, $country)
         {
             try
