@@ -282,6 +282,62 @@
             }
         }
 
+        public function insertUser_address($userID, $city, $street, $zip, $country)
+        {
+            try
+            {
+                $query = "INSERT INTO `user_address`
+                (`userID`, `city`, `street`, `zip`, `country`)
+                VALUES (?, ?, ?, ?, ?)";
+
+                $stmt = $this->database->stmt_init();
+
+                if ($stmt->prepare($query))
+                {
+                    $stmt->bind_param('sssis',
+                        $userID,
+                        $city,
+                        $street,
+                        $zip,
+                        $country
+                    );
+
+                    $stmt->execute();
+
+                    //If the execution is successful,
+                    //display that it succeeded
+                    //also insert data into Memcached
+                    if ($stmt->execute())
+                    {
+                        echo "Data added successfully";
+                        static $i;
+
+                        $key = 'user_address_' . $i;
+                        $user_address = array(
+                            'id' => $i,
+                            'userID' => $userID,
+                            'city' => $city,
+                            'street' => $street,
+                            'zip' => $zip,
+                            'country' => $country
+                            );
+
+                        $this->memcached->set($key, $user_address);
+                    }
+
+                    else
+                    {
+                        echo "Try again later";
+                    }
+                }
+            }
+
+            catch (Exception $e)
+            {
+                $this->generateLogCrud();
+            }
+        }
+
         /**
          * Creates the log for CRUD operations that will be saved to logs/crud.log
          * @return string
