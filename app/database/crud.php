@@ -348,6 +348,59 @@
         }
 
         /**
+         * Get data from `user_address` table up to a given $limit
+         * @param  int $limit The number of rows to get
+         * @return string
+         */
+        public function getUser_addressData($limit = PHP_INT_MAX)
+        {
+            try
+            {
+                $limit = intval($limit);
+
+                //If the cache is availabe, fetch data from it
+                if ($this->memcached)
+                {
+                    for ($i = 0; $i <= $limit; $i++)
+                    {
+                        $key = 'user_address_' . $i;
+                        $this->memcached->get($key);
+                    }
+                }
+
+                //If the cache isn't available, fetchfrom MySQL
+                else
+                {
+                    $query = "SELECT `ID`, `userID`, `city, `street`, `zip`, `country`
+                    FROM `user_address`
+                    LIMIT $limit";
+
+                    if ($result = $this->database->query($query))
+                    {
+                        while ($data = $result->fetch_object())
+                        {
+                            echo "<table border='1'>";
+                            echo "<tr>";
+                                echo "<td> " .$data->ID . "</td>";
+                                echo "<td> " .$data->userID . "</td>";
+                                echo "<td> " .$data->city  . "</td>";
+                                echo "<td> " .$data->street . "</td>";
+                                echo "<td> " .$data->zip . "</td>";
+                                echo "<td> " .$data->country . "</td>";
+                            echo "</tr>";
+                        echo "</table>";
+                        }
+                    }
+                }
+            }
+
+            catch (Exception $e)
+            {
+                $this->generateLogCrud();
+            }
+        }
+
+        /**
          * Creates the log for CRUD operations that will be saved to logs/crud.log
          * @return string
          */
