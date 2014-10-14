@@ -92,10 +92,8 @@
 
                 //If the cache is available, fetch data from it
                 if ($this->memcached())
-                for ($i = 0; $i <= $limit, $i++)
                 {
-                    $key = 'user_' . $i;
-                    $this->memcached->get($key);
+                    $this->getFromMemcached($limit, 'user');
                 }
 
                 //If the cache isn't availabe, fetch from MySQL
@@ -361,11 +359,7 @@
                 //If the cache is availabe, fetch data from it
                 if ($this->memcached)
                 {
-                    for ($i = 0; $i <= $limit; $i++)
-                    {
-                        $key = 'user_address_' . $i;
-                        $this->memcached->get($key);
-                    }
+                   $this->getFromMemcached($limit, 'user_address');
                 }
 
                 //If the cache isn't available, fetchfrom MySQL
