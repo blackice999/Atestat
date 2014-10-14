@@ -60,7 +60,7 @@
                             'id' => $i,
                             'email' => $email,
                             'statusID' => $statusID,
-                            'date_registered'
+                            'date_registered' => $date_registered
                             );
 
                         $this->memcached->set($key, $user);
