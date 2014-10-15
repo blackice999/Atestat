@@ -448,7 +448,39 @@
 
                     if ($stmt->execute())
                     {
-                        echo "Update user address city with " . $city;
+                        echo "Updated user address city with " . $city;
+                    }
+
+                    else
+                    {
+                        echo "Error updating data, try again later";
+                    }
+                }
+            }
+
+            catch (Exception $e)
+            {
+                $this->generateLogCrud();
+            }
+        }
+
+        public function updateUser_addressStreet($ID, $street)
+        {
+            try
+            {
+                $query = "UPDATE `user_address` SET `street` = ? WHERE `ID` = ?";
+
+                $stmt = $this->database->stmt->init();
+
+                if ($stmt->prepare($query))
+                {
+                    $stmt->bind_param('si', $street, $ID);
+
+                    $stmt->execute();
+
+                    if ($stmt->execute())
+                    {
+                        echo "Updated user address street with " . $street;
                     }
 
                     else
