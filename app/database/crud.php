@@ -528,6 +528,38 @@
             }
         }
 
+        public function updateUser_addressCountry($ID, $country)
+        {
+            try
+            {
+                $query = "UPDATE `user_address` SET `country` = ? WHERE `ID` = ?";
+
+                $stmt = $this->database->stmt->init();
+
+                if ($stmt->prepare($query))
+                {
+                    $stmt->bind_param('si', $country, $ID);
+
+                    $stmt->execute();
+
+                    if ($stmt->execute())
+                    {
+                        echo "Updated user address country with " . $country;
+                    }
+
+                    else
+                    {
+                        echo "Error updating data, try again later";
+                    }
+                }
+            }
+
+            catch (Exception $e)
+            {
+                $this->generateLogCrud();
+            }
+        }
+
         /**
          * Creates the log for CRUD operations that will be saved to logs/crud.log
          * @return string
