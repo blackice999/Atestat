@@ -425,6 +425,11 @@
                     }
                 }
             }
+
+            catch (Exception $e)
+            {
+                $this->generateLogCrud();
+            }
         }
 
         /**
