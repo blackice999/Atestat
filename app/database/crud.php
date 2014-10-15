@@ -628,7 +628,7 @@
          * Creates the log for CRUD operations that will be saved to logs/crud.log
          * @return string
          */
-        private function generateLogCrud()
+        protected function generateLogCrud()
         {
             $this->monolog->pushHandler(new StreamHandler(__DIR__.'/../logs/crud.log', Logger::ERROR));
             $this->monolog->addError('Failed query: (' . $stmt->errno . ') ' .$stmt->error);
@@ -640,7 +640,7 @@
          * @param  string $table The table from which to get the data
          * @return string
          */
-        private function getFromMemcached($limit, $table)
+        protected function getFromMemcached($limit, $table)
         {
             for ($i = 0; $i <= $limit, $i++)
             {
