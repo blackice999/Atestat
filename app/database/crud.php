@@ -496,6 +496,12 @@
             }
         }
 
+        /**
+         * Updates zip with $zip parameter
+         * @param  int $ID  The row ID
+         * @param  string $zip The new zip code
+         * @return string
+         */
         public function updateUser_addressZip($ID, $zip)
         {
             try
