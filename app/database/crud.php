@@ -432,6 +432,33 @@
             }
         }
 
+        public function updateUser_addressCity($ID, $city)
+        {
+            try
+            {
+                $query = "UPDATE `user_address` SET `city` = ? WHERE `ID` = ?";
+
+                $stmt = $this->database->stmt->init();
+
+                if ($stmt->prepare($query))
+                {
+                    $stmt->bind_param('si', $city, $ID);
+
+                    $stmt->execute();
+
+                    if ($stmt->execute())
+                    {
+                        echo "Update user address city with " . $city;
+                    }
+
+                    else
+                    {
+                        echo "Error updating data, try again later";
+                    }
+                }
+            }
+        }
+
         /**
          * Creates the log for CRUD operations that will be saved to logs/crud.log
          * @return string
