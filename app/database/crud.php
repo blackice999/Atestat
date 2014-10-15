@@ -561,6 +561,46 @@
         }
 
         /**
+         * Deletes data from 'user_address' table
+         * @param  int $ID The row ID
+         * @return string
+         */
+        public function deleteUser_address($ID)
+        {
+            try
+            {
+                $query = "DELETE FROM `user_address` WHERE `ID` = ?";
+
+                $stmt = $this->database->stmt_init();
+
+                if ($stmt->prepare($query))
+                {
+                    $stmt->bind_param('i', $ID);
+
+                    $stmt->execute();
+
+                    if ($stmt->execute())
+                    {
+                        //Delete data from memcached
+                        $this->memcached->delete('user_address_' . $ID);
+                        echo "Deleted successfully data with ID: " . $ID;
+
+                    }
+
+                    else
+                    {
+                        echo "Error deleting data, try again later";
+                    }
+                }
+            }
+
+            catch (Exception $e)
+            {
+                $this->generateLogCrud();
+            }
+        }
+
+        /**
          * Creates the log for CRUD operations that will be saved to logs/crud.log
          * @return string
          */
