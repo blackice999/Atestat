@@ -464,6 +464,12 @@
             }
         }
 
+        /**
+         * Updates street with $street parameter
+         * @param  int $ID     The row ID
+         * @param  string $street The new street name
+         * @return string
+         */
         public function updateUser_addressStreet($ID, $street)
         {
             try
