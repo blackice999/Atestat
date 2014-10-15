@@ -395,6 +395,39 @@
         }
 
         /**
+         * Updates the user's address userID with $userID parameter
+         * @param  int $ID     The row ID
+         * @param  int $userID The userID from 'user' table
+         * @return string
+         */
+        public function updateUser_addressUserID($ID, $userID)
+        {
+            try
+            {
+                $query = "UPDATE `user_address` SET `userID` = ? WHERE `ID` = ?";
+
+                $stmt = $this->database->stmt_init();
+
+                if ($stmt->prepare($query))
+                {
+                    $stmt->bind_param('ii', $userID, $ID);
+
+                    $stmt->execute();
+
+                    if($stmt->execute())
+                    {
+                        echo "Updated user address userID with: " . $userID; 
+                    }
+
+                    else
+                    {
+                        echo "Error updating data, try again later";
+                    }
+                }
+            }
+        }
+
+        /**
          * Creates the log for CRUD operations that will be saved to logs/crud.log
          * @return string
          */
