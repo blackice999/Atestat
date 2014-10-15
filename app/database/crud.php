@@ -432,6 +432,12 @@
             }
         }
 
+        /**
+         * Updates City with $city parameter
+         * @param  int $ID   The row ID
+         * @param  string $city The new city name
+         * @return string
+         */
         public function updateUser_addressCity($ID, $city)
         {
             try
