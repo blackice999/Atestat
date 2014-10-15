@@ -528,6 +528,12 @@
             }
         }
 
+        /**
+         * Updates country with $country parameter
+         * @param  int $ID      The row ID
+         * @param  string $country The new country
+         * @return string
+         */
         public function updateUser_addressCountry($ID, $country)
         {
             try
