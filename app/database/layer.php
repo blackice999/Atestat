@@ -114,7 +114,9 @@
                 //If the cache can't be accessed, get the data from mysql
                 if (!$user)
                 {
-                    $query = "SELECT `ID`,`email`, `statusID`, `date_registered` FROM `user` WHERE `ID`= ?";
+                    $query = "SELECT `ID`,`email`, `statusID`, `date_registered`
+                    FROM `user`
+                    WHERE `ID`= ?";
 
                     $stmt = $this->database->stmt_init();
 
@@ -184,7 +186,9 @@
                 if (!$user)
                 {
 
-                    $query = 'SELECT `ID`,`userID`, `city`, `street`, `zip`,`country` FROM `user_address` WHERE `ID`= ?';
+                    $query = 'SELECT `ID`,`userID`, `city`, `street`, `zip`,`country`
+                    FROM `user_address`
+                    WHERE `ID`= ?';
 
                     $stmt = $this->database->stmt_init();
 
