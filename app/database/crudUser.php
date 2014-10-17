@@ -91,7 +91,7 @@
                 $limit = intval($limit);
 
                 //If the cache is available, fetch data from it
-                if ($this->memcached())
+                if ($this->memcached)
                 {
                     $this->getFromMemcached($limit, 'user');
                 }
