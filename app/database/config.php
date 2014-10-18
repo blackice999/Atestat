@@ -23,19 +23,19 @@
          * Holds the database host name
          * @var string
          */
-        public $databaseHost = 'localhost';
+        protected $databaseHost = 'localhost';
 
         /**
          * Holds the database name
          * @var string
          */
-        public $databaseName = 'loan-crm';
+        protected $databaseName = 'loan-crm';
 
         /**
          * Holds the database users name
          * @var string
          */
-        public $databaseUser = 'root';
+        protected $databaseUser = 'root';
 
         /**
          * Holds the database password
@@ -44,7 +44,7 @@
          * Which one to use?
          * @var string
          */
-        public $databasePassword = 'sampwoS1';
+        protected $databasePassword = 'sampwoS1';
 
         /**
          * Connects to Memcached
