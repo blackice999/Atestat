@@ -87,7 +87,7 @@
          * @param  int $limit The number of rows to get
          * @return string
          */
-        public function getUser_addressData($limit = PHP_INT_MAX)
+        public function getUser_addressData_limit($limit = PHP_INT_MAX)
         {
             try
             {
