@@ -1,6 +1,5 @@
 <?php
     require __DIR__. '/../../vendor/autoload.php';
-    require __DIR__ . '/layer.php';
     require __DIR__. '/config.php';
 
     use Monolog\Logger;
