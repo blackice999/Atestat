@@ -84,7 +84,7 @@
          * @param  int $limit    The number of rows to get
          * @return string
          */
-        public function getUserData($limit = PHP_INT_MAX)
+        public function getUserData_limit($limit = PHP_INT_MAX)
         {
             try
             {
@@ -124,6 +124,77 @@
                 $this->generateLogCrud();
             }
 
+        }
+
+        /**
+         * Fetches the ID, email and date_registered rows from user table
+         * as an enumerated array if $type is 'row'
+         * or as an object if $type is 'object'
+         * @param  integer $ID
+         * @param  string $type Holds which way to fetch the data
+         * @return resource
+         */
+        public function getUserData_ID($ID, $type = 'row')
+        {
+            try
+            {
+                $user = NULL;
+
+                //Get user with id number $ID
+                if ($this->memcached)
+                {
+                    $key = 'user_' . $ID;
+                    $user = $this->memcached->get($key);
+                }
+
+                //If the cache can't be accessed, get the data from mysql
+                if (!$user)
+                {
+                    $query = "SELECT `ID`,`email`, `statusID`, `date_registered`
+                    FROM `user`
+                    WHERE `ID`= ?";
+
+                    $stmt = $this->database->stmt_init();
+
+                    if($stmt->prepare($query))
+                    {
+                        $stmt->bind_param('i', $ID);
+
+                        $stmt->execute();
+
+                        $result = $stmt->get_result();
+
+                        if ($type == 'row')
+                        {
+                            while ($row = $result->fetch_array(MYSQLI_NUM))
+                            {
+                                printf ("%s (%s) %s\n",
+                                 $row[0],
+                                 $row[1],
+                                 $row[2]
+                                );
+                            }
+                        }
+
+                        elseif ($type == 'object')
+                        {
+                            while ($obj = $result->fetch_array(MYSQLI_ASSOC))
+                            {
+                                printf ("%s (%s) %s\n",
+                                 $obj['ID'],
+                                 $obj['email'],
+                                 $obj['date_registered']
+                                );
+                            }
+                        }
+                    }
+                }
+            }
+
+            catch(Exception $e)
+            {
+                $this->generateLogCrud();
+            }
         }
 
         /**
