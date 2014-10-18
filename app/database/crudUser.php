@@ -369,7 +369,7 @@
          */
         protected function getFromMemcached($limit, $table)
         {
-            for ($i = 0; $i <= $limit, $i++)
+            for ($i = 0; $i <= $limit; $i++)
             {
                 $key = $table . '_' . $i;
                 $this->memcached->get($key);
