@@ -15,6 +15,7 @@
         public function __construct()
         {
             parent::__construct();
+            $this->monolog = new Logger('crudUser_address');
         }
 
          /**
