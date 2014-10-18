@@ -205,7 +205,7 @@
 
             catch(Exception $e)
             {
-                $this->generateLogMysql();
+                $this->generateLogCrud();
             }
         }
 
