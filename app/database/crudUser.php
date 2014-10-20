@@ -9,7 +9,7 @@
      * This class is responsible for
      * create, read, update, delete operations
      */
-    class Crud extends Layer
+    class CrudUser extends Config
     {
         public function __construct()
         {
