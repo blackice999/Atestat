@@ -121,7 +121,8 @@
 
             catch (Exception $e)
             {
-                $this->generateLogCrud();
+                $this->monolog->pushHandler(new StreamHandler(__DIR__.'/../logs/crud.log', Logger::ERROR));
+                $this->monolog->addError('Failed query: (' . $e->getCode() . ') ' .$e->GetMessage());
             }
 
         }
