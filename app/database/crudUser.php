@@ -372,11 +372,15 @@
          */
         protected function getFromMemcached($limit, $table)
         {
-            for ($i = 0; $i <= $limit; $i++)
+            if ($this->memcached->getResultCode() == Memcached::RES_SUCCESS)
             {
-                $key = $table . '_' . $i;
-                $this->memcached->get($key);
+                for ($i = 1; $i <= $limit; $i++)
+                {
+                    $key = $table . '_' . $i;
+                    $this->memcached->get($key);
+                }
             }
+              
         }
     }
 ?>
