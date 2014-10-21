@@ -107,14 +107,16 @@
                     if($result = $this->database->query($query))
                     {
                         while($data = $result->fetch_object())
-                        echo "<table border='1'>";
-                            echo "<tr>";
-                                echo "<td> " .$data->ID . "</td>";
-                                echo "<td> " .$data->email . "</td>";
-                                echo "<td> " .$data->statusID  . "</td>";
-                                echo "<td> " .$data->date_registered . "</td>";
-                            echo "</tr>";
-                        echo "</table>";
+                        {
+                            echo "<table border='1'>";
+                                echo "<tr>";
+                                    echo "<td> " .$data->ID . "</td>";
+                                    echo "<td> " .$data->email . "</td>";
+                                    echo "<td> " .$data->statusID  . "</td>";
+                                    echo "<td> " .$data->date_registered . "</td>";
+                                echo "</tr>";
+                            echo "</table>";
+                        }
                     }
                 }
             }
