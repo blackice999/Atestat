@@ -90,20 +90,19 @@
             {
                 $limit = intval($limit);
 
-                //If the cache is available, fetch data from it
-                if ($this->memcached)
-                {
-                    $this->getFromMemcached($limit, 'user');
-                }
+                $query = "SELECT `ID`,`email`,`statusID`, `date_registered`
+                 FROM `user`
+                 LIMIT $limit";
 
-                //If the cache isn't availabe, fetch from MySQL
-                else
-                {
+                 //If the cache is available, fetch data from it
+                 if ($this->memcached)
+                 {
+                     $this->getFromMemcached($limit, 'user');
+                 }
+                 else
+                 {
 
-                    $query = "SELECT `ID`,`email`,`statusID`, `date_registered`
-                     FROM `user`
-                     LIMIT $limit";
-
+                     //If the cache isn't availabe, fetch from MySQL
                     if($result = $this->database->query($query))
                     {
                         while($data = $result->fetch_object())
