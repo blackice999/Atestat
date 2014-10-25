@@ -9,7 +9,7 @@
      * This class is responsible for
      * create, read, update, delete operations
      */
-    class CrudUser_address extends Crud
+    class CrudUser_address extends CrudUser
     {
         public function __construct()
         {
