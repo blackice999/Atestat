@@ -379,7 +379,28 @@
                     $this->memcached->get($key);
                 }
             }
-              
+        }
+
+        /**
+         * @param  string $email The users email address
+         * @param  string $statusID The foreign key to user_status('ID')
+         * @param  string $date_registered The current time of registration
+         * @return string
+         */
+        private function insertIntoMemcached($email, $statusID, $date_registered)
+        {
+            static $i = 2;
+
+            $key = 'user_' . $i;
+            $user = array(
+                'id' => $i,
+                'email' => $email,
+                'statusID' => $statusID,
+                'date_registered' => $date_registered
+                );
+
+            $this->memcached->set($key, $user);
+            $i++;
         }
     }
 ?>
