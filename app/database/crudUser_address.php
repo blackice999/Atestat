@@ -54,19 +54,8 @@
                     if ($stmt->execute())
                     {
                         echo "Data added successfully";
-                        static $i;
 
-                        $key = 'user_address_' . $i;
-                        $user_address = array(
-                            'id' => $i,
-                            'userID' => $userID,
-                            'city' => $city,
-                            'street' => $street,
-                            'zip' => $zip,
-                            'country' => $country
-                            );
-
-                        $this->memcached->set($key, $user_address);
+                        $this->insertIntoMemcached($userID, $city, $street, $zip, $country);
                     }
 
                     else
@@ -434,6 +423,33 @@
             {
                 $this->generateLogCrud();
             }
+        }
+
+        /**
+         * Insert data Into Memcached with the parameters supplied by bind_param
+         * @param  integer $userID  [description]
+         * @param  string $city    The city of the user
+         * @param  string $street  The street of the user
+         * @param  int $zip     The Zip code of the user
+         * @param  string $country The country of the user
+         * @return string
+         */
+        private function insertIntoMemcached($userID, $city, $street, $zip, $country)
+        {
+            static $i = 2;
+            $key = 'user_address_' . $i;
+
+            $user_address = array(
+                'id' => $i,
+                'userID' => $userID,
+                'city' => $city,
+                'street' => $street,
+                'zip' => $zip,
+                'country' => $country
+                );
+
+            $this->memcached->set($key, $user_address);
+            $i++;
         }
     }
 ?>
