@@ -53,17 +53,8 @@
                     if ($stmt->execute())
                     {
                         echo "Data added successfully";
-                        static $i;
-
-                        $key = 'user_' . $i;
-                        $user = array(
-                            'id' => $i,
-                            'email' => $email,
-                            'statusID' => $statusID,
-                            'date_registered' => $date_registered
-                            );
-
-                        $this->memcached->set($key, $user);
+                       
+                        $this->insertIntoMemcached($email, $statusID, $date_registered);
                     }
 
                     else
