@@ -86,13 +86,6 @@
                 FROM `user_address`
                 LIMIT $limit";
 
-                //If the cache is availabe, fetch data from it
-                if ($this->memcached)
-                {
-                   $this->getFromMemcached($limit, 'user_address');
-                }
-
-                 //If the cache isn't available, fetchfrom MySQL
                 if ($result = $this->database->query($query))
                 {
                     while ($data = $result->fetch_object())
