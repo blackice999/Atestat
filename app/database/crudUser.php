@@ -85,7 +85,6 @@
                  FROM `user`
                  LIMIT $limit";
 
-                 //If the cache isn't availabe, fetch from MySQL
                 if($result = $this->database->query($query))
                 {
                     while($data = $result->fetch_object())
@@ -343,24 +342,6 @@
         {
             $this->monolog->pushHandler(new StreamHandler(__DIR__.'/../logs/crud.log', Logger::ERROR));
             $this->monolog->addError('Failed query: (' . $stmt->errno . ') ' .$stmt->error);
-        }
-
-        /**
-         * Get data from Memcached
-         * @param  int $limit The number of rows to get
-         * @param  string $table The table from which to get the data
-         * @return string
-         */
-        protected function getFromMemcached($limit, $table)
-        {
-            if ($this->memcached->getResultCode() == Memcached::RES_SUCCESS)
-            {
-                for ($i = 1; $i <= $limit; $i++)
-                {
-                    $key = $table . '_' . $i;
-                    $this->memcached->get($key);
-                }
-            }
         }
 
         /**
