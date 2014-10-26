@@ -1,6 +1,7 @@
 <?php 
     require __DIR__. '/../../vendor/autoload.php';
     require __DIR__. '/config.php';
+    require __DIR__. '/crudUser.php';
 
     use Monolog\Logger;
     use Monolog\Handler\StreamHandler;
