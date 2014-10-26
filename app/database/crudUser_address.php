@@ -158,7 +158,7 @@
 
                         if ($type == 'row')
                         {
-                            while ($row = $result->fetch_array(MYSQLI_NUM))
+                            while ($row = $result->fetch_row())
                             {
                                 printf ("%s (%s) %s %s %s\n",
                                  $row[0],
@@ -173,7 +173,7 @@
 
                         elseif ($type == 'object')
                         {
-                            while ($row = $result->fetch_array(MYSQLI_ASSOC))
+                            while ($row = $result->fetch_assoc())
                             {
                                 printf ("%s (%s) %s %s %s\n",
                                  $row['ID'],
