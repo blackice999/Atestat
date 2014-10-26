@@ -85,28 +85,19 @@
                  FROM `user`
                  LIMIT $limit";
 
-                 //If the cache is available, fetch data from it
-                 if ($this->memcached)
-                 {
-                     $this->getFromMemcached($limit, 'user');
-                 }
-                 else
-                 {
-
-                     //If the cache isn't availabe, fetch from MySQL
-                    if($result = $this->database->query($query))
+                 //If the cache isn't availabe, fetch from MySQL
+                if($result = $this->database->query($query))
+                {
+                    while($data = $result->fetch_object())
                     {
-                        while($data = $result->fetch_object())
-                        {
-                            echo "<table border='1'>";
-                                echo "<tr>";
-                                    echo "<td> " .$data->ID . "</td>";
-                                    echo "<td> " .$data->email . "</td>";
-                                    echo "<td> " .$data->statusID  . "</td>";
-                                    echo "<td> " .$data->date_registered . "</td>";
-                                echo "</tr>";
-                            echo "</table>";
-                        }
+                        echo "<table border='1'>";
+                            echo "<tr>";
+                                echo "<td> " .$data->ID . "</td>";
+                                echo "<td> " .$data->email . "</td>";
+                                echo "<td> " .$data->statusID  . "</td>";
+                                echo "<td> " .$data->date_registered . "</td>";
+                            echo "</tr>";
+                        echo "</table>";
                     }
                 }
             }
