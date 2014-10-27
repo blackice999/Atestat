@@ -229,7 +229,7 @@
                             'id' => $ID,
                             'email' => $email,
                             'statusID' => $this->statusID,
-                            'date_registered' => date("Y-m-d H:i:s");
+                            'date_registered' => date("Y-m-d H:i:s")
                             );
 
                         $this->memcached->set($key, $user);
@@ -316,7 +316,7 @@
                             'id' => $ID,
                             'email' => $this->email,
                             'statusID' => $statusID,
-                            'date_registered' => date("Y-m-d H:i:s");
+                            'date_registered' => date("Y-m-d H:i:s")
                             );
 
                         $this->memcached->set($key, $user);
