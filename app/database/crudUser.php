@@ -11,6 +11,25 @@
      */
     class CrudUser extends Config
     {
+
+        /**
+         * Holds the email in order to update Memcached
+         * @var string
+         */
+        private $email;
+
+        /**
+         * Holds the statusID in order to update Memcached
+         * @var int
+         */
+        private $statusID;
+
+        /**
+         * Holds the password in order to update Memcached
+         * @var string
+         */
+        private $password;
+
         public function __construct()
         {
             parent::__construct();
