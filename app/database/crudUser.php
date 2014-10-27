@@ -211,7 +211,7 @@
             {
                 $query = "UPDATE `user` SET `email` = ? WHERE `ID` = ?";
 
-                $stmt = $this->datebase->stmt_init();
+                $stmt = $this->database->stmt_init();
 
                 if ($stmt->prepare($query))
                 {
