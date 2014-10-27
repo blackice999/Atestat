@@ -24,12 +24,6 @@
          */
         private $statusID;
 
-        /**
-         * Holds the password in order to update Memcached
-         * @var string
-         */
-        private $password;
-
         public function __construct()
         {
             parent::__construct();
@@ -49,6 +43,12 @@
         {
             try
             {
+
+                //Stores user info for updating Memcached
+                $this->email = $email;
+                $this->statusID = $statusID;
+                $this->password = $password;
+
                 $query = "INSERT INTO `user` 
                 (`email`,`statusID`,`password`,`password_hash`,`date_registered`)
                 VALUES (?, ?, ?, ?, ?)";
@@ -222,6 +222,17 @@
                     if ($stmt->execute())
                     {
                         echo "Updated user email with:" . $email;
+
+                        //Updates Memcached with the new email
+                        $key = 'user_' . $ID;
+                        $user = array(
+                            'id' => $ID,
+                            'email' => $email,
+                            'statusID' => $this->statusID,
+                            'date_registered' => date("Y-m-d H:i:s");
+                            );
+
+                        $this->memcached->set($key, $user);
                     }
 
                     else
@@ -298,6 +309,17 @@
                     if ($stmt->execute())
                     {
                         echo "Updated user statusID with: " . $statusID; 
+
+                        //Updates Memcached with the new statusID
+                        $key = 'user_' . $ID;
+                        $user = array(
+                            'id' => $ID,
+                            'email' => $this->email,
+                            'statusID' => $statusID,
+                            'date_registered' => date("Y-m-d H:i:s");
+                            );
+
+                        $this->memcached->set($key, $user);
                     }
 
                     else
