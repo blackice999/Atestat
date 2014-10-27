@@ -39,7 +39,7 @@
         /**
          * Inserts data into 'user' table
          * @param  string $email
-         * @param  string $statusID
+         * @param  int $statusID
          * @param  string $password
          * @param  string $password_hash
          * @param  string $date_registered
