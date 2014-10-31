@@ -11,7 +11,7 @@
     /**
      * This class holds the database connection info
      */
-    class Config
+    class Database
     {
         /**
          * Holds the database connection link
@@ -104,7 +104,98 @@
          */
         public function __destruct()
         {
+            //use myql_close
+            $this->database->close();
             $this->database = NULL;
+        }
+
+        //@param sqlString string
+        //return boolean
+        /**
+         * Runs the given $sqlString
+         * @param  string $sqlString
+         * @param  array  $param
+         * @return boolean
+         */
+        public function runQuery($sqlString, array $param)
+        {
+            try
+            {
+                //$this->database istanceOf mysqli
+                if ($this->database instanceof mysqli)
+                {
+                    //run the query method
+                    $this->execute = $this->database->query($sqlString);
+                    
+                    return $this->execute;
+                }
+            }
+
+            catch (Exception $e)
+            {
+                return false;
+            }
+        }
+
+        /**
+         * Binds the given query
+         * @param  string $sqlString
+         * @param  array  $param     The given bindTypes and bindVariables
+         * @return boolean
+         */
+        public function bindQuery($sqlString, array $param)
+        {
+            try
+            {
+                $stmt = $this->database->stmt_init();
+
+                if ($stmt->prepare($sqlString))
+                    {
+                        $stmt->bind_param($param['bindTypes'], $param['bindVariables']);
+
+                        $stmt->execute();
+
+                        return $this->result = $stmt->get_result();
+                    }
+            }
+
+            catch (Exception $e)
+            {
+                return false;
+            }
+        }
+
+        /**
+         * Returns a result array from $sqlString
+         * @param  string $query
+         * @param  const $type  Numerical or associative array
+         * @return string
+         */
+        public function getArray($sqlString, $type = MYSQLI_NUM)
+        {
+            return $sqlString->fetch_array($type);
+        }
+
+
+        /**
+         * Checks if the update query is successful
+         * @param  string $sqlString
+         * @param  array  $param
+         * @return boolean
+         */
+        public function updateQuery($sqlString, array $param)
+        {
+            $runQueryResult = $this->runQuery($sqlString,$param);
+
+            // if ($runQueryResult instanceof mysqli)
+            if ($runQueryResult)
+            {
+               return $this->database->affected_rows;
+
+               //To fix why this doesn't return anything
+            }
+
+            return false;
         }
     }
 ?>
