@@ -43,12 +43,6 @@
         {
             try
             {
-
-                //Stores user info for updating Memcached
-                $this->email = $email;
-                $this->statusID = $statusID;
-                $this->password = $password;
-
                 $query = "INSERT INTO `user` 
                 (`email`,`statusID`,`password`,`password_hash`,`date_registered`)
                 VALUES (?, ?, ?, ?, ?)";
@@ -224,15 +218,7 @@
                         echo "Updated user email with:" . $email;
 
                         //Updates Memcached with the new email
-                        $key = 'user_' . $ID;
-                        $user = array(
-                            'id' => $ID,
-                            'email' => $email,
-                            'statusID' => $this->statusID,
-                            'date_registered' => date("Y-m-d H:i:s")
-                            );
-
-                        $this->memcached->set($key, $user);
+                        $this->updateMemcached($ID, $email, $statusID);
                     }
 
                     else
@@ -256,34 +242,20 @@
          */
         public function updateUserPassword($ID, $password)
         {
-            try
+
+            $db = new Database();
+            $update = $db->runQuery("UPDATE `user` SET `password` = ? WHERE `ID` = ?");
+
+            if (!$update)
             {
-                $query = "UPDATE `user` SET `password` = ? WHERE `ID` = ?";
-
-                $stmt = $this->database->stmt_init();
-
-                if ($stmt->prepare($query))
-                {
-                    $stmt->bind_param('si', $password, $ID);
-
-                    $stmt->execute();
-
-                    if ($stmt->execute())
-                    {
-                        echo "Updated user password with" . $password;
-                    }
-
-                    else
-                    {
-                        echo "Error updating data, try again later";
-                    }
-                }
+                return "An error occured!";
             }
 
-            catch (Exception $e)
+            else
             {
-                $this->generateLogCrud();
+                return 'Updated successfully the password';
             }
+            
         }
 
         /**
@@ -311,15 +283,7 @@
                         echo "Updated user statusID with: " . $statusID; 
 
                         //Updates Memcached with the new statusID
-                        $key = 'user_' . $ID;
-                        $user = array(
-                            'id' => $ID,
-                            'email' => $this->email,
-                            'statusID' => $statusID,
-                            'date_registered' => date("Y-m-d H:i:s")
-                            );
-
-                        $this->memcached->set($key, $user);
+                        $this->updateMemcached($ID, $email, $statusID);
                     }
 
                     else
@@ -359,7 +323,6 @@
                         //Delete data from memcached
                         $this->memcached->delete('user_' . $ID);
                         echo "Deleted successfully data with ID: " . $ID;
-
                     }
 
                     else
@@ -405,6 +368,19 @@
 
             $this->memcached->set($key, $user);
             $i++;
+        }
+
+        private function updateMemcached($ID, $email, $statusID)
+        {
+            $key = 'user_' . $ID;
+            $user = array(
+                'id' => $ID,
+                'email' => $email,
+                'statusID' => $statusID,
+                'date_registered' => date("Y-m-d H:i:s")
+                );
+
+            $this->memcached->set($key, $user);
         }
     }
 ?>
