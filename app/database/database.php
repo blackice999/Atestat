@@ -151,7 +151,10 @@
 
                 if ($stmt->prepare($sqlString))
                     {
-                        $stmt->bind_param($param['bindTypes'], $param['bindVariables']);
+                        foreach ($param['bindVariables'] as $variables)
+                        {
+                            $stmt->bind_param($param['bindTypes'], $variables);
+                        }
 
                         $stmt->execute();
 
@@ -196,6 +199,144 @@
             }
 
             return false;
+        }
+
+        /**
+         * Checks if the current email given is in the database
+         * @param  string $email
+         * @return boolean       Returns true if exists, false otherwise
+         */
+        public function emailExists($email)
+        {
+            try
+            {
+                $bindArray = array(
+                    'bindTypes' => 's',
+                    'bindVariables' => array($email)
+                    );
+
+                $bind = $this->bindQuery(
+                    "SELECT `email` FROM `user` WHERE `email` = ? LIMIT 1",
+                    $bindArray
+                    );
+
+               $info = $this->getArray($bind);
+
+                if (is_array($info) && !empty($info))
+                {
+                    return true;
+                }
+
+                else
+                {
+                    return false;
+                }
+            }
+
+            catch (Exception $e)
+            {
+                return false;
+            }
+        }
+
+        /**
+         * Checks if the current password is in the database
+         * @param  string $password
+         * @return boolean          Returns true if exists, false otherwise
+         */
+        public function passwordExists($password)
+        {
+            try
+            {
+                $bindArray = array(
+                    'bindTypes' => 's',
+                    'bindVariables' => array($password)
+                    );
+
+                $bind = $this->bindQuery(
+                    "SELECT password FROM user WHERE password = ? LIMIT 1",
+                    $bindArray
+                    );
+
+                $info = $this->getArray($bind); 
+
+                if (is_array($info) && !empty($info))
+                {
+                    return true;
+                }
+
+                else
+                {
+                    return false;
+                }
+            }
+
+            catch (Exception $e)
+            {
+                return false;
+            }
+        }
+
+        public function authorizeAccess($email, $password)
+        {
+            try
+            {
+                // $bindArray = array(
+                //     'bindTypes' => 'ss',
+                //     'bindVariables' => array($email,$password)
+
+                    //to fix - bindVariables
+                    // );
+
+                // $info = $this->bindQuery(
+                // "SELECT email, password FROM user
+                //  WHERE email = ?
+                //  AND password = ?",
+                //  $bindArray);
+                
+                if ($this->emailExists($email) && $this->passwordExists($password))
+                {
+                    return true;
+                }
+
+                else
+                {
+                    return false;
+                }
+            }
+
+            catch (Exception $e)
+            {
+                return false;
+            }
+        }
+
+        public function register($email, $statusID, $password)
+        {
+            try
+            {
+
+                //Sanitize the email
+                $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+
+                $date = date("Y-m-d H:i:s");
+
+                //Maybe add a personal salt, but it's not effective
+                $password = password_hash($password, PASSWORD_BCRYPT);
+
+                $bindArray = array(
+                    'bindTypes' => 'siss',
+                    'bindVariables' => array($email, $statusID, $password, $date);
+                    );
+
+                $this->bindQuery(
+                    "INSERT INTO `user` (email, statusID, password, password_hash, date_registered)
+                     VALUES (?, ?, ?, ?)",
+                    $bindArray
+                    );
+
+
+            }
         }
     }
 ?>
