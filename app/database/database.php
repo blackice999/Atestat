@@ -224,7 +224,7 @@
             {
                 $bindArray = array(
                     'bindTypes' => 's',
-                    'bindVariables' => array($email)
+                    'bindVariables' => array(&$email)
                     );
 
                 $bind = $this->bindQuery(
@@ -251,43 +251,43 @@
             }
         }
 
-        /**
-         * Checks if the current password is in the database
-         * @param  string $password
-         * @return boolean          Returns true if exists, false otherwise
-         */
-        public function passwordExists($password)
-        {
-            try
-            {
-                $bindArray = array(
-                    'bindTypes' => 's',
-                    'bindVariables' => array($password)
-                    );
+        // /**
+        //  * Checks if the current password is in the database
+        //  * @param  string $password
+        //  * @return boolean          Returns true if exists, false otherwise
+        //  */
+        // public function passwordExists($password)
+        // {
+        //     try
+        //     {
+        //         $bindArray = array(
+        //             'bindTypes' => 's',
+        //             'bindVariables' => array(&$password)
+        //             );
 
-                $bind = $this->bindQuery(
-                    "SELECT `password` FROM `user` WHERE `password` = ? LIMIT 1",
-                    $bindArray
-                    );
+        //         $bind = $this->bindQuery(
+        //             "SELECT `password` FROM `user` WHERE `ID` = ? LIMIT 1",
+        //             $bindArray
+        //             );
 
-                $info = $this->getArray($bind); 
+        //         $info = $this->getArray($bind); 
 
-                if (password_verify($password, $info[0]) && is_array($info) && !empty($info))
-                {
-                    return true;
-                }
+        //         if (password_verify($password, $info[0]) && is_array($info) && !empty($info))
+        //         {
+        //             return true;
+        //         }
 
-                else
-                {
-                    return false;
-                }
-            }
+        //         else
+        //         {
+        //             return false;
+        //         }
+        //     }
 
-            catch (Exception $e)
-            {
-                return false;
-            }
-        }
+        //     catch (Exception $e)
+        //     {
+        //         return false;
+        //     }
+        // }
 
         public function authorizeAccess($email, $password)
         {
@@ -305,10 +305,24 @@
                 //  WHERE email = ?
                 //  AND password = ?",
                 //  $bindArray);
+                 
+                // $password = password_hash($password, PASSWORD_BCRYPT);
+                $hash = password_hash($password, PASSWORD_BCRYPT);
+                $bindArray = array(
+                    'bindTypes' => 's',
+                    'bindVariables' => array(&$email)
+                    );
+
+                $bind = $this->bindQuery(
+                    "SELECT `ID`, `password` FROM `user` WHERE `email` = ? LIMIT 1",
+                    $bindArray
+                    );
+
+                $info = $this->getArray($bind);
                 
-                if ($this->emailExists($email) && $this->passwordExists($password))
+                if (password_verify($password, $info[1]) && $this->emailExists($email))
                 {
-                    return true;
+                    return $info[0];
                 }
 
                 else
