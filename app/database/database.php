@@ -148,13 +148,21 @@
             try
             {
                 $stmt = $this->database->stmt_init();
-
                 if ($stmt->prepare($sqlString))
                     {
-                        foreach ($param['bindVariables'] as $variables)
-                        {
-                            $stmt->bind_param($param['bindTypes'], $variables);
-                        }
+                        // foreach ($param['bindVariables'] as $variables)
+                        // {
+                        //     $stmt->bind_param($param['bindTypes'], $variables);
+                        // }
+
+                        //Calls call_user_func_array
+                        //to dynamically pass the params array
+                        call_user_func_array(
+                            array($stmt, "bind_param"),
+                            array_merge(
+                                array($param['bindTypes']), $param['bindVariables']
+                            )
+                        );
 
                         if (strpos($sqlString, "SELECT") !== false)
                         {
@@ -264,7 +272,7 @@
 
                 $info = $this->getArray($bind); 
 
-                if (is_array($info) && !empty($info))
+                if (password_verify($password, $info[0]) && is_array($info) && !empty($info))
                 {
                     return true;
                 }
@@ -315,6 +323,13 @@
             }
         }
 
+        /**
+         * Registers the new person
+         * @param  string $email    The persons email
+         * @param  int $statusID foreign key referencing the status of the person
+         * @param  string $password The persons password
+         * @return boolean           If it succeeds, returns true, otherwise false
+         */
         public function register($email, $statusID, $password)
         {
             try
@@ -322,21 +337,25 @@
                 //Sanitize the email
                 $email = filter_var($email, FILTER_SANITIZE_EMAIL);
 
-                $date = date("Y-m-d H:i:s");
+                $statusID = intval($statusID);
+
+                // $date = date("Y-m-d H:i:s");
 
                 //Maybe add a personal salt, but it's not effective
                 $password = password_hash($password, PASSWORD_BCRYPT);
 
                 $bindArray = array(
-                    'bindTypes' => 'siss',
-                    'bindVariables' => array($email, $statusID, $password, $date)
+                    'bindTypes' => 'isis',
+                    'bindVariables' => array(&$ID, &$email, &$statusID, &$password)
                     );
 
-                $this->bindQuery(
-                    "INSERT INTO `user` (email, statusID, password, password_hash, date_registered)
-                     VALUES (?, ?, ?, ?)",
+                $insert = $this->bindQuery(
+                    "INSERT INTO `user` (`ID`, `email`, `statusID`, `password`)
+                    VALUES (?,?,?,?)",
                     $bindArray
                     );
+
+                return $insert;
             }
 
             catch (Exception $e)
