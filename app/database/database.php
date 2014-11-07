@@ -156,9 +156,13 @@
                             $stmt->bind_param($param['bindTypes'], $variables);
                         }
 
-                        $stmt->execute();
+                        if (strpos($sqlString, "SELECT") !== false)
+                        {
+                            $stmt->execute();
+                            return $this->result = $stmt->get_result();
+                        }
 
-                        return $this->result = $stmt->get_result();
+                        return $stmt->execute();
                     }
             }
 
@@ -254,7 +258,7 @@
                     );
 
                 $bind = $this->bindQuery(
-                    "SELECT password FROM user WHERE password = ? LIMIT 1",
+                    "SELECT `password` FROM `user` WHERE `password` = ? LIMIT 1",
                     $bindArray
                     );
 
@@ -315,7 +319,6 @@
         {
             try
             {
-
                 //Sanitize the email
                 $email = filter_var($email, FILTER_SANITIZE_EMAIL);
 
@@ -326,7 +329,7 @@
 
                 $bindArray = array(
                     'bindTypes' => 'siss',
-                    'bindVariables' => array($email, $statusID, $password, $date);
+                    'bindVariables' => array($email, $statusID, $password, $date)
                     );
 
                 $this->bindQuery(
@@ -334,8 +337,11 @@
                      VALUES (?, ?, ?, ?)",
                     $bindArray
                     );
+            }
 
-
+            catch (Exception $e)
+            {
+                return false;
             }
         }
     }
