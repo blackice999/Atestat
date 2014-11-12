@@ -176,7 +176,7 @@
 
             catch (Exception $e)
             {
-                return false;
+                $this->error = $this->database->error;
             }
         }
 
@@ -367,9 +367,16 @@
                     "INSERT INTO `user` (`ID`, `email`, `statusID`, `password`)
                     VALUES (?,?,?,?)",
                     $bindArray
-                    );
+                    ); 
 
-                return $insert;
+
+                if(isset($this->error))
+                {
+                    $this->error;
+                    return false;
+                }
+                    
+                return true;
             }
 
             catch (Exception $e)
