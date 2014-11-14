@@ -1,12 +1,14 @@
 body{
- background-color: #1055FB;
+     background-color: #1055FB;
+     color: #ffffff;
+     font-size: 16px;
+     font-family: Arial, Sans-serif;
 }
 
 #banner {
     width: 250px;
     height: 50px;
     border: 10px solid black;
-    color: #ffffff;
 }
 
 #banner img {
@@ -17,7 +19,6 @@ body{
     width: 400px;
     margin: 100px auto;
     text-align: center;
-    color: #ffffff;
 }
 
 .form-middle .align-left {
@@ -26,4 +27,47 @@ body{
 
 .align-center {
     display: inline-block;
+}
+
+#logout-right {
+    text-decoration: none;
+    margin: 20px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+#logout-right:visited{
+    color: white;
+}
+
+#logout-right:hover {
+    text-decoration: underline;
+}
+
+#container {
+    margin: 100px;
+   
+}
+
+.user_info {
+    text-align: left;
+}
+
+.user_info thead {
+  float: left;   
+}
+
+
+.user_info thead th {
+  display: block;   
+  background: red;
+}
+
+.user_info tbody {
+  float: right;   
+}
+
+.user_info tbody td {
+  display: block;   
 }
