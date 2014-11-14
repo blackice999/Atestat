@@ -338,13 +338,13 @@
         }
 
         /**
-         * Registers the new person
+         * Inserts the new person
          * @param  string $email    The persons email
          * @param  int $statusID foreign key referencing the status of the person
          * @param  string $password The persons password
          * @return boolean           If it succeeds, returns true, otherwise false
          */
-        public function register($email, $statusID, $password)
+        public function insertUser($email, $statusID, $password)
         {
             try
             {
@@ -359,20 +359,39 @@
                 $password = password_hash($password, PASSWORD_BCRYPT);
 
                 $bindArray = array(
-                    'bindTypes' => 'isis',
-                    'bindVariables' => array(&$ID, &$email, &$statusID, &$password)
+                    'bindTypes' => 'sis',
+                    'bindVariables' => array(&$email, &$statusID, &$password)
                     );
 
                 $insert = $this->bindQuery(
-                    "INSERT INTO `user` (`ID`, `email`, `statusID`, `password`)
-                    VALUES (?,?,?,?)",
+                    "INSERT INTO `user` (`email`, `statusID`, `password`)
+                    VALUES (?,?,?)",
                     $bindArray
                     ); 
+                
+            }
 
+            catch (Exception $e)
+            {
+                return false;
+            }
+        }
 
-                if(isset($this->error))
+        /**
+         * Registers the new person
+         * @param  string $email    The persons email
+         * @param  int $statusID foreign key referencing the status of the person
+         * @param  string $password The persons password
+         * @return boolean           If it succeeds, returns true, otherwise false
+         */
+        public function register($email, $statusID, $password)
+        {
+            try
+            {
+                $this->insertUser($email, $statusID, $password);
+
+                 if(isset($this->error))
                 {
-                    $this->error;
                     return false;
                 }
                     
