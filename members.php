@@ -23,7 +23,7 @@
         $bindArray);
 
     //Get the result of the query
-    $info_user = $db->getArray($query_user, MYSQLI_ASSOC);
+    // $info_user = $db->getArray($query_user, MYSQLI_ASSOC);
 
     //Runs a prepared query to get info from 'user_address' table
     $query_address = $db->bindQuery(
@@ -32,6 +32,14 @@
 
     //Get the result of the query
     $info_address = $db->getArray($query_address, MYSQLI_ASSOC);
+
+    //Runs a query to get table info
+    $field = $db->runQuery(
+        "SHOW COLUMNS FROM `user` WHERE Field NOT IN ('password','password_hash')",
+        array());
+
+    //Get the result of the query
+    $field_array = $db->getArray($field)
 ?>
 <!DOCTYPE html>
 <html>
@@ -42,53 +50,35 @@
 <body>
     <a href="logout.php" id="logout-right">Log out </a>
     <div id="container">
+ 
+       <table id="user_info" cellpadding="10">
+     
+            <thead>
+           <?php  while ($row = $db->getArray($field)): ?>
 
-        <div id="info-right">
-           <table style="text-align: left;" cellpadding="10">
-           <tr>
-                <th>Email</th>
-                <td><?php echo $info_user['email']; ?></td>
-           </tr>
+                <tr>
+                    <th>
+                        <?php echo $row[0]; ?>
+                    </th>
+                </tr>
 
-            <tr>
-                <th>status ID</th>
-                <td><?php echo $info_user['statusID']; ?></td>
-            </tr>
-            <tr>
-                <th>Date registered</th>
-                <td><?php echo $info_user['date_registered']; ?></td>
-           </tr>
+                <?php endwhile; ?>
 
-           <tr>
-               <th>User ID</th>
-               <td><?php echo $info_address['userID']; ?></td>
-           </tr>
+            </thead>
 
-           <tr>
-               <th>City</th>
-               <td><?php echo $info_address['city']; ?></td>
-           </tr>
+            <tbody>
 
-           <tr>
-               <th>Street</th>
-               <td><?php echo $info_address['street']; ?></td>
-           </tr>
+                <?php while($info_user = $db->getArray($query_user, MYSQLI_ASSOC)): ?>
 
-           <tr>
-               <th>Zip</th>
-               <td><?php echo $info_address['zip']; ?></td>
-           </tr>
+                     <?php foreach ($info_user as $info): ?>
+                        <tr>
+                            <td> <?php echo $info; ?></td>
+                        </tr>
 
-           <tr>
-               <th>Country</th>
-               <td><?php echo $info_address['country']; ?></td>
-           </tr>
-            </table>
-
-        </div>
-
-        <div id="info-left">
-        </div>
+                     <?php endforeach; ?>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
     </div>
 </body>
 </html>
