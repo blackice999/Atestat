@@ -50,81 +50,94 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Members page</title>
+    <title><?php echo $site_name; ?> - Members page</title>
     <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
+     <div id="banner">
+        <img src="design/accountsmall.jpg" width="100" height="50">
+        <span>Cool site name</span>
+    </div>
+
     <a href="logout.php" id="logout-right">Log out </a>
     <div id="container">
- 
-       <table class="user_info" cellpadding="10">
-     
-            <thead>
-           <?php  while ($row = $db->getArray($field)): ?>
-
-                <tr>
-                    <th>
-                        <?php
-                            if ($row[0] == 'statusID')
-                            {
-                                $row[0] = 'status';
-                            }
-
-                            elseif ($row[0] == 'date_registered')
-                            {
-                                $row[0] = 'date registered';
-                            }
-
-                            echo ucfirst($row[0]);
-                         ?>
-                    </th>
-                </tr>
-
-                <?php endwhile; ?>
-
-            </thead>
-
-            <tbody>
-
-                <?php while($info_user = $db->getArray($query_user)): ?>
-
-                     <?php foreach ($info_user as $info): ?>
-                        <tr>
-                            <td> <?php echo $info; ?></td>
-                        </tr>
-
-                     <?php endforeach; ?>
-                <?php endwhile; ?>
-            </tbody>
-        </table>
-
-        <h2> Address</h2>
-        <table class="user_info" cellpadding="10">
-            <thead>
-                <?php while ($row_address = $db->getArray($field_address)): ?>
+        <div id="info-left">
+            <table class="user_info" cellpadding="10">
+         
+                <thead>
+               <?php  while ($row = $db->getArray($field)): ?>
 
                     <tr>
                         <th>
-                            <?php echo ucfirst($row_address[0]); ?>
+                            <?php
+                                if ($row[0] == 'statusID')
+                                {
+                                    $row[0] = 'status';
+                                }
+
+                                elseif ($row[0] == 'date_registered')
+                                {
+                                    $row[0] = 'date registered';
+                                }
+
+                                echo ucfirst($row[0]);
+                             ?>
                         </th>
                     </tr>
 
-                <?php endwhile; ?>
+                    <?php endwhile; ?>
 
-            </thead>
+                </thead>
 
-            <tbody>
-                <?php while ($info_address = $db->getArray($query_address)): ?>
-                    <?php foreach ($info_address as $info): ?>
+                <tbody>
+
+                    <?php while($info_user = $db->getArray($query_user)): ?>
+
+                         <?php foreach ($info_user as $info): ?>
+                            <tr>
+                                <td> <?php echo $info; ?></td>
+                            </tr>
+
+                         <?php endforeach; ?>
+                    <?php endwhile; ?>
+                </tbody>
+            </table>
+
+            <h2> Address</h2>
+            <table class="user_info" cellpadding="10">
+                <thead>
+                    <?php while ($row_address = $db->getArray($field_address)): ?>
+
                         <tr>
-                            <td> <?php echo $info; ?></td>
+                            <th>
+                                <?php echo ucfirst($row_address[0]); ?>
+                            </th>
                         </tr>
-                    <?php endforeach; ?>
-                <?php endwhile; ?>
 
-            </tbody>
-            
-        </table>
+                    <?php endwhile; ?>
+
+                </thead>
+
+                <tbody>
+                    <?php while ($info_address = $db->getArray($query_address)): ?>
+                        <?php foreach ($info_address as $info): ?>
+                            <tr>
+                                <td> <?php echo $info; ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php endwhile; ?>
+
+                </tbody>
+                
+            </table>
+         </div>
+
+        <div id="info-right">
+            <h2> Another </h2>
+            <img src="design/accountsmall.jpg" width="100" height="100" />
+
+        </div>
     </div>
+
 </body>
 </html>
