@@ -42,7 +42,7 @@
 
             <tr class='align-left'>
                 <td>Password: </td>
-                <td><input type = 'password' name = 'Register[pass]' id = 'pass'/></td>
+                <td><input type = 'password' name = 'Register[password]' id = 'password'/></td>
             </tr>
 
             <tr class='align-left'>
