@@ -218,7 +218,7 @@ class Register extends Database{
         return true;
     }
 
-    public function isPasswordValid()
+    private function isPasswordValid()
     {
         if (empty($this->password))
         {
@@ -228,6 +228,31 @@ class Register extends Database{
         return true;
 
         //what next
+    }
+
+    private function getStatusID()
+    {
+        try
+        {
+            //Specifies to which items to apply the filter
+            $bindArray = array(
+                'bindTypes' => 's',
+                'bindVariables' => array(&$this->email)
+                );
+
+            $bind = $this->bindQuery(
+                "SELECT `statusID` FROM `user` WHERE `email` = ?",
+                $bindArray
+                );
+
+            return $this->getArray($bind);
+        }
+
+        catch (Exception $e)
+        {
+            echo $this->database->error;
+            return false;
+        }
     }
 }
 
