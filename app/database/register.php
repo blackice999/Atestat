@@ -199,6 +199,36 @@ class Register extends Database{
 
         return true;
     }
+
+    private function isEmailValid()
+    {
+        if (empty($this->email))
+        {
+            $this->errors[] = "Please enter an email!";
+        }
+
+        if(!filter_var($this->email, FILTER_VALIDATE_EMAIL))
+        {
+            $this->errors[] = "Please enter a valid email!";
+            return false;
+        }
+
+        $this->email = filter_var($this->email, FILTER_SANITIZE_EMAIL);
+
+        return true;
+    }
+
+    public function isPasswordValid()
+    {
+        if (empty($this->password))
+        {
+            $this->errors[] = "Please enter a password!";
+        }
+
+        return true;
+
+        //what next
+    }
 }
 
 
