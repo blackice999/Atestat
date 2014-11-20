@@ -13,6 +13,7 @@
         <span>Cool site name</span>
     </div>
     
+    <!-- Form for login -->
     <table class="form-middle" >
         <form action = 'login.php' method = 'post'>
             <tr class='align-left'>
@@ -33,6 +34,7 @@
     </table>
 
 
+    <!-- Form for registration -->
     <table class="form-middle" >
         <form action = 'register.php' method = 'post'>
             <tr class='align-left'>
@@ -43,6 +45,11 @@
             <tr class='align-left'>
                 <td>Password: </td>
                 <td><input type = 'password' name = 'Register[password]' id = 'password'/></td>
+            </tr>
+
+            <tr class='align-left'>
+                <td>Repeat password: </td>
+                <td><input type = 'password' name = 'Register[password2]' id = 'password2'/></td>
             </tr>
 
             <tr class='align-left'>
