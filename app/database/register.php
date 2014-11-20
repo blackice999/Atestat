@@ -1,16 +1,19 @@
 <?php
 
-class Register extends Database{
+class Register extends Database {
 
+    //Variables for user address
     public $city;
     public $street;
     public $zip;
     public $country;
     private $userID;    
     
+    //Variables for user profile
     public $email;
     public $password;
 
+    //Variables for correct values
     private $validCities = array();
     private $validStreets = array();
     private $validCountries = array();
@@ -19,6 +22,9 @@ class Register extends Database{
     //Holds error like if city or street is missing etc.
     private $errors = array();
 
+    /**
+     * Creates arrays holding the correct values
+     */
     public function __construct()
     {
         parent::__construct();
@@ -28,6 +34,10 @@ class Register extends Database{
         $this->validZips = array("123456789", "987654321");
     }
 
+    /**
+     * Checks if all the address values are correct
+     * @return boolean
+     */
     public function isAdressValid()
     {
         //check all the address variables (city, street, etc.)
@@ -49,6 +59,13 @@ class Register extends Database{
         }
     }
 
+     /**
+        * Inserts the new person
+        * @param  string $email    The persons email
+        * @param  int $statusID foreign key referencing the status of the person
+        * @param  string $password The persons password
+        * @return boolean           If it succeeds, returns true, otherwise false
+     */
     public function insertUser($email, $statusID, $password)
     {
         try
@@ -92,6 +109,13 @@ class Register extends Database{
     }
 
 
+    /**
+     * Inserts a new user into database
+     * @param  string $email
+     * @param  int $statusID A foreign key to (user_status)
+     * @param  string $password
+     * @return boolean
+     */
     public function doRegister($email, $statusID, $password)
     {
         try
@@ -114,6 +138,10 @@ class Register extends Database{
         }
     }
 
+    /**
+     * If there are any errors, output them
+     * @return string The error
+     */
     public function outputErrors()
     {
         if (isset($this->errors))
@@ -125,6 +153,10 @@ class Register extends Database{
         }
     }
 
+    /**
+     * Checks on an array if the city received is valid
+     * @return boolean
+     */
     private function isCityValid()
     {
 
@@ -144,6 +176,10 @@ class Register extends Database{
         return true;
     }
 
+    /**
+     * Checks on an array if the street received is valid
+     * @return boolean
+     */
     private function isStreetValid()
     {
 
@@ -163,6 +199,10 @@ class Register extends Database{
         return true;
     }
 
+    /**
+     * Checks on array if the country received is valid
+     * @return boolean
+     */
     private function isCountryValid()
     {
 
@@ -182,6 +222,10 @@ class Register extends Database{
         return true;
     }
 
+    /**
+     * Checks on an array if the zip received is valid
+     * @return boolean
+     */
     private function isZipValid()
     {
         if (empty($this->zip))
@@ -200,6 +244,10 @@ class Register extends Database{
         return true;
     }
 
+    /**
+     * Checks if the received email is valid
+     * @return boolean
+     */
     private function isEmailValid()
     {
         if (empty($this->email))
@@ -218,6 +266,10 @@ class Register extends Database{
         return true;
     }
 
+    /**
+     * Checks on a database query if the received password is valid
+     * @return boolean [description]
+     */
     private function isPasswordValid()
     {
         if (empty($this->password))
@@ -225,11 +277,30 @@ class Register extends Database{
             $this->errors[] = "Please enter a password!";
         }
 
-        return true;
+        $bindArray = array(
+            'bindTypes' => 's',
+            'bindVariables' => array(&$this->email)
+            );
 
-        //what next
+        $bind = $this->bindQuery(
+            "SELECT `password` FROM `user` WHERE `email` = ?",
+            $bindArray
+            );
+
+        $result = $this->getArray($bind);
+
+        if (!password_verify($this->password, $result[0]))
+        {
+            return false;
+        }
+
+        return true;
     }
 
+    /**
+     * Gets the statusID based on email
+     * @return [type] [description]
+     */
     private function getStatusID()
     {
         try
