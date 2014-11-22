@@ -53,10 +53,13 @@ class Register extends Database {
     {
         //check the userprofile(email, password)
 
-        if (!empty($this->email))
+        // if (!empty($this->email))
+        if (!$this->isEmailValid() || !$this->isPasswordValid())
         {
-            //do something
+            return false;
         }
+
+        return true;
     }
 
      /**
@@ -70,7 +73,6 @@ class Register extends Database {
     {
         try
         {
-
             if (!$this->isUserProfileValid())
             {
                 return false;
@@ -99,7 +101,6 @@ class Register extends Database {
                 VALUES (?,?,?)",
                 $bindArray
                 ); 
-            
         }
 
         catch (Exception $e)
@@ -107,6 +108,51 @@ class Register extends Database {
             return false;
         }
     }
+
+     public function insertAddress($userID, $city, $street, $zip, $country)
+        {
+            try
+            {
+                //Gets the userID by email
+                $userID = $this->getUserID()[0];
+
+                //Specifies which items to apply the filtering
+                $data = array(
+                    'userID' => $userID,
+                    'city' => $city,
+                    'street' => $street,
+                    'zip' => $zip,
+                    'country' => $country
+                    );
+
+                //Specifies rules to use for filtering
+                $args = array(
+                    'userID' => FILTER_VALIDATE_INT,
+                    'city' => FILTER_SANITIZE_STRING,
+                    'street' => FILTER_SANITIZE_STRING,
+                    'zip' => FILTER_VALIDATE_INT,
+                    'country' => FILTER_SANITIZE_STRING
+                    );
+
+                filter_var_array($data, $args);
+
+                $bindArray = array(
+                    'bindTypes' => 'issis',
+                    'bindVariables' => array(&$userID, &$city, &$street, &$zip, &$country)
+                    ); 
+                
+                $insert = $this->bindQuery(
+                    "INSERT INTO `user_address` (`userID`, `city`, `street`, `zip`, `country`)
+                    VALUES (?, ?, ?, ?, ?)",
+                    $bindArray
+                    );
+            }
+
+            catch (Exception $e)
+            {
+                return false;
+            }
+        }
 
 
     /**
@@ -122,7 +168,7 @@ class Register extends Database {
         {
             $this->insertUser($email, $statusID, $password);
 
-            $this->insertAddress($userID, $city, $street, $zip, $country);
+            $this->insertAddress($this->userID, $this->city, $this->street, $this->zip, $this->country);
 
              if(isset($this->error))
             {
@@ -261,8 +307,6 @@ class Register extends Database {
             return false;
         }
 
-        $this->email = filter_var($this->email, FILTER_SANITIZE_EMAIL);
-
         return true;
     }
 
@@ -277,20 +321,25 @@ class Register extends Database {
             $this->errors[] = "Please enter a password!";
         }
 
-        $bindArray = array(
-            'bindTypes' => 's',
-            'bindVariables' => array(&$this->email)
-            );
+        // $bindArray = array(
+        //     'bindTypes' => 's',
+        //     'bindVariables' => array(&$this->email)
+        //     );
 
-        $bind = $this->bindQuery(
-            "SELECT `password` FROM `user` WHERE `email` = ?",
-            $bindArray
-            );
+        // $bind = $this->bindQuery(
+        //     "SELECT `password` FROM `user` WHERE `email` = ?",
+        //     $bindArray
+        //     );
 
-        $result = $this->getArray($bind);
+        // $result = $this->getArray($bind);
 
-        if (!password_verify($this->password, $result[0]))
+        // if (!password_verify($this->password, $result[0]))
+        // {
+        //     return false;
+        // }
+        if (!($this->password == $_POST['Register']['password2']))
         {
+            echo "Password's don't match <br />";
             return false;
         }
 
@@ -299,7 +348,7 @@ class Register extends Database {
 
     /**
      * Gets the statusID based on email
-     * @return [type] [description]
+     * @return int
      */
     private function getStatusID()
     {
@@ -313,6 +362,35 @@ class Register extends Database {
 
             $bind = $this->bindQuery(
                 "SELECT `statusID` FROM `user` WHERE `email` = ?",
+                $bindArray
+                );
+
+            return $this->getArray($bind);
+        }
+
+        catch (Exception $e)
+        {
+            echo $this->database->error;
+            return false;
+        }
+    }
+
+    /**
+     * Gets the userID based on email
+     * @return int
+     */
+    private function getUserID()
+    {
+        try
+        {
+            //Specifies to which items to apply the filter
+            $bindArray = array(
+                'bindTypes' => 's',
+                'bindVariables' => array(&$this->email)
+                );
+
+            $bind = $this->bindQuery(
+                "SELECT `ID` FROM `user` WHERE `email` = ?",
                 $bindArray
                 );
 
