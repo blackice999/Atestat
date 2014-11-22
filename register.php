@@ -36,10 +36,9 @@
         {
             $register->$key = $value;
         } 
-        
-        // $insert = $register->doRegister($register->email, 1, $register->password);
 
-        //TO FIX -- INSERT A NEW USER IN USER AND USER_ADDRESS
+        $insert = $register->doRegister($register->email, 1, $register->password);
+
         if ($insert)
         {
             echo "Registration successful. <a href='index.php'> Go back </a>";
