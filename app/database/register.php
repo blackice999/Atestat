@@ -20,7 +20,10 @@ class Register extends Database {
     private $validZips = array();
 
     //Holds error like if city or street is missing etc.
-    private $errors = array();
+    public $errors = array(
+        'hasError' => false,
+        'errors' => array()
+        );
 
     /**
      * Creates arrays holding the correct values
@@ -38,14 +41,18 @@ class Register extends Database {
      * Checks if all the address values are correct
      * @return boolean
      */
-    public function isAdressValid()
+    public function isAddressValid()
     {
-        //check all the address variables (city, street, etc.)
-        if (!$this->isCityValid() || !$this->isStreetValid() || !$this->isZipValid() || !$this->isCountryValid())
+        $this->isCityValid();
+        $this->isStreetValid();
+        $this->isZipValid();
+        $this->isCountryValid();
+
+        if (!empty($this->errors['errors']))
         {
             return false;
         }
-
+        
         return true;
     }
 
@@ -113,6 +120,11 @@ class Register extends Database {
         {
             try
             {
+                if (!$this->isAdressValid())
+                {
+                    return false;
+                }
+
                 //Gets the userID by email
                 $userID = $this->getUserID()[0];
 
@@ -169,11 +181,11 @@ class Register extends Database {
             $this->insertUser($email, $statusID, $password);
 
             $this->insertAddress($this->userID, $this->city, $this->street, $this->zip, $this->country);
-
-             if(isset($this->error))
+            if(isset($this->error))
             {
                 return false;
             }
+
                 
             return true;
         }
@@ -192,9 +204,9 @@ class Register extends Database {
     {
         if (isset($this->errors))
         {
-            foreach ($this->errors as $error)
+            foreach ($this->errors['errors'] as $key => $value)
             {
-                echo $error;
+                echo $value;
             }
         }
     }
@@ -203,19 +215,24 @@ class Register extends Database {
      * Checks on an array if the city received is valid
      * @return boolean
      */
-    private function isCityValid()
+   private function isCityValid()
     {
-
         if (empty($this->city))
         {
-            $this->errors[] = "Please enter a city!";
+            $this->errors['hasError'] = true;
+            $this->errors['errors']['emptyCity'] = 'Please enter a city';
             return false;
         }
 
+        //Sanitize the city string
         $this->city = filter_var($this->city, FILTER_SANITIZE_STRING);
 
-        if (!in_array(ucwords($this->city), $this->validCities))
+        //If the received city doesn't match the validCities and emptyCity is not empty
+        //set errors hasError to true and insert new item into invalidCity
+        if (!in_array(ucwords($this->city), $this->validCities) && !isset($this->errors['errors']['emptyCity']))
         {
+            $this->errors['hasError'] = true;
+            $error = $this->errors['errors']['invalidCity'] = 'Please enter a valid city';
             return false;
         }
 
@@ -229,17 +246,24 @@ class Register extends Database {
     private function isStreetValid()
     {
 
+        //If the street is empty, set erros hasError to true and insert new item into emptyStreet
         if (empty($this->street))
         {
-            $this->errors[] = "Please enter a street!";
+            $this->errors['hasError'] = true;
+            $this->errors['errors']['emptyStreet'] = 'Please enter a street';
             return false;
         }
 
+        //Sanitize the street string
         $this->street = filter_var($this->street, FILTER_SANITIZE_STRING);
 
-        if (!in_array(ucwords($this->street), $this->validStreets))
+        //If the received street doesn't match the validStreets and emptyStreet is not empty
+        //set errors hasError to true and insert new item into invalidStreet
+        if (!in_array(ucwords($this->street), $this->validStreets) && !isset($this->errors['errors']['emptyStreet']))
         {
-            return false;
+           $this->errors['hasError'] = true;
+           $this->errors['errors']['invalidStreet'] = 'Please enter a valid street';
+           return false;
         }
 
         return true;
@@ -251,17 +275,23 @@ class Register extends Database {
      */
     private function isCountryValid()
     {
-
+        //If the country is empty, set errors hasError to true and set new item into emptyCountry
         if (empty($this->country))
         {
-            $this->errors[] =  "Please enter a country!";
+            $this->errors['hasError'] = true;
+            $this->errors['errors']['emptyCountry'] = 'Please enter a country';
             return false;
         }
 
+        //Sanitize the country string
         $this->country = filter_var($this->country, FILTER_SANITIZE_STRING);
 
-        if (!in_array(ucwords($this->street), $this->validStreets))
+        //If the received country doesn't match the validCountries and emptyCountry is not empty
+        //set errors hasError to true and insert new item into invalidCountry
+        if (!in_array(ucwords($this->country), $this->validCountries) && !isset($this->errors['errors']['emptyCountry']))
         {
+            $this->errors['hasError'] = true;
+            $this->errors['errors']['invalidCountry'] = 'Please enter a valid country';
             return false;
         }
 
@@ -274,16 +304,24 @@ class Register extends Database {
      */
     private function isZipValid()
     {
+        //If the zip code is empty, set errors hasError to true and set new item into emptyZip
         if (empty($this->zip))
         {
-            $this->errors[] =  "Please enter a zip code!";
+            $this->errors['hasError'] = true;
+            $this->errors['errors']['emptyZip'] = 'Please enter a zip code';
             return false;
+           
         }
 
-        $this->zip = filter_var($this->zip, FILTER_SANITIZE_STRING);
+        //Sanitize the zip code int
+        $this->zip = filter_var($this->zip, FILTER_SANITIZE_NUMBER_INT);
 
-        if (!in_array(ucwords($this->zip), $this->validZips))
+        //If the received zip code doesn't match the validZips and emptyZip is not empty
+        //set errors hasError to true and insert new item into invalidZip
+        if (!in_array(ucwords($this->zip), $this->validZips) && !isset($this->errors['errors']['emptyZip']))
         {
+            $this->errors['hasError'] = true;
+            $this->errors['errors']['invalidZip'] = 'Please enter a valid zip code';
             return false;
         }
 
