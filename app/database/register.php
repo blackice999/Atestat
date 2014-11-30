@@ -178,9 +178,15 @@ class Register extends Database {
     {
         try
         {
-            $this->insertUser($email, $statusID, $password);
+            $user = $this->insertUser($email, $statusID, $password);
 
-            $this->insertAddress($this->userID, $this->city, $this->street, $this->zip, $this->country);
+            $address = $this->insertAddress($this->userID, $this->city, $this->street, $this->zip, $this->country);
+
+            if (!$user || !$address)
+            {
+                return false;
+            }
+
             if(isset($this->error))
             {
                 return false;
@@ -336,12 +342,15 @@ class Register extends Database {
     {
         if (empty($this->email))
         {
-            $this->errors[] = "Please enter an email!";
+            $this->errors['hasError'] = true;
+            $this->errors['errors']['emptyEmail'] = "Please enter an email address";
+            return false;
         }
 
-        if(!filter_var($this->email, FILTER_VALIDATE_EMAIL))
+        if(!filter_var($this->email, FILTER_VALIDATE_EMAIL) && !isset($this->errors['errors']['emptyEmail']))
         {
-            $this->errors[] = "Please enter a valid email!";
+            $this->errors['hasError'] = true;
+            $this->errors['errors']['invalidEmail'] = "Please enter a valid email address";
             return false;
         }
 
@@ -356,7 +365,9 @@ class Register extends Database {
     {
         if (empty($this->password))
         {
-            $this->errors[] = "Please enter a password!";
+            $this->errors['hasError'] = true;
+            $this->errors['errors']['emptyPassword'] = "Please enter a password";
+            return false;
         }
 
         // $bindArray = array(
@@ -375,9 +386,10 @@ class Register extends Database {
         // {
         //     return false;
         // }
-        if (!($this->password == $_POST['Register']['password2']))
+        if (!($this->password == $_POST['Register']['password2']) && !isset($this->errors['errors']['emptyPassword']))
         {
-            echo "Password's don't match <br />";
+            $this->errors['hasError'] = true;
+            $this->errors['errors']['passwordMismatch'] = "Password's don't match";
             return false;
         }
 
