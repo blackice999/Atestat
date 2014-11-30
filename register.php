@@ -7,7 +7,7 @@
     {
         throw new Exception("Unauthorized access!");
     }
-
+    
      $db = new Database();
 
      echo "<pre>";
@@ -46,6 +46,20 @@
 
         else
         {
+            if($register instanceOf Register && is_array($register->errors))
+            {
+                if ($register->errors['hasError'] == true)
+                {
+                    echo "please fix the following errors: <br />";
+                    foreach ($register->errors['errors'] as $key => $value)
+                    {
+                        echo $value . "<br />";
+                    }
+
+                    echo " <a href='index.php'> Go back </a>";
+                }
+            }
+
             echo "User already exists. <a href='index.php'> Go back </a>";
         }
      }
