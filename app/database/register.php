@@ -120,7 +120,7 @@ class Register extends Database {
         {
             try
             {
-                if (!$this->isAdressValid())
+                if (!$this->isAddressValid())
                 {
                     return false;
                 }
