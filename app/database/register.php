@@ -62,7 +62,6 @@ class Register extends Database {
 
         // if (!empty($this->email))
         $this->isEmailValid();
-        $this->isPasswordValid();
         
          //If the received email address already exists and emptyEmail is not empty
         //set errors hasError to true and insert new item into emailExists
@@ -71,6 +70,8 @@ class Register extends Database {
             $this->errors['hasError'] = true;
             $this->errors['errors']['emailExists'] = 'Email address already exists';
         }
+        
+        $this->isPasswordValid();
 
         if (!empty($this->errors['errors']))
         {
