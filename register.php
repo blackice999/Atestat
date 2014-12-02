@@ -10,18 +10,9 @@
     
      $db = new Database();
 
-     echo "<pre>";
-     print_r($_POST['Register']);
-     echo "</pre>";
-
      if (empty($_POST['Register']))
      {
         $errors[] = 'Some fields are empty, please fill them';
-     }
-
-     if (!filter_var($_POST['Register']['email'], FILTER_VALIDATE_EMAIL))
-     {
-        $errors[] = 'Please enter a correct e-mail address';
      }
 
      //If there are no errors, proceed by inserting the new user
@@ -54,13 +45,17 @@
                     foreach ($register->errors['errors'] as $key => $value)
                     {
                         echo $value . "<br />";
+
+                        //Stops the script execution if the email already exists
+                        if ($value == 'Email address already exists')
+                        {
+                            break;
+                        }
                     }
 
                     echo " <a href='index.php'> Go back </a>";
                 }
             }
-
-            echo "User already exists. <a href='index.php'> Go back </a>";
         }
      }
 
