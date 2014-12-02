@@ -93,6 +93,7 @@ class Register extends Database {
         {
             if (!$this->isUserProfileValid())
             {
+                //Returns false if password is empty, email already exists or empty
                 return false;
             }
 
@@ -119,6 +120,9 @@ class Register extends Database {
                 VALUES (?,?,?)",
                 $bindArray
                 ); 
+
+            //Returns true if the user was successfully inserted
+            return $insert;
         }
 
         catch (Exception $e)
@@ -133,6 +137,7 @@ class Register extends Database {
             {
                 if (!$this->isAddressValid())
                 {
+                    //Returns false if there was an error ( empty city, invalid zip etc.)
                     return false;
                 }
 
@@ -169,6 +174,9 @@ class Register extends Database {
                     VALUES (?, ?, ?, ?, ?)",
                     $bindArray
                     );
+
+                //Returns true if the user address was successfully inserted
+                return $insert;
             }
 
             catch (Exception $e)
