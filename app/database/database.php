@@ -3,6 +3,9 @@
     ini_set('display_errors',1);
     mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
+    //Holds a string to the site name, in order to simply <title> tags
+    $site_name = 'Prototype CRM';
+
     require __DIR__. '/../../vendor/autoload.php';
 
     use Monolog\Logger;
