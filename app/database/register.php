@@ -59,8 +59,6 @@ class Register extends Database {
     public function isUserProfileValid()
     {
         //check the userprofile(email, password)
-
-        // if (!empty($this->email))
         $this->isEmailValid();
         
          //If the received email address already exists and emptyEmail is not empty
