@@ -6,6 +6,7 @@
 <head>
     <title><?php echo $site_name; ?></title>
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
 </head>
 <body>
     <div id="banner">
@@ -15,7 +16,7 @@
     
     <!-- Form for login -->
     <table class="form-middle" >
-        <form action = 'login.php' method = 'post'>
+        <form action = 'login.php' method = 'post' id="form-login">
             <tr class='align-left'>
                 <td>Email:</td>
                 <td><input type = 'text' name = 'Login[email]' id = 'email'/></td>
@@ -35,8 +36,8 @@
 
 
     <!-- Form for registration -->
-    <table class="form-middle" >
-        <form action = 'register.php' method = 'post'>
+    <table class="form-middle">
+        <form action = 'register.php' method = 'post' id="register-form">
             <tr class='align-left'>
                 <td>Email:</td>
                 <td><input type = 'text' name = 'Register[email]' id = 'email'/></td>
@@ -73,10 +74,30 @@
             </tr>
 
             <tr>
-                <td colspan="2"><input type = 'submit' value = 'Register' class="align-center"></td>
+                <td colspan="2"><input type = 'submit' value = 'Register' class="align-center" id="test"></td>
             </tr>
 
         </form>
     </table>
+    <script type="text/javascript">
+    //TO FIX -- DISABLE ONLY REGISTER FORMS SUBMIT BUTTON
+//    $(document).ready(function() {
+//     var $submit = $("#test"),
+//         $inputs = $('#register-form input[type=text], input[type=password]');
+
+//     function checkEmpty() {
+
+//         // filter over the empty inputs
+
+//         return $inputs.filter(function() {
+//             return !$.trim(this.value);
+//         }).length === 0;
+//     }
+
+//     $inputs.on('keyup blur', function() {
+//         $submit.prop("disabled", !checkEmpty());
+//     }).keyup(); // trigger an initial blur
+// });
+    </script>
 </body>
 </html>
