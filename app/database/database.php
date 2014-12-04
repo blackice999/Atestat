@@ -253,45 +253,7 @@
                 return false;
             }
         }
-
-        // /**
-        //  * Checks if the current password is in the database
-        //  * @param  string $password
-        //  * @return boolean          Returns true if exists, false otherwise
-        //  */
-        // public function passwordExists($password)
-        // {
-        //     try
-        //     {
-        //         $bindArray = array(
-        //             'bindTypes' => 's',
-        //             'bindVariables' => array(&$password)
-        //             );
-
-        //         $bind = $this->bindQuery(
-        //             "SELECT `password` FROM `user` WHERE `ID` = ? LIMIT 1",
-        //             $bindArray
-        //             );
-
-        //         $info = $this->getArray($bind); 
-
-        //         if (password_verify($password, $info[0]) && is_array($info) && !empty($info))
-        //         {
-        //             return true;
-        //         }
-
-        //         else
-        //         {
-        //             return false;
-        //         }
-        //     }
-
-        //     catch (Exception $e)
-        //     {
-        //         return false;
-        //     }
-        // }
-
+        
         public function authorizeAccess($email, $password)
         {
             try
