@@ -253,25 +253,11 @@
                 return false;
             }
         }
-        
+
         public function authorizeAccess($email, $password)
         {
             try
             {
-                // $bindArray = array(
-                //     'bindTypes' => 'ss',
-                //     'bindVariables' => array($email,$password)
-
-                    //to fix - bindVariables
-                    // );
-
-                // $info = $this->bindQuery(
-                // "SELECT email, password FROM user
-                //  WHERE email = ?
-                //  AND password = ?",
-                //  $bindArray);
-                 
-                // $password = password_hash($password, PASSWORD_BCRYPT);
                 $hash = password_hash($password, PASSWORD_BCRYPT);
                 $bindArray = array(
                     'bindTypes' => 's',
