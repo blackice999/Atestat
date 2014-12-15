@@ -11,7 +11,7 @@
 <body>
     <div id="banner">
         <img src="design/accountsmall.jpg" width="100" height="50">
-        <span>Cool site name</span>
+        <span><?php echo $site_name; ?></span>
     </div>
     
     <!-- Form for login -->
