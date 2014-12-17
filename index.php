@@ -10,8 +10,8 @@
 </head>
 <body>
     <div id="banner">
-        <img src="design/accountsmall.jpg" width="100" height="50">
-        <span><?php echo $site_name; ?></span>
+        <img src="design/logo.png" width="180" height="50">
+        <!-- <span><?php echo $site_name; ?></span> -->
     </div>
     
     <!-- Form for login -->
