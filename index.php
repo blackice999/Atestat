@@ -10,7 +10,7 @@
 </head>
 <body>
     <div id="banner">
-        <img src="design/logo.png" width="180" height="50">
+        <img src="design/logo_four.png">
         <!-- <span><?php echo $site_name; ?></span> -->
     </div>
     
