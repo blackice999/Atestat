@@ -1,3 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><?php echo $site_name; ?> - Register</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+<body>
+    <div id="banner">
+        <img src="design/logo_four.png">
+        <!-- <span><?php echo $site_name; ?></span> -->
+    </div>
+</body>
+</html>
 <?php 
     require __DIR__. '/app/database/database.php';
     require __DIR__.'/app/database/register.php';
@@ -71,12 +84,3 @@
         echo "<a href='index.php'> Go back </a>";
      }
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title><?php echo $site_name; ?> - Register</title>
-</head>
-<body>
-
-</body>
-</html>
