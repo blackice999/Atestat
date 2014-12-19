@@ -20,7 +20,7 @@ if ($data)
 
 else
 {
-    echo "Incorrect username or password. <a href='index.php'> Go back </a>";
+    echo "<p class='text_info'> Incorrect username or password. <a href='index.php'> Go back </a></p>";
 }
 ?>
 <!DOCTYPE html>
