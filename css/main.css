@@ -26,6 +26,9 @@ body{
     width: 180px;
     height: 36px;
     border: 10px solid black;
+    position: absolute;
+    top: 10px;
+    left: 10px;
 }
 
 #banner img {
@@ -36,6 +39,8 @@ body{
     width: 400px;
     margin: 100px auto;
     text-align: center;
+    position: relative;
+    top: 50px;
 }
 
 .form-middle .align-left {
@@ -54,7 +59,7 @@ body{
     top: 10px;
 }
 
-#logout-right:visited{
+#logout-right:visited, .text_info a {
     color: white;
 }
 
@@ -66,6 +71,8 @@ body{
     margin: 50px 0px;
     color: #075FAB;
     display: flex;
+    position: relative;
+    top: 60px;
 }
 
 #container h2 {
@@ -100,4 +107,10 @@ body{
     width: 50%;
     background-color: white;
     flex: 1;
+}
+
+.text_info {
+    position: relative;
+    top: 100px;
+    left: 20px;
 }
