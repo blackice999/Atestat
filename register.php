@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <?php require __DIR__. '/app/database/database.php'; ?>
     <title><?php echo $site_name; ?> - Register</title>
     <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
@@ -12,7 +13,6 @@
 </body>
 </html>
 <?php 
-    require __DIR__. '/app/database/database.php';
     require __DIR__.'/app/database/register.php';
 
     //Prints an error if the redirect didn't come from index.php's form
