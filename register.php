@@ -45,7 +45,7 @@
 
         if ($insert)
         {
-            echo "Registration successful. <a href='index.php'> Go back </a>";
+            echo "<p class='text_info'> Registration successful. <a href='index.php'> Go back </a></p>";
         }
 
         else
@@ -54,10 +54,10 @@
             {
                 if ($register->errors['hasError'] == true)
                 {
-                    echo "please fix the following errors: <br />";
+                    echo "<p class='text_info'>please fix the following errors: </p>";
                     foreach ($register->errors['errors'] as $key => $value)
                     {
-                        echo $value . "<br />";
+                        echo "<p class='text_info'>" .$value . "</p>";
 
                         //Stops the script execution if the email already exists
                         if ($value == 'Email address already exists')
@@ -66,7 +66,7 @@
                         }
                     }
 
-                    echo " <a href='index.php'> Go back </a>";
+                    echo "<a href='index.php' class='text_info'> Go back </a>";
                 }
             }
         }
