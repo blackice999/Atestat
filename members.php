@@ -52,6 +52,8 @@
 <head>
     <title><?php echo $site_name; ?> - Members page</title>
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="js/general.js"></script>
 </head>
 <body>
      <div id="banner">
@@ -134,7 +136,6 @@
 
         <div id="info-right">
             <h2> Add a new user </h2>
-            <img src="design/accountsmall.jpg" width="100" height="100" />
             <?php if ($_SESSION['id'] == 1): ?>
                 <!-- Form for registration -->
                 <table class="form-members">
