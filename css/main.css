@@ -43,7 +43,11 @@ body{
     top: 50px;
 }
 
-.form-middle .align-left {
+.form-members {
+    text-align: center;
+}
+
+.form-middle .align-left, .form-members .align-left {
     text-align: left;
 }
 
