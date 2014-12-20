@@ -57,7 +57,7 @@
                     echo "<p class='text_info'>please fix the following errors: </p>";
                     foreach ($register->errors['errors'] as $key => $value)
                     {
-                        echo "<p class='text_info'>" .$value . "</p>";
+                        echo "<div class='text_info'>" .$value . "</div>";
 
                         //Stops the script execution if the email already exists
                         if ($value == 'Email address already exists')
