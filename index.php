@@ -6,7 +6,8 @@
 <head>
     <title><?php echo $site_name; ?></title>
     <link rel="stylesheet" type="text/css" href="css/main.css">
-    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="js/general.js"></script>
 </head>
 <body>
     <div id="banner">
@@ -33,26 +34,5 @@
 
         </form>
     </table>
-
-    <script type="text/javascript">
-    //TO FIX -- DISABLE ONLY REGISTER FORMS SUBMIT BUTTON
-//    $(document).ready(function() {
-//     var $submit = $("#test"),
-//         $inputs = $('#register-form input[type=text], input[type=password]');
-
-//     function checkEmpty() {
-
-//         // filter over the empty inputs
-
-//         return $inputs.filter(function() {
-//             return !$.trim(this.value);
-//         }).length === 0;
-//     }
-
-//     $inputs.on('keyup blur', function() {
-//         $submit.prop("disabled", !checkEmpty());
-//     }).keyup(); // trigger an initial blur
-// });
-    </script>
 </body>
 </html>
