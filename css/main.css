@@ -113,4 +113,6 @@ body{
     position: relative;
     top: 100px;
     left: 20px;
+    clear:both;
+    float: left;
 }
