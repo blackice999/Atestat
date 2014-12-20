@@ -135,7 +135,52 @@
         <div id="info-right">
             <h2> Another </h2>
             <img src="design/accountsmall.jpg" width="100" height="100" />
+            <?php if ($_SESSION['id'] == 1): ?>
+                <!-- Form for registration -->
+                <table class="form-members">
+                    <form action = 'register.php' method = 'post' id="register-form">
+                        <tr class='align-left'>
+                            <td>Email:</td>
+                            <td><input type = 'text' name = 'Register[email]' id = 'email'/></td>
+                        </tr>
 
+                        <tr class='align-left'>
+                            <td>Password: </td>
+                            <td><input type = 'password' name = 'Register[password]' id = 'password'/></td>
+                        </tr>
+
+                        <tr class='align-left'>
+                            <td>Repeat password: </td>
+                            <td><input type = 'password' name = 'Register[password2]' id = 'password2'/></td>
+                        </tr>
+
+                        <tr class='align-left'>
+                            <td>City:</td>
+                            <td><input type='text' name='Register[city]' id='city' /></td>
+                        </tr>
+
+                        <tr class='align-left'>
+                            <td>Street:</td>
+                            <td><input type='text' name='Register[street]' id='street' /></td>
+                        </tr>
+
+                         <tr class='align-left'>
+                            <td>Zip:</td>
+                            <td><input type='text' name='Register[zip]' id='zip' /></td>
+                        </tr>
+
+                         <tr class='align-left'>
+                            <td>Country:</td>
+                            <td><input type='text' name='Register[country]' id='country' /></td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="2"><input type = 'submit' value = 'Register' class="align-center" id="test"></td>
+                        </tr>
+
+                    </form>
+                </table>
+            <?php endif;?>
         </div>
     </div>
 
