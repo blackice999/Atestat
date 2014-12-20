@@ -133,7 +133,7 @@
          </div>
 
         <div id="info-right">
-            <h2> Another </h2>
+            <h2> Add a new user </h2>
             <img src="design/accountsmall.jpg" width="100" height="100" />
             <?php if ($_SESSION['id'] == 1): ?>
                 <!-- Form for registration -->
