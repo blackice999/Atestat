@@ -138,54 +138,7 @@
 
         <div id="info-right">
             <?php if ($_SESSION['id'] == 1): ?>
-                <a href="app/admin/display_users.php"> List registered users</a>
-
-                <h2 id="add-user"> Add a new user </h2>
-
-                <!-- Form for registration -->
-                <table class="form-members">
-                    <form action = 'register.php' method = 'post' id="register-form">
-                        <tr class='align-left'>
-                            <td>Email:</td>
-                            <td><input type = 'text' name = 'Register[email]' id = 'email'/></td>
-                        </tr>
-
-                        <tr class='align-left'>
-                            <td>Password: </td>
-                            <td><input type = 'password' name = 'Register[password]' id = 'password'/></td>
-                        </tr>
-
-                        <tr class='align-left'>
-                            <td>Repeat password: </td>
-                            <td><input type = 'password' name = 'Register[password2]' id = 'password2'/></td>
-                        </tr>
-
-                        <tr class='align-left'>
-                            <td>City:</td>
-                            <td><input type='text' name='Register[city]' id='city' /></td>
-                        </tr>
-
-                        <tr class='align-left'>
-                            <td>Street:</td>
-                            <td><input type='text' name='Register[street]' id='street' /></td>
-                        </tr>
-
-                         <tr class='align-left'>
-                            <td>Zip:</td>
-                            <td><input type='text' name='Register[zip]' id='zip' /></td>
-                        </tr>
-
-                         <tr class='align-left'>
-                            <td>Country:</td>
-                            <td><input type='text' name='Register[country]' id='country' /></td>
-                        </tr>
-
-                        <tr>
-                            <td colspan="2"><input type = 'submit' value = 'Register' class="align-center" id="test"></td>
-                        </tr>
-
-                    </form>
-                </table>
+                <h2><a href="app/admin/display_users.php" class="registered"> List registered users</a></h2>
             <?php endif;?>
         </div>
     </div>
