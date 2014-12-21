@@ -45,7 +45,7 @@
 
         if ($insert)
         {
-            echo "<p class='text_info'> Registration successful. <a href='members.php'> Go back </a></p>";
+            echo "<p class='text_info'> Registration successful. <a href='app/admin/display_users.php'> Go back </a></p>";
         }
 
         else
@@ -66,7 +66,7 @@
                         }
                     }
 
-                    echo "<a href='members.php' class='text_info'> Go back </a>";
+                    echo "<a href='app/admin/display_users.php' class='text_info'> Go back </a>";
                 }
             }
         }
