@@ -45,6 +45,7 @@ body{
 
 .form-members {
     text-align: center;
+    margin: 100px 100px -50px 100px;
 }
 
 .form-middle .align-left, .form-members .align-left {
@@ -119,4 +120,9 @@ body{
     left: 20px;
     clear:both;
     float: left;
+}
+
+#add-user {
+    margin: 100px 100px -60px 100px;
+    line-height: 10px;
 }
