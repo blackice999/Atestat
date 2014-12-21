@@ -82,8 +82,8 @@
             <?php foreach ($users_array as $user): ?>
                 <li class="text_info">
                     <?php echo $user; ?>
-                    <img src="../../design/red-x.png" title="Remove person" alt="remove"/>
-                    <img src="../../design/icon_edit.png" title="Edit person" alt="edit" />
+                    <a href=""><img src="../../design/red-x.png" title="Remove person" alt="remove"/></a>
+                    <a href=""><img src="../../design/icon_edit.png" title="Edit person" alt="edit" /></a>
                 </li>
             <?php endforeach; ?>
 
