@@ -135,8 +135,8 @@
          </div>
 
         <div id="info-right">
-            <h2> Add a new user </h2>
             <?php if ($_SESSION['id'] == 1): ?>
+                <h2 id="add-user"> Add a new user </h2>
                 <!-- Form for registration -->
                 <table class="form-members">
                     <form action = 'register.php' method = 'post' id="register-form">
