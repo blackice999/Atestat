@@ -56,12 +56,16 @@ body{
     display: inline-block;
 }
 
-#logout-right {
+#navigation {
     text-decoration: none;
     margin: 20px;
     position: absolute;
     right: 10px;
     top: 10px;
+}
+
+#logout-right {
+    margin-left: 10px;
 }
 
 #logout-right:visited, .text_info a {
