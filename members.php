@@ -61,7 +61,9 @@
         <!-- <span><?php echo $site_name; ?></span> -->
     </div>
 
-    <a href="logout.php" id="logout-right">Log out </a>
+    <div id="navigation">
+     <a href="logout.php" id="logout-right">Log out </a>
+    </div>
     <div id="container">
         <div id="info-left">
             <table class="user_info" cellpadding="10">
@@ -136,7 +138,10 @@
 
         <div id="info-right">
             <?php if ($_SESSION['id'] == 1): ?>
+                <a href="app/admin/display_users.php"> List registered users</a>
+
                 <h2 id="add-user"> Add a new user </h2>
+
                 <!-- Form for registration -->
                 <table class="form-members">
                     <form action = 'register.php' method = 'post' id="register-form">
