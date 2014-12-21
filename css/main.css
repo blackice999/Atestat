@@ -64,6 +64,10 @@ body{
     top: 10px;
 }
 
+.registered {
+    text-decoration: none;
+    color: #075FAB;
+}
 #logout-right {
     margin-left: 10px;
 }
@@ -72,7 +76,7 @@ body{
     color: white;
 }
 
-#logout-right:hover {
+#logout-right:hover, .registered:hover {
     text-decoration: underline;
 }
 
@@ -130,3 +134,4 @@ body{
     margin: 100px 100px -60px 100px;
     line-height: 10px;
 }
+
