@@ -9,7 +9,7 @@
 
     $db = new Database();
 
-    $users = $db->runQuery("SELECT `email` FROM `user` ORDER BY `email` DESC", array());
+    $users = $db->runQuery("SELECT `ID`,`email` FROM `user` ORDER BY `email` DESC", array());
 ?>
 
 <!DOCTYPE html>
@@ -79,13 +79,13 @@
      <ol>
          <?php while ($users_array = $db->getArray($users)): ?>
 
-            <?php foreach ($users_array as $user): ?>
+            
                 <li class="text_info">
-                    <?php echo $user; ?>
-                    <a href=""><img src="../../design/red-x.png" title="Remove person" alt="remove"/></a>
+                    <?php echo $users_array[1]; ?>
+                    <a href="update_user.php?id="><img src="../../design/red-x.png" title="Remove person" alt="remove"/></a>
                     <a href=""><img src="../../design/icon_edit.png" title="Edit person" alt="edit" /></a>
                 </li>
-            <?php endforeach; ?>
+            
 
          <?php endwhile; ?>
      </ol>
