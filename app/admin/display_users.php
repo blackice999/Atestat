@@ -79,13 +79,15 @@
      <ol>
          <?php while ($users_array = $db->getArray($users)): ?>
 
-            
-                <li class="text_info">
-                    <?php echo $users_array[1]; ?>
-                    <a href="update_user.php?id="><img src="../../design/red-x.png" title="Remove person" alt="remove"/></a>
-                    <a href=""><img src="../../design/icon_edit.png" title="Edit person" alt="edit" /></a>
-                </li>
-            
+            <li class="text_info">
+                <?php echo $users_array[1]; ?>
+
+                <a href="delete_user.php?id=<?php echo $users_array[0];?>">
+                <img src="../../design/red-x.png" title="Remove person" alt="remove"/></a>
+
+                <a href="update_user.php?id=<?php echo $users_array[0];?>">
+                <img src="../../design/icon_edit.png" title="Edit person" alt="edit"/></a>
+            </li>
 
          <?php endwhile; ?>
      </ol>
