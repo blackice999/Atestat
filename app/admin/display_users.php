@@ -2,6 +2,8 @@
     require __DIR__. '/../database/database.php';
     session_start();
 
+    //Throws an error if there isn't a logged person,
+    //and he isn't an admin (having ID 1)
     if (!(isset($_SESSION['id']) && $_SESSION['id'] == 1))
     {
         throw new  Exception("Unauthorized access!");       
@@ -9,6 +11,8 @@
 
     $db = new Database();
 
+    //Runs a query to return the ID and the email
+    //Doesn't return the first registered user (admin)
     $users = $db->runQuery("SELECT `ID`,`email` FROM `user` ORDER BY `ID` ASC LIMIT 1,2147483647", array());
 ?>
 
@@ -80,7 +84,10 @@
          <?php while ($users_array = $db->getArray($users)): ?>
 
             <li class="text_info">
-                <?php echo $users_array[1]; ?>
+                <?php
+                    //Get the emails from the query
+                    echo $users_array[1];
+                ?>
 
                 <a href="delete_user.php?id=<?php echo $users_array[0];?>">
                 <img src="../../design/red-x.png" title="Remove person" alt="remove"/></a>
