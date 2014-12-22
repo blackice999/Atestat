@@ -9,7 +9,7 @@
 
     $db = new Database();
 
-    $users = $db->runQuery("SELECT `ID`,`email` FROM `user` ORDER BY `email` DESC", array());
+    $users = $db->runQuery("SELECT `ID`,`email` FROM `user` ORDER BY `ID` ASC LIMIT 1,2147483647", array());
 ?>
 
 <!DOCTYPE html>
