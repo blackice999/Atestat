@@ -33,76 +33,84 @@
          <a href="../../members.php" id="logout-right"> Go back </a>
     </div>
 
-    <h2 id="add-user"> Add a new user </h2>
+    <div id="container-display">
 
-        <!-- Form for registration -->
-        <table class="form-members">
-            <form action = '../../register.php' method = 'post' id="register-form">
-                <tr class='align-left'>
-                    <td>Email:</td>
-                    <td><input type = 'text' name = 'Register[email]' id = 'email'/></td>
-                </tr>
+        <div id="info-left-display">
 
-                <tr class='align-left'>
-                    <td>Password: </td>
-                    <td><input type = 'password' name = 'Register[password]' id = 'password'/></td>
-                </tr>
+            <?php if (isset($_GET['action']) && $_GET['action'] == 'deleted'): ?>
+                <p class="text_info"> Successfully deleted user </p>
+            <?php endif; ?>
 
-                <tr class='align-left'>
-                    <td>Repeat password: </td>
-                    <td><input type = 'password' name = 'Register[password2]' id = 'password2'/></td>
-                </tr>
+             <h2> Registered users list</h2>
+             <ol>
+                 <?php while ($users_array = $db->getArray($users)): ?>
 
-                <tr class='align-left'>
-                    <td>City:</td>
-                    <td><input type='text' name='Register[city]' id='city' /></td>
-                </tr>
+                    <li>
+                        <?php
+                            //Get the emails from the query
+                            echo $users_array[1];
+                        ?>
 
-                <tr class='align-left'>
-                    <td>Street:</td>
-                    <td><input type='text' name='Register[street]' id='street' /></td>
-                </tr>
+                        <a href="delete_user.php?id=<?php echo $users_array[0];?>"
+                            onclick="javascript: return confirm('Are you SURE you wish to delete this user?');">
+                        <img src="../../design/red-x.png" title="Remove person" alt="remove"/></a>
 
-                 <tr class='align-left'>
-                    <td>Zip:</td>
-                    <td><input type='text' name='Register[zip]' id='zip' /></td>
-                </tr>
+                        <a href="update_user.php?id=<?php echo $users_array[0];?>">
+                        <img src="../../design/icon_edit.png" title="Edit person" alt="edit"/></a>
+                    </li>
 
-                 <tr class='align-left'>
-                    <td>Country:</td>
-                    <td><input type='text' name='Register[country]' id='country' /></td>
-                </tr>
+                 <?php endwhile; ?>
+             </ol>
+        </div>
 
-                <tr>
-                    <td colspan="2"><input type = 'submit' value = 'Register' class="align-center"></td>
-                </tr>
+        <div id="info-right-display">
+            <h2> Add a new user </h2>
 
-            </form>
-        </table>
+                <!-- Form for registration -->
+                <table class="form-members">
+                    <form action = '../../register.php' method = 'post' id="register-form">
+                        <tr class='align-left'>
+                            <td>Email:</td>
+                            <td><input type = 'text' name = 'Register[email]' id = 'email'/></td>
+                        </tr>
 
-    <?php if (isset($_GET['action']) && $_GET['action'] == 'deleted'): ?>
-        <p class="text_info"> Successfully deleted user </p>
-    <?php endif; ?>
+                        <tr class='align-left'>
+                            <td>Password: </td>
+                            <td><input type = 'password' name = 'Register[password]' id = 'password'/></td>
+                        </tr>
 
-     <h2 class="text_info"> Registered users list</h2>
-     <ol>
-         <?php while ($users_array = $db->getArray($users)): ?>
+                        <tr class='align-left'>
+                            <td>Repeat password: </td>
+                            <td><input type = 'password' name = 'Register[password2]' id = 'password2'/></td>
+                        </tr>
 
-            <li class="text_info">
-                <?php
-                    //Get the emails from the query
-                    echo $users_array[1];
-                ?>
+                        <tr class='align-left'>
+                            <td>City:</td>
+                            <td><input type='text' name='Register[city]' id='city' /></td>
+                        </tr>
 
-                <a href="delete_user.php?id=<?php echo $users_array[0];?>"
-                    onclick="javascript: return confirm('Are you SURE you wish to delete this user?');">
-                <img src="../../design/red-x.png" title="Remove person" alt="remove"/></a>
+                        <tr class='align-left'>
+                            <td>Street:</td>
+                            <td><input type='text' name='Register[street]' id='street' /></td>
+                        </tr>
 
-                <a href="update_user.php?id=<?php echo $users_array[0];?>">
-                <img src="../../design/icon_edit.png" title="Edit person" alt="edit"/></a>
-            </li>
+                         <tr class='align-left'>
+                            <td>Zip:</td>
+                            <td><input type='text' name='Register[zip]' id='zip' /></td>
+                        </tr>
 
-         <?php endwhile; ?>
-     </ol>
+                         <tr class='align-left'>
+                            <td>Country:</td>
+                            <td><input type='text' name='Register[country]' id='country' /></td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="2"><input type = 'submit' value = 'Register' class="align-center"></td>
+                        </tr>
+
+                    </form>
+                </table>
+        </div>
+    </div>
 </body>
 </html>
