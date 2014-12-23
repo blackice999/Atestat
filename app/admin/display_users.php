@@ -41,6 +41,10 @@
                 <p class="text_info"> Successfully deleted user </p>
             <?php endif; ?>
 
+            <?php if (isset($_GET['action']) && $_GET['action'] == 'error'): ?>
+                <p class="text_info"> Error occured deleting user</p>
+            <?php endif; ?>
+
              <h2> Registered users list</h2>
              <ol>
                  <?php while ($users_array = $db->getArray($users)): ?>
