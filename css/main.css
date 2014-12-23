@@ -45,7 +45,6 @@ body{
 
 .form-members {
     text-align: center;
-    margin: 100px 100px -50px 100px;
 }
 
 .form-middle .align-left, .form-members .align-left {
@@ -80,12 +79,15 @@ body{
     text-decoration: underline;
 }
 
-#container {
+#container, #container-display {
     margin: 50px 0px;
-    color: #075FAB;
     display: flex;
     position: relative;
     top: 60px;
+}
+
+#container {
+     color: #075FAB;
 }
 
 #container h2 {
@@ -114,12 +116,15 @@ body{
   display: block;   
 }
 
-#info-left, #info-right {
+#info-left, #info-right, #info-left-display, #info-right-display {
     float: left;
     min-height: 380px;
     width: 50%;
-    background-color: white;
     flex: 1;
+}
+
+#info-left, #info-right {
+    background-color: #ffffff;
 }
 
 .text_info {
@@ -129,9 +134,3 @@ body{
     clear:both;
     float: left;
 }
-
-#add-user {
-    margin: 100px 100px -60px 100px;
-    line-height: 10px;
-}
-
