@@ -25,6 +25,16 @@
         'bindVariables' => array(&$filter_id)
         );
 
+    $valid_id = $db->bindQuery("SELECT `ID` FROM `user` WHERE `ID` = ?", $bindArray);
+
+    $arrayID = $db->getArray($valid_id);
+
+    if (!$arrayID)
+    {
+        header("Location: display_users.php?action=error");
+        die();
+    }
+
     $delete_user = $db->bindQuery("DELETE FROM `user_address` WHERE `userID` = ?", $bindArray);
     $delete_address = $db->bindQuery("DELETE FROM `user` WHERE `ID` = ? ", $bindArray);
     if ($delete_user && $delete_address)
