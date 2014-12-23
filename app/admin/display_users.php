@@ -80,6 +80,11 @@
             </form>
         </table>
 
+    <?php if (isset($_GET['action']) && $_GET['action'] == 'deleted'): ?>
+        <p class="text_info"> Successfully deleted user </p>
+    <?php endif; ?>
+
+     <h2 class="text_info"> Registered users list</h2>
      <ol>
          <?php while ($users_array = $db->getArray($users)): ?>
 
