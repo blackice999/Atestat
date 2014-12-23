@@ -89,7 +89,7 @@
                     echo $users_array[1];
                 ?>
 
-                <a href="delete_user.php/?id=<?php echo $users_array[0];?>"
+                <a href="delete_user.php?id=<?php echo $users_array[0];?>"
                     onclick="javascript: return confirm('Are you SURE you wish to delete this user?');">
                 <img src="../../design/red-x.png" title="Remove person" alt="remove"/></a>
 
