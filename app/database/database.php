@@ -167,6 +167,8 @@
                             )
                         );
 
+                        //If the query starts with SELECT
+                        //It means a result set will be returned
                         if (strpos($sqlString, "SELECT") !== false)
                         {
                             $stmt->execute();
