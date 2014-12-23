@@ -90,7 +90,7 @@ class Register extends Database {
     {
         try
         {
-            if (!$this->isUserProfileValid())
+            if (!($this->isUserProfileValid() && $this->isAddressValid()))
             {
                 //Returns false if password is empty, email already exists or empty
                 return false;
