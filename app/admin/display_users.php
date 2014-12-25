@@ -21,6 +21,7 @@
 <head>
     <title><?php echo $site_name; ?> - Registered users</title>
     <link rel="stylesheet" type="text/css" href="../../css/main.css">
+    <script src="../../js/general.js"></script>
 </head>
 <body>
     <div id="banner">
@@ -59,8 +60,15 @@
                             onclick="javascript: return confirm('Are you SURE you wish to delete this user?');">
                         <img src="../../design/red-x.png" title="Remove person" alt="remove"/></a>
 
-                        <a href="update_user.php?id=<?php echo $users_array[0];?>">
-                        <img src="../../design/icon_edit.png" title="Edit person" alt="edit"/></a>
+                        <!-- <a href="update_user.php?id=<?php echo $users_array[0];?>">
+                        <img src="../../design/icon_edit.png" title="Edit person" alt="edit"/></a> -->
+
+                         <span onclick="openPopup();">
+                        <img src="../../design/icon_edit.png" title="Edit person" alt="edit"/></span>
+                            <div id="test" class="popup">
+                                This is a test message
+                                <div class="cancel" onclick="closePopup();"></div>
+                            </div>
                     </li>
 
                  <?php endwhile; ?>
