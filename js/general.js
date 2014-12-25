@@ -22,3 +22,13 @@ $(document).ready(function() {
         $(".form-members").toggle(1000);
     });
 });
+
+//Opens or closes the pop-up box on display_users.php file
+//when the edit image is clicked
+function openPopup() {
+        document.getElementById('test').style.display = 'block';
+        }
+
+    function closePopup() {
+        document.getElementById('test').style.display = 'none';
+    }
