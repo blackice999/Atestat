@@ -71,7 +71,7 @@
 
     <div id="navigation">
          <a href="../../logout.php" id="logout-right">Log out </a>
-         <a href="../../members.php" id="logout-right"> Go back </a>
+         <a href="display_users.php" id="logout-right"> Go back </a>
     </div>
 
     <div id="container-display">
@@ -132,17 +132,22 @@
 
                 </thead>
 
+                <form method="post" action="update.php">
                 <tbody>
                     <?php while ($info_address = $db->getArray($query_address)): ?>
                         <?php foreach ($info_address as $info): ?>
                             <tr>
-                                <td> <?php echo $info; ?></td>
+                                <td><input type="text" value="<?php echo $info; ?>"></td>
                             </tr>
                         <?php endforeach; ?>
                     <?php endwhile; ?>
 
+                    <tr>
+                        <td><input type="submit" value="Update" class="align-center"></td>
+                    </tr>
+
                 </tbody>
-                
+                </form>
             </table>
          </div>
 
