@@ -63,8 +63,8 @@
 
         public function __construct()
         {
-            $this->memcached = new Memcached();
-            $this->memcached->addServer('127.0.0.1', '11211');
+            // $this->memcached = new Memcached();
+            // $this->memcached->addServer('127.0.0.1', '11211');
 
             try
             {
@@ -77,12 +77,12 @@
             }
             catch (Exception $e)
             {
-                $this->monolog = new Logger('mysql');
-                $this->monolog->pushHandler(new StreamHandler(__DIR__.'/../logs/mysqlError.log', Logger::ERROR));
-                $this->monolog->addError(
-                    'Failed to connect to mysql: (' .
-                    $e->getCode() . ') ' .
-                    $e->getMessage());
+                // $this->monolog = new Logger('mysql');
+                // $this->monolog->pushHandler(new StreamHandler(__DIR__.'/../logs/mysqlError.log', Logger::ERROR));
+                // $this->monolog->addError(
+                //     'Failed to connect to mysql: (' .
+                //     $e->getCode() . ') ' .
+                //     $e->getMessage());
                 die();
                     
             }
