@@ -26,7 +26,7 @@ $(document).ready(function() {
 //Opens or closes the pop-up box on display_users.php file
 //when the edit image is clicked
 function openPopup() {
-        document.getElementById('test').style.display = 'block';
+        document.getElementById('show-popup').style.display = 'block';
 
         //If the browser width is less than 700px
         //Hide the add user form
@@ -37,7 +37,7 @@ function openPopup() {
     }
 
     function closePopup() {
-        document.getElementById('test').style.display = 'none';
+        document.getElementById('show-popup').style.display = 'none';
 
         //If the browser width is less than 700px
         //Showw the add user form
