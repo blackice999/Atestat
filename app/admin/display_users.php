@@ -66,7 +66,8 @@
                          <span onclick="openPopup();">
                         <img src="../../design/icon_edit.png" title="Edit person" alt="edit"/></span>
                             <div id="test" class="popup">
-                                This is a test message
+                                Update user
+                                <?php require 'update_user.php'; ?>
                                 <div class="cancel" onclick="closePopup();"></div>
                             </div>
                     </li>
