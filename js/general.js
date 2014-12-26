@@ -27,8 +27,22 @@ $(document).ready(function() {
 //when the edit image is clicked
 function openPopup() {
         document.getElementById('test').style.display = 'block';
+
+        //If the browser width is less than 700px
+        //Hide the add user form
+        if (window.innerWidth < 700)
+        {
+            document.getElementById('info-right-display').style.display = 'none';
         }
+    }
 
     function closePopup() {
         document.getElementById('test').style.display = 'none';
+
+        //If the browser width is less than 700px
+        //Showw the add user form
+        if (window.innerWidth < 700)
+        {
+            document.getElementById('info-right-display').style.display = 'block';
+        }
     }
