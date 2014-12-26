@@ -1,6 +1,6 @@
 <?php 
-    require __DIR__ . '/../database/database.php';
-    session_start();
+    // require __DIR__ . '/../database/database.php';
+    // session_start();
 
     //Throws an error if there isn't a logged person,
     //and he isn't an admin (having ID 1)
@@ -9,21 +9,21 @@
         throw new Exception("Unauthorized access!");
     }
 
-    if (!isset($_GET['id']))
-    {
-        throw new Exception("Missing ID");
-    }
+    // if (!isset($_GET['id']))
+    // {
+    //     throw new Exception("Missing ID");
+    // }
 
     //Sanitize the received ID
     //removing all characters except digits, plus and minus sign
     $filter_id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 
-    $db = new Database();
+    // $db = new Database();
 
     //Stores which variables should be binded to
     $bindArray = array(
         'bindTypes' => 'i',
-        'bindVariables' => array(&$filter_id)
+        'bindVariables' => array(&$users_array[0])
         );
 
     //Runs a prepared query to get info from 'user' table
@@ -64,18 +64,18 @@
     <link rel="stylesheet" type="text/css" href="../../css/main.css">
 </head>
 <body>
-     <div id="banner">
-        <img src="../../design/logo_four.png">
+     <!-- <div id="banner">
+        <img src="../../design/logo_four.png"> -->
         <!-- <span><?php echo $site_name; ?></span> -->
-    </div>
+   <!--  </div>
 
     <div id="navigation">
          <a href="../../logout.php" id="logout-right">Log out </a>
          <a href="display_users.php" id="logout-right"> Go back </a>
-    </div>
+    </div> -->
 
-    <div id="container-display">
-        <div id="info-left-display">
+   <!--  <div id="container-display">
+        <div id="info-left-display"> -->
             <table class="user_info" cellpadding="10">
          
                 <thead>
@@ -109,7 +109,7 @@
 
                          <?php foreach ($info_user as $info): ?>
                             <tr>
-                                <td> <?php echo $info; ?></td>
+                                <td class="indent-left"> <?php echo $info; ?></td>
                             </tr>
 
                          <?php endforeach; ?>
@@ -137,7 +137,7 @@
                     <?php while ($info_address = $db->getArray($query_address)): ?>
                         <?php foreach ($info_address as $info): ?>
                             <tr>
-                                <td><input type="text" value="<?php echo $info; ?>"></td>
+                                <td><input type="text" value="<?php echo $info; ?>" class="user-update"></td>
                             </tr>
                         <?php endforeach; ?>
                     <?php endwhile; ?>
@@ -149,10 +149,10 @@
                 </tbody>
                 </form>
             </table>
-         </div>
+        <!--  </div>
 
         <div id="info-right-display">
         </div>
-    </div>
+    </div> -->
 </body>
 </html>
