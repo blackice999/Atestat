@@ -47,7 +47,7 @@
             <?php endif; ?>
 
              <h2> Registered users list</h2>
-             <ol>
+             <ol style="margin-left: -10px;">
                  <?php while ($users_array = $db->getArray($users)): ?>
 
                     <li>
