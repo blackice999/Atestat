@@ -157,7 +157,7 @@ body{
 
 .cancel
 {
-    display:relative;
+    display:block;
     position: absolute;
     top: 0;
     right: 0;
