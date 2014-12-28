@@ -138,10 +138,10 @@ body{
 .popup
 {
     position:absolute;
-    top:-70px;
-    left:275px;
+    top:0px;
+    left:0px;
     margin:100px auto;
-    width:300px;
+    width:320px;
     height:410px;
     font-family:verdana;
     font-size:12px;
