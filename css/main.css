@@ -182,3 +182,7 @@ body{
 .user-update {
     width: 170px;
 }
+
+.not-selected {
+    display: none;
+}
