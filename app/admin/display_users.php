@@ -21,6 +21,7 @@
 <head>
     <title><?php echo $site_name; ?> - Registered users</title>
     <link rel="stylesheet" type="text/css" href="../../css/main.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="../../js/general.js"></script>
 </head>
 <body>
@@ -50,7 +51,8 @@
              <ol style="margin-left: -10px;">
                  <?php while ($users_array = $db->getArray($users)): ?>
 
-                    <li>
+                    <li class='registered-users'>
+                    <span class='show-users'>
                         <?php
                             //Get the emails from the query
                             echo $users_array[1];
@@ -65,6 +67,7 @@
 
                          <span onclick="openPopup();">
                         <img src="../../design/icon_edit.png" title="Edit person" alt="edit"/></span>
+                    </span>
                             <div id="show-popup" class="popup">
                                 Update user
                                 <?php require 'update_user.php'; ?>
