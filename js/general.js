@@ -76,5 +76,3 @@ function closePopup() {
         document.getElementById('info-right-display').style.display = 'block';
     }
 }
-
-//TO FIX -- REMOVE ADD USER FORM HEADING TO MAKE IT VISIBLE
