@@ -1,13 +1,15 @@
 //Disables form submit button if all the fields are empty
 $(document).ready(function() {
-    $(".form-members").hide();
-    var $submit = $("input[type=submit]"),
-        $inputs = $('input[type=text], input[type=password]');
+    //Disable the add user form on page load
+    // $(".form-members").hide();
+
+    //Select only the add user form text, password and submit fields 
+    var $submit = $(".form-members input[type=submit]"),
+        $inputs = $('.form-members input[type=text], .form-members input[type=password]');
 
     function checkEmpty() {
 
         // filter over the empty inputs
-
         return $inputs.filter(function() {
             return !$.trim(this.value);
         }).length === 0;
@@ -18,9 +20,9 @@ $(document).ready(function() {
     }).keyup(); // trigger an initial blur
 
     //Toggles visibility of add user form
-    $("#add-user").click(function(){
-        $(".form-members").toggle(1000);
-    });
+    // $("#add-user").click(function(){
+    //     $(".form-members").toggle(1000);
+    // });
 });
 
 //Opens or closes the pop-up box on display_users.php file
