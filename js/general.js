@@ -36,7 +36,7 @@ function openPopup() {
         $('.registered-users').not(this).addClass( 'not-selected' );
 
         //If the numbering needs to be disabled, the below line does that
-        // $('.show-users').css('list-style-type','none');
+        // $('.registered-users').css('list-style-type','none');
         
         //Show the currently selected list element popup box
         $('.registered-users #show-popup').show().index(this);
@@ -74,3 +74,5 @@ function closePopup() {
         document.getElementById('info-right-display').style.display = 'block';
     }
 }
+
+//TO FIX -- REMOVE ADD USER FORM HEADING TO MAKE IT VISIBLE
