@@ -52,7 +52,6 @@
                  <?php while ($users_array = $db->getArray($users)): ?>
 
                     <li class='registered-users'>
-                    <span class='show-users'>
                         <?php
                             //Get the emails from the query
                             echo $users_array[1];
@@ -65,9 +64,9 @@
                         <!-- <a href="update_user.php?id=<?php echo $users_array[0];?>">
                         <img src="../../design/icon_edit.png" title="Edit person" alt="edit"/></a> -->
 
-                         <span onclick="openPopup();">
-                        <img src="../../design/icon_edit.png" title="Edit person" alt="edit"/></span>
-                    </span>
+                         <span onclick="openPopup();" class='edit-user'>
+                         <img src="../../design/icon_edit.png" title="Edit person" alt="edit"/></span>
+                    
                             <div id="show-popup" class="popup">
                                 Update user
                                 <?php require 'update_user.php'; ?>
