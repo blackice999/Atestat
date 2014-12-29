@@ -186,3 +186,7 @@ body{
 .not-selected {
     display: none;
 }
+
+.edit-user {
+    cursor: pointer;
+}
