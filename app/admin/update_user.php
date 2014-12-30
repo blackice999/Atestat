@@ -123,7 +123,7 @@
                     <?php while ($row_address = $db->getArray($field_address)): ?>
 
                         <tr>
-                            <th>
+                            <th class="update-header">
                                 <?php echo ucfirst($row_address[0]); ?>
                             </th>
                         </tr>
