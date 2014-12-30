@@ -187,6 +187,10 @@ body{
     display: none;
 }
 
+.update-header {
+    line-height: 25px; 
+}
+
 .edit-user {
     cursor: pointer;
 }
