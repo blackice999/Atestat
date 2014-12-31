@@ -29,4 +29,14 @@
     {
         throw new Exception("Unauthorized access!");
     }
+
+    $register = new Register();
+
+    //Create an array which holds the database column names
+    //(city, street, zip, country)
+    $new_keys = array('city', 'street', 'zip', 'country');
+
+    //Creates a new array, using the $new_keys as key
+    //and the POST data as values
+    $post_array = array_combine($new_keys, $_POST['Update']);
 ?>
