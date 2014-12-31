@@ -39,4 +39,11 @@
     //Creates a new array, using the $new_keys as key
     //and the POST data as values
     $post_array = array_combine($new_keys, $_POST['Update']);
+
+    foreach ($post_array as $key => $value)
+    {
+        $register->$key = $value;
+
+
+    }
 ?>
