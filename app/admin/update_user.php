@@ -134,10 +134,15 @@
 
                 <form method="post" action="update.php">
                 <tbody>
+
+                    <input type="hidden" value="<?php echo $users_array[0];?>" name="id"/>
                     <?php while ($info_address = $db->getArray($query_address)): ?>
                         <?php foreach ($info_address as $info): ?>
                             <tr>
-                                <td><input type="text" value="<?php echo $info; ?>" class="user-update"></td>
+                                <td>
+                                    <input type="text" value="<?php echo $info; ?>"
+                                    class="user-update" name="Update[]" />
+                                 </td>
                             </tr>
                         <?php endforeach; ?>
                     <?php endwhile; ?>
