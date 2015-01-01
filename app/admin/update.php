@@ -30,6 +30,8 @@
         throw new Exception("Unauthorized access!");
     }
 
+    //Sanitize the received ID
+    //removing all characters except digits, plus and minus sign
     $filter_id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
 
     $register = new Register();
@@ -42,13 +44,13 @@
     //and the POST data as values
     $post_array = array_combine($new_keys, $_POST['Update']);
 
+    //put POST's contents into the register class's variables;
     foreach ($post_array as $key => $value)
     {
         $register->$key = $value;
-
-
     }
 
+    //Specify which variables to bind
     $bindArray = array(
         'bindTypes' => 'ssisi',
         'bindVariables' => array(
@@ -60,16 +62,43 @@
             )
     );
     
+    //If there are no address errors (example: the city is valid)
     if ($register->isAddressValid())
     {
+        //Update the given user, having ID received by form
         $update = $register->bindQuery(
             "UPDATE `user_address` SET `city` = ?, `street` = ?, `zip` = ?, `country` = ? WHERE `userID` = ?",
             $bindArray
         );
     }
 
+    //If the validation failed, the $update variable won't be set, so this sets it to false
+    else
+    {
+        $update = false;
+    }
+
+    //If the validation was successfull, write a notice
     if ($update)
     {
-        echo 'yes';
+        echo "<p class='text_info'> User successfully updated. <a href='display_users.php'> Go back </a></p>";
+    }
+
+    //If there were any validation errors, print them
+    else
+    {
+        if ($register instanceof Register && is_array($register->errors))
+        {
+            if ($register->errors['hasError'] == true)
+            {
+                echo "<p class='text_info'> Please fix the following errors: </p>";
+                foreach ($register->errors['errors'] as $key => $value)
+                {
+                    echo "<div class='text_info'>" . $value . "</div>";
+                }
+
+                echo "<a href='display_users.php' class='text_info'> Go back </a>";
+            }
+        }
     }
 ?>
