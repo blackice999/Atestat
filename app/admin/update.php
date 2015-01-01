@@ -58,7 +58,7 @@
             &$register->street,
             &$register->zip,
             &$register->country,
-            &$_POST['id']
+            &$filter_id
             )
     );
     
