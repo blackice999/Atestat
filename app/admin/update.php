@@ -30,6 +30,8 @@
         throw new Exception("Unauthorized access!");
     }
 
+    $filter_id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
+
     $register = new Register();
 
     //Create an array which holds the database column names
@@ -45,5 +47,29 @@
         $register->$key = $value;
 
 
+    }
+
+    $bindArray = array(
+        'bindTypes' => 'ssisi',
+        'bindVariables' => array(
+            &$register->city,
+            &$register->street,
+            &$register->zip,
+            &$register->country,
+            &$_POST['id']
+            )
+    );
+    
+    if ($register->isAddressValid())
+    {
+        $update = $register->bindQuery(
+            "UPDATE `user_address` SET `city` = ?, `street` = ?, `zip` = ?, `country` = ? WHERE `userID` = ?",
+            $bindArray
+        );
+    }
+
+    if ($update)
+    {
+        echo 'yes';
     }
 ?>
