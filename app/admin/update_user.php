@@ -23,7 +23,7 @@
     //Stores which variables should be binded to
     $bindArray = array(
         'bindTypes' => 'i',
-        'bindVariables' => array(&$users_array[0])
+        'bindVariables' => array(&$users_array['ID'])
         );
 
     //Runs a prepared query to get info from 'user' table
