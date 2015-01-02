@@ -49,15 +49,15 @@
 
              <h2> Registered users list</h2>
              <ol style="margin-left: -10px;">
-                 <?php while ($users_array = $db->getArray($users)): ?>
+                 <?php while ($users_array = $db->getArray($users, MYSQLI_ASSOC)): ?>
 
                     <li class='registered-users'>
                         <?php
                             //Get the emails from the query
-                            echo $users_array[1];
+                            echo $users_array['email'];
                         ?>
 
-                        <a href="delete_user.php?id=<?php echo $users_array[0];?>"
+                        <a href="delete_user.php?id=<?php echo $users_array['ID'];?>"
                             onclick="javascript: return confirm('Are you SURE you wish to delete this user?');">
                         <img src="../../design/red-x.png" title="Remove person" alt="remove"/></a>
 
