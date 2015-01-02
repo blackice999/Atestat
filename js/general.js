@@ -2,6 +2,7 @@
 $(document).ready(function() {
     //Disable the add user form on page load
     // $(".form-members").hide();
+    $('.show-error').hide();
 
     //Select only the add user form text, password and submit fields 
     var $submit = $(".form-members input[type=submit]"),
@@ -15,8 +16,22 @@ $(document).ready(function() {
         }).length === 0;
     }
 
+    //TO IMPLEMENT -- SHOW AN ERROR BOX ON SUBMIT BUTTON HOVER IF FIELDS ARE EMPTY 
     $inputs.on('keyup blur', function() {
-        $submit.prop("disabled", !checkEmpty());
+        if (!checkEmpty())
+        {
+            $submit.attr('disabled', 'disabled');
+            $submit.addClass('disabled');
+            $('.show-error').show(500);
+        }
+
+        else
+        {
+            $submit.removeAttr('disabled');
+            $submit.removeClass('disabled');
+            $('.show-error').hide(500);
+        }
+
     }).keyup(); // trigger an initial blur
 
     //Toggles visibility of add user form
