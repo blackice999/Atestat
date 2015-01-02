@@ -194,3 +194,13 @@ body{
 .edit-user {
     cursor: pointer;
 }
+
+.show-error {
+    border: 1px solid;
+    padding:10px 0;
+    background-color: #FFBABA;
+    color: #D8000C;
+    text-align: center;
+    border-radius: 5px;
+    width: 360px;
+}
