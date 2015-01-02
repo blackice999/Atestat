@@ -125,6 +125,8 @@
 
                     </form>
                 </table>
+
+            <p class='show-error'> Please fill in all form elements </p>
         </div>
     </div>
 </body>
