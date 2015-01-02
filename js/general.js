@@ -8,7 +8,7 @@ $(document).ready(function() {
     var $submit = $(".form-members input[type=submit]"),
         $inputs = $('.form-members input[type=text], .form-members input[type=password]');
 
-    function checkEmpty() {
+    function fieldsFilled() {
 
         // filter over the empty inputs
         return $inputs.filter(function() {
@@ -18,7 +18,7 @@ $(document).ready(function() {
 
     //TO IMPLEMENT -- SHOW AN ERROR BOX ON SUBMIT BUTTON HOVER IF FIELDS ARE EMPTY 
     $inputs.on('keyup blur', function() {
-        if (!checkEmpty())
+        if (!fieldsFilled())
         {
             $submit.attr('disabled', 'disabled');
             $submit.addClass('disabled');
