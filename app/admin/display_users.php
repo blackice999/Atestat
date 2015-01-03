@@ -52,10 +52,18 @@
                  <?php while ($users_array = $db->getArray($users)): ?>
 
                     <li class='registered-users'>
-                        <?php
-                            //Get the emails from the query
-                            echo $users_array[1];
-                        ?>
+                        <span class='users' onclick='showNotifications()'>
+                            <?php
+                                //Get the emails from the query
+                                echo $users_array[1];
+                            ?>
+                        </span>
+
+                          <div id="show-notifications" class="popup">
+                                View notifications
+                                <?php require 'view_notifications.php'; ?>
+                                <div class="cancel" onclick="closeNotifications();"></div>
+                            </div>
 
                         <a href="delete_user.php?id=<?php echo $users_array[0];?>"
                             onclick="javascript: return confirm('Are you SURE you wish to delete this user?');">
