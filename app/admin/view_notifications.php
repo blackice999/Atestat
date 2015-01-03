@@ -40,6 +40,16 @@
             <?php endwhile; ?>
         </thead>
 
+        <tbody>
+            <?php while ($info_status = $db->getArray($query_status)): ?>
+                <?php foreach ($info_status as $info): ?>
+                    <tr>
+                        <td class='indent-left'> <?php echo $info; ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php endwhile; ?>
+        </tbody>
+
     </table>
 </body>
 </html>
