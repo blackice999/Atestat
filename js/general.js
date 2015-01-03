@@ -76,3 +76,21 @@ function closePopup() {
         document.getElementById('info-right-display').style.display = 'block';
     }
 }
+
+function showNotifications()
+{
+    $('.registered-users').click(function()
+    {
+       $('.registered-users').not(this).addClass('not-selected');
+
+       $('.registered-users #show-notifications').show().index(this);
+    });
+}
+
+function closeNotifications () {
+    $('.registered-users').click(function(){
+        $('.registered-users').not(this).removeClass('not-selected');
+
+        $('.registered-users #show-notifications').hide().index(this);
+    });
+}
