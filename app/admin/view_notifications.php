@@ -20,6 +20,12 @@
         array());
 
     $field_array = $db->getArray($field);
+
+    //Get all notes from user_notes table
+    $notes = $db->bindQuery(
+        "SELECT `notes` FROM `user_notes` WHERE `userID` = ?",
+        $bindArray
+    );
 ?>
 
 <!DOCTYPE html>
@@ -51,5 +57,13 @@
         </tbody>
 
     </table>
+
+    <h2>Notes</h2>
+        <?php while ($note_text = $db->getArray($notes)): ?>
+            <?php foreach ($note_text as $note): ?>
+                <p> <?php echo $note; ?> </p>
+            <?php endforeach; ?>
+        <?php endwhile; ?>
+
 </body>
 </html>
