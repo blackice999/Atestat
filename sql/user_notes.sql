@@ -1,0 +1,13 @@
+CREATE DATABASE IF NOT EXISTS `loan-crm`;
+USE `loan-crm`;
+
+CREATE TABLE IF NOT EXISTS `user_notes`
+(
+    `ID` INT(4) NOT NULL AUTO_INCREMENT,
+    `userID` INT(4) NOT NULL,
+    `notes` VARCHAR(255) NOT NULL, 
+    PRIMARY KEY(`ID`),
+
+    FOREIGN KEY (`userID`)
+        REFERENCES `user`(`ID`)
+) ENGINE=INNODB;
