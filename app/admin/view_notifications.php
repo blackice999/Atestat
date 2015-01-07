@@ -59,12 +59,23 @@
     </table>
 
     <h2>Notes</h2>
+    <ol>
         <?php while ($note_text = $db->getArray($notes)): ?>
-            <?php foreach ($note_text as $note): ?>
-                <p> <?php echo $note; ?> </p>
-            <?php endforeach; ?>
-        <?php endwhile; ?>
+            <li class="notes-list">
+                <?php foreach ($note_text as $note): ?>
+                    <span> <?php echo $note; ?> </span>
 
+                    <a href=""
+                        onclick="javascript: return confirm('Are you SURE you wish to delete this note?');">
+                    <img src="../../design/red-x.png" title="Remove note" alt="remove" /></a>
+
+                    <span onclick="showNotifications();" class="edit-user">
+                        <img src="../../design/icon_edit.png" title="Edit note" alt="edit"/>
+                    </span>
+                <?php endforeach; ?>
+            </li>
+        <?php endwhile; ?>
+    </ol>
     <div class="add-note">
         <h2>Add note</h2>
         <form action="add_note.php" method="post" class="form-notification">
