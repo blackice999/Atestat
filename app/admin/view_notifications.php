@@ -65,5 +65,14 @@
             <?php endforeach; ?>
         <?php endwhile; ?>
 
+    <div class="add-note">
+        <h2>Add note</h2>
+        <form action="add_note.php" method="post" class="form-notification">
+            <textarea name="note"></textarea> <br />
+            <input type="submit" value="Add note" class="align-center">
+        </form>
+    </div>
+
+
 </body>
 </html>
