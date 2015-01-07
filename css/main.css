@@ -206,3 +206,8 @@ body{
     max-height: 335px;
     max-width: 160px;
 }
+
+.notes-list {
+    list-style-type: none;
+    margin-left: -35px;
+}
