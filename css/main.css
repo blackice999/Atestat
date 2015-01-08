@@ -204,14 +204,16 @@ body{
 
 .add-note textarea {
     max-height: 335px;
-    max-width: 160px;
+    max-width: 140px;
 }
 
 .notes-list {
     list-style-type: none;
     margin-left: -35px;
+    width: 165px;
 }
 
 .edit-note-input {
     width: 140px;
+    height: 30px;
 }
