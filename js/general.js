@@ -23,6 +23,16 @@ $(document).ready(function() {
     // $("#add-user").click(function(){
     //     $(".form-members").toggle(1000);
     // });
+    $('.edit-note').click(function() {
+        var input = $(
+            "<textarea>",
+            { val: $(this).text(),
+                class: "edit-note-input"
+            }
+        );
+        $(this).replaceWith(input);
+        input.select();
+    });
 });
 
 //Opens or closes the pop-up box on display_users.php file
