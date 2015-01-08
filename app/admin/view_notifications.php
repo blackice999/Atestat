@@ -63,15 +63,15 @@
         <?php while ($note_text = $db->getArray($notes)): ?>
             <li class="notes-list">
                 <?php foreach ($note_text as $note): ?>
-                    <span> <?php echo $note; ?> </span>
+                    <span class="edit-note"> <?php echo $note; ?> </span>
 
                     <a href=""
                         onclick="javascript: return confirm('Are you SURE you wish to delete this note?');">
                     <img src="../../design/red-x.png" title="Remove note" alt="remove" /></a>
 
-                    <span onclick="showNotifications();" class="edit-user">
+                    <!-- <span onclick="showNotifications();" class="edit-user">
                         <img src="../../design/icon_edit.png" title="Edit note" alt="edit"/>
-                    </span>
+                    </span> -->
                 <?php endforeach; ?>
             </li>
         <?php endwhile; ?>
@@ -83,7 +83,6 @@
             <input type="submit" value="Add note" class="align-center">
         </form>
     </div>
-
 
 </body>
 </html>
