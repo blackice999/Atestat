@@ -64,14 +64,17 @@
             <li class="notes-list">
                 <?php foreach ($note_text as $note): ?>
                     <span class="edit-note"> <?php echo $note; ?> </span>
+                    <textarea style="display:none;" class="edit-note-input"><?php echo $note; ?></textarea>
+                    <input type="submit" value="Update Note" style="display:none;" class="align-center">
 
                     <a href=""
                         onclick="javascript: return confirm('Are you SURE you wish to delete this note?');">
                     <img src="../../design/red-x.png" title="Remove note" alt="remove" /></a>
 
-                    <!-- <span onclick="showNotifications();" class="edit-user">
+                    <span onclick="showNote();" class="edit-user" >
                         <img src="../../design/icon_edit.png" title="Edit note" alt="edit"/>
-                    </span> -->
+                    </span>
+
                 <?php endforeach; ?>
             </li>
         <?php endwhile; ?>
@@ -83,6 +86,5 @@
             <input type="submit" value="Add note" class="align-center">
         </form>
     </div>
-
 </body>
 </html>
