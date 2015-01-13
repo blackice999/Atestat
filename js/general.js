@@ -23,17 +23,63 @@ $(document).ready(function() {
     // $("#add-user").click(function(){
     //     $(".form-members").toggle(1000);
     // });
-    $('.edit-note').click(function() {
-        var input = $(
-            "<textarea>",
-            { val: $(this).text(),
-                class: "edit-note-input"
-            }
-        );
-        $(this).replaceWith(input);
-        input.select();
-    });
+
+    // $('#test').click(function() {
+
+    //     var text = $('.edit-note').val();
+    //     var number = $('.edit-note').index();
+    //     console.log(number);
+    //           jQuery.ajax({
+    //            type: "POST",
+    //            data: 'id='+id,     // <-- put on top
+    //            url: "view_notifications.php",
+    //            cache: false,
+    //            success: function(response)
+    //            {
+    //              alert("Record successfully updated");
+    //            }
+    //          });
+    // });
+
 });
+
+function showNote()
+{
+    //On edit note icon click
+    $('.notes-list').click(function(){
+        //Remove the span containing the text
+        $(this).children('.edit-note').addClass('not-selected');
+
+        //Show a textarea box where the user can insert new text
+        $(this).children('textarea').show();
+
+        //Also show the submit button
+        $(this).children('.align-center').show();
+    });
+}
+//TO FIX -- REMOVE INPUT FIELD ON EDIT NOTE,
+//SET BACK THE SPAN CLASS TO CHANGED
+// $(document).mouseup(function (e)
+// {
+//     // var $test2;
+//     // $something = $('.edit-note').click(function(){
+//     function something()
+//     {
+//         $('.edit-note').click(function(){
+
+//             $test2 = $(this).text();
+//         });
+//     }
+//     // });
+//         $test = $('.edit-note').text();
+//         var container = $(".edit-note-input");
+
+//         if (!container.is(e.target) // if the target of the click isn't the container...
+//             && container.has(e.target).length === 0) // ... nor a descendant of the container
+//         {
+//             container.replaceWith(something());
+//         }
+// });
 
 //Opens or closes the pop-up box on display_users.php file
 //when the edit image is clicked
