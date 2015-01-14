@@ -65,7 +65,7 @@
                 <?php foreach ($note_text as $note): ?>
                     <span class="edit-note"> <?php echo $note; ?> </span>
 
-                    <form action="update_note.php" method="post" class="test" style="display:none;">
+                    <form action="update_note.php" method="post" class="form-update-note" style="display:none;">
                         <textarea class="edit-note-input"><?php echo $note; ?></textarea>
                         <input type="submit" value="Update Note" class="align-center">
                     </form>
