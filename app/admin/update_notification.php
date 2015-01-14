@@ -48,4 +48,14 @@
         'UPDATE `user_notes` SET `notes` = ? WHERE `ID` = ?',
         $bindArray
     );
+
+    if ($update)
+    {
+        echo "<p class='text_info'> Note successfully updated. <a href='display_users.php'> Go back </a>";
+    }
+
+    else
+    {
+        echo "<p class='text_info'> An error occured uptading the note. <a href='display_users.php'> Go back </a>";
+    }
 ?>
