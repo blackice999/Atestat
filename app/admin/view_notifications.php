@@ -59,13 +59,16 @@
     </table>
 
     <h2>Notes</h2>
-    <ol>
+    <ol class="notes">
         <?php while ($note_text = $db->getArray($notes)): ?>
             <li class="notes-list">
                 <?php foreach ($note_text as $note): ?>
                     <span class="edit-note"> <?php echo $note; ?> </span>
-                    <textarea style="display:none;" class="edit-note-input"><?php echo $note; ?></textarea>
-                    <input type="submit" value="Update Note" style="display:none;" class="align-center">
+
+                    <form action="update_note.php" method="post" class="test" style="display:none;">
+                        <textarea class="edit-note-input"><?php echo $note; ?></textarea>
+                        <input type="submit" value="Update Note" class="align-center">
+                    </form>
 
                     <a href=""
                         onclick="javascript: return confirm('Are you SURE you wish to delete this note?');">
