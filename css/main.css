@@ -215,5 +215,7 @@ body{
 
 .edit-note-input {
     width: 140px;
-    height: 30px;
+    height: 100px;
+    max-width: 140px;
+    max-height: 100px;
 }
