@@ -219,3 +219,9 @@ body{
     max-width: 140px;
     max-height: 100px;
 }
+
+.notes {
+    overflow: auto;
+    width: 165px;
+    height: 310px;
+}
