@@ -23,7 +23,7 @@
 
     //Get all notes from user_notes table
     $notes = $db->bindQuery(
-        "SELECT `notes` FROM `user_notes` WHERE `userID` = ?",
+        "SELECT `ID`,`notes` FROM `user_notes` WHERE `userID` = ?",
         $bindArray
     );
 ?>
@@ -60,14 +60,14 @@
 
     <h2>Notes</h2>
     <ol class="notes">
-        <?php while ($note_text = $db->getArray($notes)): ?>
+        <?php while ($note_info = $db->getArray($notes, MYSQLI_ASSOC)): ?>
             <li class="notes-list">
-                <?php foreach ($note_text as $note): ?>
-                    <span class="edit-note"> <?php echo $note; ?> </span>
+               
+                    <span class="edit-note"> <?php echo $note_info['notes']; ?> </span>
 
                     <form action="update_notification.php" method="post" class="form-update-note" style="display:none;">
-                        <textarea name="note" class="edit-note-input"><?php echo $note; ?></textarea>
-                        <input type="hidden" value="<?php echo $users_array[0];?>" name="id">
+                        <textarea name="note" class="edit-note-input"><?php echo $note_info['notes']; ?></textarea>
+                        <input type="hidden" value="<?php echo $note_info['ID'];?>" name="id">
                         <input type="submit" value="Update Note" class="align-center">
                     </form>
 
@@ -80,7 +80,7 @@
                     </span>
                     <hr class="notes-splitter" />
 
-                <?php endforeach; ?>
+                
             </li>
         <?php endwhile; ?>
     </ol>
