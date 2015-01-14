@@ -50,11 +50,9 @@ function showNote()
         //Remove the span containing the text
         $(this).children('.edit-note').addClass('not-selected');
 
-        //Show a textarea box where the user can insert new text
-        $(this).children('textarea').show();
-
-        //Also show the submit button
-        $(this).children('.align-center').show();
+        //Show a form with a submit button
+        //and a textarea box where the user can insert new text
+        $(this).children('.form-update-note').show();
     });
 }
 //TO FIX -- REMOVE INPUT FIELD ON EDIT NOTE,
