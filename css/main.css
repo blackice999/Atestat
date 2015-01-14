@@ -198,13 +198,17 @@ body{
 .add-note {
     float:right;
     position: absolute;
-    top:10px;
+    top: 0px;
     right:10px;
 }
 
 .add-note textarea {
-    max-height: 335px;
+    max-height: 43px;
     max-width: 140px;
+}
+
+.add-note h3 {
+    line-height: 5px;
 }
 
 .notes-list {
