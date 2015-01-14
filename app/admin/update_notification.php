@@ -27,4 +27,11 @@
     {
         throw new Exception("Unauthorized access!");
     }
+
+    //Sanitize the received textarea string
+    $filter_note = filter_input(INPUT_POST, 'note', FILTER_SANITIZE_STRING);
+
+    //Sanitize the received ID
+    //removing all characters except digits, plus and minus sign
+    $filter_id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
 ?>
