@@ -77,6 +77,7 @@
                     <span onclick="showNote();" class="edit-user" >
                         <img src="../../design/icon_edit.png" title="Edit note" alt="edit"/>
                     </span>
+                    <hr class="notes-splitter" />
 
                 <?php endforeach; ?>
             </li>
