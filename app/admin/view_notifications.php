@@ -67,6 +67,7 @@
 
                     <form action="update_notification.php" method="post" class="form-update-note" style="display:none;">
                         <textarea name="note" class="edit-note-input"><?php echo $note; ?></textarea>
+                        <input type="hidden" value="<?php echo $users_array[0];?>" name="id">
                         <input type="submit" value="Update Note" class="align-center">
                     </form>
 
