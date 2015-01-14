@@ -34,4 +34,18 @@
     //Sanitize the received ID
     //removing all characters except digits, plus and minus sign
     $filter_id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
+
+    $db = new Database();
+
+    //Specify which variables to bind
+    $bindArray = array(
+        'bindTypes' => 'si',
+        'bindVariables' => array(&$filter_note, &$filter_id)
+        );
+
+    //Updates the current note by the ID got from the form
+    $update = $db->bindQuery(
+        'UPDATE `user_notes` SET `notes` = ? WHERE `ID` = ?',
+        $bindArray
+    );
 ?>
