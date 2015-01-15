@@ -71,7 +71,7 @@
                         <input type="submit" value="Update Note" class="align-center">
                     </form>
 
-                    <a href=""
+                    <a href="delete_notification.php?id=<?php echo $note_info['ID']; ?>"
                         onclick="javascript: return confirm('Are you SURE you wish to delete this note?');">
                     <img src="../../design/red-x.png" title="Remove note" alt="remove" /></a>
 
