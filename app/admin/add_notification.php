@@ -29,11 +29,27 @@
 
     $db = new Database();
 
-
     //Sanitize the received note string
     $filter_note = filter_input(INPUT_POST, 'note', FILTER_SANITIZE_STRING);
 
     //Sanitize the received ID
     //removing all characters except digits, plus and minus sign
-    $filter_id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
+    $filter_id = filter_input(INPUT_POST, 'userID', FILTER_SANITIZE_NUMBER_INT);
+
+    //Specify which variables to bind
+    $bindArray = array(
+        'bindTypes' => 'is',
+        'bindVariables' => array(&$filter_id, &$filter_note)
+        );
+
+    //Add a new note, with the userID received in id
+    $insert_note = $db->bindQuery("INSERT INTO `user_notes` (`userID`, `notes`) VALUES
+        (?, ?)",
+        $bindArray
+    );
+
+    if ($insert_note)
+    {
+        echo "<p class='text_info'> Note successfully added <a href='display_users.php'> Go back </a></p>";
+    }
 ?>
