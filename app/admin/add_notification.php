@@ -13,7 +13,7 @@
 
     <div id="navigation">
          <a href="../../logout.php" id="logout-right">Log out </a>
-         <a href="../../members.php" id="logout-right"> Go back </a>
+         <a href="display_users.php" id="logout-right"> Go back </a>
     </div>
 </body>
 </html>
