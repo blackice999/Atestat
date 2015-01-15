@@ -38,10 +38,48 @@
 
         //If the ID cannot be found,
         //redirect to the previous page, showing an error
-        if (!$array_ID)
+        if (!$arrayID)
         {
-            header("Location: view_notifications.php?action=error");
+            header("Location: display_users.php?action=error");
             die();
         }
     }
+
+    catch (Exception $e)
+    {
 ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title><?php echo $site_name;?> - Delete note</title>
+    <link rel="stylesheet" type="text/css" href="../../css/main.css">
+</head>
+<body>
+    <div id="banner">
+        <img src="../../design/logo_four.png">
+        <!-- <span><?php echo $site_name; ?></span> -->
+    </div>
+
+    <?php if (isset($_SESSION['id'])): ?>
+    <div id="navigation">
+         <a href="../../logout.php" id="logout-right">Log out </a>
+         <a href="display_users.php" id="logout-right"> Go back </a>
+    </div>
+    <?php endif; ?>
+
+    <?php if (isset($_SESSION['id'])): ?>
+    <p class="text_info">
+        An error occured: <?php echo $e->getMessage(); ?>
+    </p>
+
+    <?php else: ?>
+
+        <p class="text_info">
+        An error occured: <?php echo $e->getMessage(); ?>
+        <a href="../../index.php">Go back</a>
+        </p>
+
+    <?php endif; ?>
+</body>
+</html>
+<?php } ?>
