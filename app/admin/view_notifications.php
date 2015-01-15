@@ -88,6 +88,7 @@
         <h3>Add note</h3>
         <form action="add_note.php" method="post" class="form-notification">
             <textarea name="note"></textarea> <br />
+            <input type="hidden" value="<?php echo $users_array[0]; ?>">
             <input type="submit" value="Add note" class="align-center">
         </form>
     </div>
