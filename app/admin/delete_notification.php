@@ -43,6 +43,14 @@
             header("Location: display_users.php?action=error");
             die();
         }
+
+        $delete_note = $db->bindQuery("DELETE FROM `user_notes` WHERE `ID` = ?", $bindArray);
+
+        if ($delete_note)
+        {
+            header("Location: display_users.php?action=deleted");
+            die();
+        }
     }
 
     catch (Exception $e)
