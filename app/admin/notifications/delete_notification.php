@@ -1,5 +1,5 @@
 <?php
-    require __DIR__ . '/../database/database.php';
+    require __DIR__ . '/../../database/database.php';
     session_start();
 
     try
@@ -40,7 +40,7 @@
         //redirect to the previous page, showing an error
         if (!$arrayID)
         {
-            header("Location: display_users.php?action=error");
+            header("Location: ../display_users.php?action=error");
             die();
         }
 
@@ -48,7 +48,7 @@
 
         if ($delete_note)
         {
-            header("Location: display_users.php?action=deleted");
+            header("Location: ../display_users.php?action=deleted");
             die();
         }
     }
@@ -60,18 +60,18 @@
 <html>
 <head>
     <title><?php echo $site_name;?> - Delete note</title>
-    <link rel="stylesheet" type="text/css" href="../../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../../../css/main.css">
 </head>
 <body>
     <div id="banner">
-        <img src="../../design/logo_four.png">
+        <img src="../../../design/logo_four.png">
         <!-- <span><?php echo $site_name; ?></span> -->
     </div>
 
     <?php if (isset($_SESSION['id'])): ?>
     <div id="navigation">
-         <a href="../../logout.php" id="logout-right">Log out </a>
-         <a href="display_users.php" id="logout-right"> Go back </a>
+         <a href="../../../logout.php" id="logout-right">Log out </a>
+         <a href="../display_users.php" id="logout-right"> Go back </a>
     </div>
     <?php endif; ?>
 
@@ -84,7 +84,7 @@
 
         <p class="text_info">
         An error occured: <?php echo $e->getMessage(); ?>
-        <a href="../../index.php">Go back</a>
+        <a href="../../../index.php">Go back</a>
         </p>
 
     <?php endif; ?>
