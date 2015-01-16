@@ -36,6 +36,13 @@
     //removing all characters except digits, plus and minus sign
     $filter_id = filter_input(INPUT_POST, 'userID', FILTER_SANITIZE_NUMBER_INT);
 
+
+    //If no note message was sent, echo an error
+    //stopping the script execution
+    if (empty($filter_note))
+    {
+        die("<p class='text_info'> Please enter a note. <a href='../display_users.php'> Go back </a></p>");
+    }
     //Specify which variables to bind
     $bindArray = array(
         'bindTypes' => 'is',
