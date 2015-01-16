@@ -43,7 +43,7 @@ body{
     top: 50px;
 }
 
-.form-members {
+.form-members, .form-notification {
     text-align: center;
 }
 
@@ -203,4 +203,43 @@ body{
     text-align: center;
     border-radius: 5px;
     width: 360px;
+}
+
+.add-note {
+    float:right;
+    position: absolute;
+    top: 0px;
+    right:10px;
+}
+
+.add-note textarea {
+    max-height: 43px;
+    max-width: 140px;
+}
+
+.add-note h3 {
+    line-height: 5px;
+}
+
+.notes-list {
+    list-style-type: none;
+    margin-left: -35px;
+    width: 185px;
+}
+
+.edit-note-input {
+    width: 140px;
+    height: 100px;
+    max-width: 140px;
+    max-height: 100px;
+}
+
+.notes {
+    overflow: auto;
+    width: 165px;
+    height: 310px;
+}
+
+.notes-splitter {
+    color: #7C7C7C;
 }

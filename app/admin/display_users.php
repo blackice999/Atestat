@@ -38,13 +38,12 @@
     <div id="container-display">
 
         <div id="info-left-display">
-
             <?php if (isset($_GET['action']) && $_GET['action'] == 'deleted'): ?>
-                <p class="text_info"> Successfully deleted user </p>
+                <p class="show-error-action" style="position:absolute; top: -15px;"> Successfully deleted user </p>
             <?php endif; ?>
 
             <?php if (isset($_GET['action']) && $_GET['action'] == 'error'): ?>
-                <p class="text_info"> Error occured deleting user</p>
+                <p class="show-error-action" style="position:absolute; top: -15px;"> Error occured deleting user</p>
             <?php endif; ?>
 
              <h2> Registered users list</h2>
@@ -56,6 +55,19 @@
                             //Get the emails from the query
                             echo $users_array['email'];
                         ?>
+
+                        <span class='users' onclick='showNotifications()'>
+                            <?php
+                                //Get the emails from the query
+                                echo $users_array[1];
+                            ?>
+                        </span>
+
+                          <div id="show-notifications" class="popup">
+                                View notifications
+                                <?php require 'notifications/view_notifications.php'; ?>
+                                <div class="cancel" onclick="closeNotifications();"></div>
+                            </div>
 
                         <a href="delete_user.php?id=<?php echo $users_array['ID'];?>"
                             onclick="javascript: return confirm('Are you SURE you wish to delete this user?');">
