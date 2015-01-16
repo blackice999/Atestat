@@ -57,6 +57,6 @@
 
     if ($insert_note)
     {
-        echo "<p class='text_info'> Note successfully added <a href='display_users.php'> Go back </a></p>";
+        echo "<p class='text_info'> Note successfully added <a href='../display_users.php'> Go back </a></p>";
     }
 ?>
