@@ -65,13 +65,13 @@
                
                     <span class="edit-note"> <?php echo $note_info['notes']; ?> </span>
 
-                    <form action="update_notification.php" method="post" class="form-update-note" style="display:none;">
+                    <form action="notifications/update_notification.php" method="post" class="form-update-note" style="display:none;">
                         <textarea name="note" class="edit-note-input"><?php echo $note_info['notes']; ?></textarea>
                         <input type="hidden" value="<?php echo $note_info['ID'];?>" name="id">
                         <input type="submit" value="Update Note" class="align-center">
                     </form>
 
-                    <a href="delete_notification.php?id=<?php echo $note_info['ID']; ?>"
+                    <a href="notifications/delete_notification.php?id=<?php echo $note_info['ID']; ?>"
                         onclick="javascript: return confirm('Are you SURE you wish to delete this note?');">
                     <img src="../../design/red-x.png" title="Remove note" alt="remove" /></a>
 
@@ -86,7 +86,7 @@
     </ol>
     <div class="add-note">
         <h3>Add note</h3>
-        <form action="add_notification.php" method="post" class="form-notification">
+        <form action="notifications/add_notification.php" method="post" class="form-notification">
             <textarea name="note"></textarea> <br />
             <input type="hidden" name="userID" value="<?php echo $users_array[0]; ?>">
             <input type="submit" value="Add note" class="align-center">
