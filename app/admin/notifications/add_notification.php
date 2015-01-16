@@ -43,6 +43,7 @@
     {
         die("<p class='text_info'> Please enter a note. <a href='../display_users.php'> Go back </a></p>");
     }
+    
     //Specify which variables to bind
     $bindArray = array(
         'bindTypes' => 'is',
