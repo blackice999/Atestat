@@ -60,7 +60,7 @@
 
                           <div id="show-notifications" class="popup">
                                 View notifications
-                                <?php require 'view_notifications.php'; ?>
+                                <?php require 'notifications/view_notifications.php'; ?>
                                 <div class="cancel" onclick="closeNotifications();"></div>
                             </div>
 
