@@ -39,11 +39,11 @@
 
         <div id="info-left-display">
             <?php if (isset($_GET['action']) && $_GET['action'] == 'deleted'): ?>
-                <p class="show-error-action" style="position:absolute; top: -15px;"> Successfully deleted user </p>
+                <p class="show-error-action"> Successfully deleted user </p>
             <?php endif; ?>
 
             <?php if (isset($_GET['action']) && $_GET['action'] == 'error'): ?>
-                <p class="show-error-action" style="position:absolute; top: -15px;"> Error occured deleting user</p>
+                <p class="show-error-action"> Error occured deleting user</p>
             <?php endif; ?>
 
              <h2> Registered users list</h2>
