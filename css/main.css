@@ -195,7 +195,7 @@ body{
     cursor: pointer;
 }
 
-.show-error {
+.show-error, .show-error-action {
     border: 1px solid;
     padding:10px 0;
     background-color: #FFBABA;
@@ -203,6 +203,11 @@ body{
     text-align: center;
     border-radius: 5px;
     width: 360px;
+}
+
+.show-error-action {
+    position:absolute;
+    top: -35px;
 }
 
 .add-note {
