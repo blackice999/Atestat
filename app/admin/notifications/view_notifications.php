@@ -7,7 +7,7 @@
     //Stores which variables should be binded to
     $bindArray = array(
         'bindTypes' => 'i',
-        'bindVariables' => array(&$users_array[0])
+        'bindVariables' => array(&$users_array['ID'])
         );
 
     $query_status = $db->bindQuery("SELECT `status` FROM `user`
@@ -88,7 +88,7 @@
         <h3>Add note</h3>
         <form action="notifications/add_notification.php" method="post" class="form-notification">
             <textarea name="note"></textarea> <br />
-            <input type="hidden" name="userID" value="<?php echo $users_array[0]; ?>">
+            <input type="hidden" name="userID" value="<?php echo $users_array['ID']; ?>">
             <input type="submit" value="Add note" class="align-center">
         </form>
     </div>
