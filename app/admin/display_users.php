@@ -51,15 +51,10 @@
                  <?php while ($users_array = $db->getArray($users, MYSQLI_ASSOC)): ?>
 
                     <li class='registered-users'>
-                        <?php
-                            //Get the emails from the query
-                            echo $users_array['email'];
-                        ?>
-
                         <span class='users' onclick='showNotifications()'>
                             <?php
                                 //Get the emails from the query
-                                echo $users_array[1];
+                                echo $users_array['email'];
                             ?>
                         </span>
 
