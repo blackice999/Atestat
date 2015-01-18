@@ -20,7 +20,7 @@
         <form action = 'login.php' method = 'post' id="form-login">
             <tr class='align-left'>
                 <td>Email:</td>
-                <td><input type = 'text' name = 'Login[email]' id = 'email'/></td>
+                <td><input type = 'text' name = 'Login[email]' id = 'email' autofocus/></td>
             </tr>
 
             <tr class='align-left'>
