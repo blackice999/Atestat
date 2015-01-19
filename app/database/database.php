@@ -6,10 +6,10 @@
     //Holds a string to the site name, in order to simply <title> tags
     $site_name = 'Prototype CRM';
 
-    require __DIR__. '/../../vendor/autoload.php';
+    // require __DIR__. '/../../vendor/autoload.php';
 
-    use Monolog\Logger;
-    use Monolog\Handler\StreamHandler;
+    // use Monolog\Logger;
+    // use Monolog\Handler\StreamHandler;
 
     /**
      * This class holds the database connection info
