@@ -196,18 +196,27 @@ body{
 }
 
 .show-error, .show-error-action {
-    border: 1px solid;
-    padding:10px 0;
     background-color: #FFBABA;
     color: #D8000C;
+}
+
+.show-error, .show-error-action, .show-success-action {
+    border: 1px solid;
+    padding:10px 0;
     text-align: center;
     border-radius: 5px;
     width: 360px;
 }
 
+.show-success-action {
+    color: #4F8A10;
+    background-color: #DFF2BF;
+}
+
 .show-error-action {
     position:absolute;
     top: -35px;
+    color: #D8000C;
 }
 
 .add-note {
