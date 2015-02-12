@@ -7,7 +7,7 @@
 </head>
 <body>
     <div id="banner">
-        <img src="../../design/logo_four.png">
+        <img src="../../design/logo.png">
         <!-- <span><?php echo $site_name; ?></span> -->
     </div>
 
