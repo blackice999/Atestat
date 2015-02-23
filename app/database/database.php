@@ -260,7 +260,6 @@
         {
             try
             {
-                $hash = password_hash($password, PASSWORD_BCRYPT);
                 $bindArray = array(
                     'bindTypes' => 's',
                     'bindVariables' => array(&$email)
