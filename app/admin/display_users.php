@@ -46,6 +46,7 @@
                 <p class="show-error-action"> Error occured deleting user</p>
             <?php endif; ?>
 
+        <div style="position: relative;">
              <h2> Registered users list</h2>
              <ol style="margin-left: -10px;">
                  <?php while ($users_array = $db->getArray($users, MYSQLI_ASSOC)): ?>
@@ -83,6 +84,7 @@
 
                  <?php endwhile; ?>
              </ol>
+        </div>
         </div>
 
         <div id="info-right-display">
