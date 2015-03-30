@@ -213,12 +213,6 @@ body{
     background-color: #DFF2BF;
 }
 
-.show-error-action {
-    position:absolute;
-    top: -35px;
-    color: #D8000C;
-}
-
 .add-note {
     float:right;
     position: absolute;
