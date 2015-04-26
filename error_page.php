@@ -13,9 +13,8 @@
         <!-- <span><?php echo $site_name; ?></span> -->
     </div>
 
-    <div id="error_image">
+    <div id="error-image">
         <img src="design/dolphin_black.png">
-        <div id="error_text">
     </div>
 </body>
 </html>
