@@ -254,5 +254,51 @@ body{
 
 #error-image {
     width: 400px;
-    margin: 200px auto;
+    margin: 300px auto;
+}
+
+#error-text {
+    position: relative;
+    bottom: 160px;
+    right: 30px;
+    width: 300px;
+
+    height: 100px;
+    text-align: center;
+    
+    border: 1px solid red;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    -webkit-box-shadow: 2px 2px 4px #888;
+    -moz-box-shadow: 2px 2px 4px #888;
+    box-shadow: 2px 2px 4px #888;
+
+    font-size: 25px;
+}
+
+#error-text a {
+    color: #fff;
+}
+
+#error-text:before {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 30px;
+    top: 100px;
+    border: 10px solid;
+    border-color: red transparent transparent red;
+}
+
+#error-text:after {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 38px;
+    top: 100px;
+    border: 15px solid;
+    border-color:  transparent transparent ;
 }
