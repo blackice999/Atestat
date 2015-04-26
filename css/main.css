@@ -251,3 +251,8 @@ body{
 .notes-splitter {
     color: #7C7C7C;
 }
+
+#error_image {
+    width: 400px;
+    margin: 200px auto;
+}
