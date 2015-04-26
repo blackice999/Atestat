@@ -15,6 +15,9 @@
 
     <div id="error-image">
         <img src="design/dolphin_black.png">
+        <div id="error-text">
+             Oops! An error occured accessing this page. <br /> <a href="index.php">go back </a>
+         </div>
     </div>
 </body>
 </html>
