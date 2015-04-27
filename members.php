@@ -4,7 +4,8 @@
     
     if (!isset($_SESSION['id']))
     {
-        throw new  Exception("Unauthorized access!");       
+        header("Location: error_page.php");
+        exit();
     }
 
     $id = $_SESSION['id'];
