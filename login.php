@@ -4,7 +4,8 @@
 
 if (!isset($_POST['Login']))
 {
-    throw new  Exception("Unauthorized access!");       
+    header("Location: error_page.php");
+    exit();
 }
 
 $db = new Database();
