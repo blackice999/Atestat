@@ -6,7 +6,8 @@
     //and he isn't an admin (having ID 1)
     if (!(isset($_SESSION['id']) && $_SESSION['id'] == 1))
     {
-        throw new Exception("Unauthorized access!");
+        header("Location: ../../error_page.php");
+        exit();
     }
 
     // if (!isset($_GET['id']))

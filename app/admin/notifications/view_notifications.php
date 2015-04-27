@@ -1,7 +1,8 @@
 <?php 
     if (!(isset($_SESSION['id']) && $_SESSION['id'] == 1))
     {
-        throw new Exception("Unauthorized access!");
+        header("Location: ../../../error_page.php");
+        exit();
     }
 
     //Stores which variables should be binded to
