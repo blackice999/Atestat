@@ -18,7 +18,8 @@
     //Prints an error if the redirect didn't come from index.php's form
     if (!isset($_POST['Register']))
     {
-        throw new Exception("Unauthorized access!");
+        header("Location: error_page.php");
+        exit();
     }
     
      $db = new Database();
