@@ -15,3 +15,6 @@ CREATE TABLE IF NOT EXISTS `user_address`
     FOREIGN KEY (`userID`)
         REFERENCES `user`(`ID`)
 ) ENGINE=INNODB;
+
+INSERT INTO `user_address` (`userID`, `city`, `street`, `zip`, `country`)
+    VALUES(1, 'Baia Mare', 'Nothing', 123456789, 'Romania')
