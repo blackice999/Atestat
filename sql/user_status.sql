@@ -8,3 +8,6 @@ CREATE TABLE IF NOT EXISTS `user_status`
     `status` VARCHAR(20) NOT NULL,
     PRIMARY KEY (`ID`)
 ) ENGINE=INNODB;
+
+
+INSERT INTO `user_status` (`status`) VALUES('active'),('updated')
