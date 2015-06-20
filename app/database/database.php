@@ -47,7 +47,7 @@
          * Which one to use?
          * @var string
          */
-        protected $databasePassword = 'sampwoS1';
+        protected $databasePassword = 'admin';
 
         /**
          * Connects to Memcached
